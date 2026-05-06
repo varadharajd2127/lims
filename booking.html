@@ -272,7 +272,7 @@ tbody tr:hover td{background:#f8f9ff;}
 
 /* ── INSTR INFO BAR ── */
 .instr-info-bar{
-  display:none;background:#eff6ff;border:1px solid #bfdbfe;
+  background:#eff6ff;border:1px solid #bfdbfe;
   border-radius:var(--radius-sm);padding:9px 13px;
   font-size:12.5px;color:var(--blue);margin-bottom:14px;
   display:flex;align-items:center;gap:8px;
@@ -402,7 +402,8 @@ tbody tr:hover td{background:#f8f9ff;}
       <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--blue);display:flex;align-items:center;gap:8px;">
         <i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);"></i> My Booking History
       </div>
-      <button class="btn btn-gold btn-sm" onclick="switchPanel('newbooking')"><i class="fa-solid fa-plus"></i> New Booking</button>
+      <button class="btn btn-gold btn-sm" onclick="switchPanel('newbooking')"><i class="fa-solid fa-plus"></i> New Booking</button> 
+      <button class="btn btn-blue btn-sm" onclick="printMyBookings()"><i class="fa-solid fa-print"></i> Print</button>
     </div>
     <div class="tbl-wrap">
       <table>
@@ -597,21 +598,25 @@ function bookingRow(b){
 /* ── INSTRUMENTS ───────────────────────────────────────────── */
 function initInstrGrid(){
   if(!instruments.length){
-    document.getElementById('instrGrid').innerHTML='<p style="color:var(--gray);padding:20px;grid-column:1/-1;"><i class="fa-solid fa-circle-exclamation"></i> No instruments found. Please refresh.</p>';
+    document.getElementById('instrGrid').innerHTML='<p style="color:var(--gray);padding:20px;grid-column:1/-1;"><i class="fa-solid fa-circle-exclamation"></i> No instruments found.</p>';
     return;
   }
   document.getElementById('instrGrid').innerHTML=instruments.map(i=>`
     <div class="instr-card">
+      ${i.imageUrl?`<img src="${i.imageUrl}" alt="${i.name}" style="width:100%;height:130px;object-fit:cover;">`:
+        `<div style="width:100%;height:90px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,.2);"><i class="fa-solid fa-flask-vial"></i></div>`}
       <div class="ic-head">
         <h3><i class="fa-solid fa-flask-vial"></i> ${i.name}</h3>
-        <p><i class="fa-solid fa-location-dot"></i> ${i.lab}</p>
+        <p><i class="fa-solid fa-location-dot"></i> ${i.lab}${i.roomNo?' · '+i.roomNo:''}</p>
       </div>
       <div class="ic-body">
         <div class="ic-row">
           <span class="badge ${i.status==='Available'?'b-available':'b-maintenance'}">${i.status}</span>
           <span style="font-size:11px;color:var(--gray);">Max ${i.maxH}h/day</span>
         </div>
-        ${i.model?`<p style="font-size:11.5px;color:var(--gray);margin-bottom:6px;"><i class="fa-solid fa-tag" style="color:var(--gold);margin-right:3px;"></i>${i.model}</p>`:''}
+        ${i.model?`<p style="font-size:11.5px;color:var(--gray);margin-bottom:3px;"><i class="fa-solid fa-tag" style="color:var(--gold);margin-right:3px;"></i><strong>Model:</strong> ${i.model}</p>`:''}
+        ${i.make?`<p style="font-size:11.5px;color:var(--gray);margin-bottom:3px;"><i class="fa-solid fa-industry" style="color:var(--gold);margin-right:3px;"></i><strong>Make:</strong> ${i.make}</p>`:''}
+        ${i.labIncharge?`<p style="font-size:11.5px;color:var(--gray);margin-bottom:6px;"><i class="fa-solid fa-user-tie" style="color:var(--gold);margin-right:3px;"></i><strong>In-charge:</strong> ${i.labIncharge}</p>`:''}
         <p class="ic-desc">${i.desc||''}</p>
         <div class="ic-timing">
           <i class="fa-regular fa-clock"></i> ${pad(i.startHour)}:00 – ${pad(i.endHour)}:00
@@ -793,6 +798,36 @@ function switchPanel(pid){
 function toggleDrawer(){document.getElementById('drawer').classList.toggle('open');}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
 function doLogout(){sessionStorage.removeItem('limsUser');window.location.href='index.html';}
+function printMyBookings(){
+  const rows=[...myBookings].reverse().map(b=>`<tr>
+    <td>${b.id}</td><td>${b.instrName}</td><td>${b.date}</td><td>${b.time}</td>
+    <td>${b.dur}h</td><td>${b.purpose}</td><td>${b.guide}</td><td>${b.status}</td>
+  </tr>`).join('');
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>My Bookings — AZBT LIMS</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:30px;color:#1E3057;}
+    h2{text-align:center;margin-bottom:4px;}
+    .sub{text-align:center;font-size:12px;color:#555;margin-bottom:4px;}
+    .user-info{text-align:center;font-size:13px;margin-bottom:20px;color:#333;}
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th{background:#1E3057;color:#C9973A;padding:9px 8px;text-align:left;}
+    td{padding:8px;border-bottom:1px solid #ddd;vertical-align:top;}
+    tr:nth-child(even) td{background:#f9f9fb;}
+    .footer{text-align:center;margin-top:30px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:14px;}
+    @media print{body{margin:15px;}}
+  </style></head><body>
+  <h2>AZBT LIMS — My Booking History</h2>
+  <div class="sub">PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology, Loyola College, Chennai — 600 034</div>
+  <div class="user-info">Name: <strong>${user.name}</strong> &nbsp;|&nbsp; ID: <strong>${user.uid}</strong> &nbsp;|&nbsp; Role: <strong>${user.role}${user.cls?' · '+user.cls:''}</strong> &nbsp;|&nbsp; Email: <strong>${user.email}</strong></div>
+  <table>
+    <thead><tr><th>Booking ID</th><th>Instrument</th><th>Date</th><th>Time</th><th>Duration</th><th>Purpose</th><th>Guide</th><th>Status</th></tr></thead>
+    <tbody>${rows||'<tr><td colspan="8" style="text-align:center;padding:20px;">No bookings found</td></tr>'}</tbody>
+  </table>
+  <div class="footer">Printed on ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})} &nbsp;|&nbsp; AZBT LIMS, Loyola College &nbsp;|&nbsp; hodzoology@loyolacollege.edu</div>
+  </body></html>`);
+  w.document.close();w.print();
+}
 </script>
 </body>
 </html>
