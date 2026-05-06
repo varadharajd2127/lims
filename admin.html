@@ -2,304 +2,420 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <title>Admin Dashboard — AZBT LIMS</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 :root{
-  --blue:#23365D;--blue2:#1a2847;--blue3:#2e4475;
+  --blue:#1E3057;--blue2:#152440;--blue3:#2a4070;
   --maroon:#6C232E;--maroon2:#85293a;
-  --gold:#D4A64A;--gold2:#e8bc6a;--gold3:#f5d898;
-  --light:#F4F6F9;--white:#ffffff;--gray:#6b7280;
-  --border:#d8dde8;--radius:12px;--radius-sm:8px;
-  --shadow:0 2px 16px rgba(35,54,93,.10);
-  --shadow-sm:0 1px 6px rgba(35,54,93,.07);
+  --gold:#C9973A;--gold2:#dba94e;--gold3:#f0cc85;
+  --light:#F2F5FA;--white:#fff;--gray:#6b7280;
+  --border:#cfd5e2;--radius:14px;--radius-sm:9px;
+  --shadow:0 4px 24px rgba(30,48,87,.11);
+  --shadow-sm:0 1px 8px rgba(30,48,87,.08);
+  --green:#16a34a;--red:#dc2626;--amber:#d97706;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:var(--light);color:var(--blue);min-height:100vh;}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--blue);min-height:100vh;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
 
-/* NAV */
-.topnav{background:var(--blue);border-bottom:3px solid var(--maroon);
-  height:58px;padding:0 18px;display:flex;align-items:center;
-  position:sticky;top:0;z-index:200;gap:10px;}
-.nav-brand{display:flex;align-items:center;gap:9px;flex:1;min-width:0;}
-.nav-brand img{object-fit:contain;flex-shrink:0;}
+/* ── NAV ── */
+.topnav{
+  background:var(--blue);border-bottom:3px solid var(--gold);
+  height:58px;padding:0 16px;display:flex;align-items:center;
+  position:sticky;top:0;z-index:300;gap:8px;
+}
+.nav-brand{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
 .nav-brand .t1{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);font-weight:700;white-space:nowrap;}
 .nav-brand .t2{font-size:10px;color:rgba(255,255,255,.5);white-space:nowrap;}
-.admin-pill{background:var(--maroon);color:#fff;font-size:10px;font-weight:700;
-  padding:2px 8px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;}
-.nav-tabs{display:flex;gap:2px;background:rgba(0,0,0,.2);border-radius:10px;padding:4px;}
-.nav-tab{padding:7px 12px;border:none;background:transparent;
-  color:rgba(255,255,255,.65);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
-  cursor:pointer;border-radius:7px;transition:all .2s;white-space:nowrap;}
-.nav-tab.active{background:var(--gold);color:var(--blue);}
+.admin-badge{background:var(--maroon);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.5px;flex-shrink:0;}
+.nav-tabs{display:flex;gap:2px;background:rgba(0,0,0,.22);border-radius:10px;padding:4px;flex-shrink:0;}
+.nav-tab{
+  padding:7px 11px;border:none;background:transparent;
+  color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:11.5px;font-weight:600;
+  cursor:pointer;border-radius:7px;transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:5px;
+}
+.nav-tab i{font-size:12px;}
+.nav-tab.active{background:var(--gold);color:#fff;}
 .nav-tab:hover:not(.active){background:rgba(255,255,255,.1);color:#fff;}
-.hamburger{display:none;background:transparent;border:none;cursor:pointer;padding:4px;}
-.hamburger span{display:block;width:21px;height:2px;background:#fff;margin:4px 0;border-radius:2px;}
-.drawer{display:none;position:fixed;top:58px;left:0;right:0;
-  background:var(--blue);z-index:199;padding:10px;
-  border-bottom:3px solid var(--maroon);box-shadow:var(--shadow);}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.nav-avatar{
+  width:34px;height:34px;border-radius:50%;background:var(--maroon);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:#fff;overflow:hidden;border:2px solid rgba(255,255,255,.2);
+}
+.hamburger{display:none;background:transparent;border:none;cursor:pointer;padding:5px;flex-shrink:0;}
+.hamburger span{display:block;width:20px;height:2px;background:#fff;margin:4px 0;border-radius:2px;}
+
+/* DRAWER */
+.drawer{
+  display:none;position:fixed;top:58px;left:0;right:0;
+  background:var(--blue);z-index:299;padding:10px;
+  border-bottom:3px solid var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
 .drawer.open{display:block;}
-.drawer .nav-tab{display:block;width:100%;text-align:left;padding:12px 14px;font-size:14px;margin-bottom:2px;}
+.drawer .nav-tab{display:flex;width:100%;text-align:left;padding:12px 14px;font-size:13.5px;margin-bottom:2px;border-radius:8px;}
 
-/* LAYOUT */
-.main{padding:20px;max-width:1200px;margin:0 auto;}
-.panel{display:none;}.panel.active{display:block;}
+/* ── LAYOUT ── */
+.main{padding:18px 16px;max-width:1200px;margin:0 auto;}
+.panel{display:none;}
+.panel.active{display:block;}
 
-/* CARDS */
-.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:20px;}
-.sec-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--blue);
-  padding-bottom:10px;border-bottom:2px solid var(--gold);margin-bottom:16px;}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+/* ── CARDS ── */
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:18px 20px;margin-bottom:16px;}
+.card-title{
+  font-family:'Playfair Display',serif;font-size:17px;color:var(--blue);
+  margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold);
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+}
+.card-title i{color:var(--gold);font-size:16px;}
 
-/* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px;}
-.stat-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);
-  padding:16px;text-align:center;border-top:3px solid var(--gold);}
-.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--blue);font-weight:700;}
-.stat-lbl{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
-.stat-card.danger{border-top-color:var(--maroon);}
-.stat-card.danger .stat-num{color:var(--maroon);}
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px;}
+.stat-card{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:16px;text-align:center;border-top:3px solid var(--gold);
+}
+.stat-card.red{border-top-color:var(--maroon);}
+.stat-card.green{border-top-color:var(--green);}
+.stat-card.amber{border-top-color:var(--amber);}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--blue);font-weight:700;line-height:1;}
+.stat-lbl{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-top:5px;}
+.stat-icon{font-size:20px;color:var(--gold);margin-bottom:6px;}
 
-/* BADGES */
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;}
+/* ── BADGES ── */
+.badge{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;}
 .b-student{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
 .b-research{background:#faf5ff;color:#6b21a8;border:1px solid #e9d5ff;}
 .b-staff{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;}
-.b-admin{background:#fff7ed;color:#92400e;border:1px solid #fed7aa;}
-.b-approved{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;}
-.b-pending{background:#fef3c7;color:#92400e;border:1px solid #fcd34d;}
+.b-admin{background:#1E3057;color:var(--gold);border:1px solid rgba(201,151,58,.4);}
+.b-approved{background:#dcfce7;color:#166534;border:1px solid #86efac;}
+.b-pending{background:#fef9c3;color:#854d0e;border:1px solid #fde047;}
 .b-rejected{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;}
 .b-blocked{background:#f3f4f6;color:#374151;border:1px solid #d1d5db;}
-.b-available{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;}
-.b-maintenance{background:#f3f4f6;color:#374151;border:1px solid #d1d5db;}
+.b-available{background:#dcfce7;color:#166534;border:1px solid #86efac;}
+.b-maintenance{background:#fef9c3;color:#854d0e;border:1px solid #fde047;}
 
-/* TABLE */
-.tbl-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:20px;}
-table{width:100%;border-collapse:collapse;background:#fff;min-width:540px;}
-thead th{background:var(--blue);color:#fff;padding:11px 12px;
-  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;}
-tbody td{padding:10px 12px;font-size:13px;border-bottom:1px solid #f0f2f7;vertical-align:middle;}
-tbody tr:hover td{background:#f8f9ff;}
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);}
+table{width:100%;border-collapse:collapse;background:#fff;min-width:600px;}
+thead th{
+  background:var(--blue);color:#fff;padding:11px 13px;
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;
+}
+tbody td{padding:10px 13px;font-size:13px;border-bottom:1px solid #edf0f7;vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:#f8f9ff;}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;
-  padding:9px 18px;border-radius:var(--radius-sm);font-family:'Inter',sans-serif;
-  font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;}
-.btn-gold{background:var(--gold);color:var(--blue);}
-.btn-gold:hover{background:var(--gold2);}
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:10px 18px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .22s;
+}
+.btn-gold{background:var(--gold);color:#fff;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
 .btn-blue{background:var(--blue);color:#fff;}
-.btn-blue:hover{background:var(--blue3);}
+.btn-blue:hover{background:var(--blue3);transform:translateY(-1px);}
 .btn-green{background:#16a34a;color:#fff;}
 .btn-green:hover{background:#15803d;}
 .btn-red{background:#dc2626;color:#fff;}
 .btn-red:hover{background:#b91c1c;}
-.btn-orange{background:#d97706;color:#fff;}
-.btn-orange:hover{background:#b45309;}
-.btn-outline{background:transparent;border:1.5px solid var(--blue);color:var(--blue);}
-.btn-outline:hover{background:var(--blue);color:#fff;}
+.btn-amber{background:#d97706;color:#fff;}
+.btn-amber:hover{background:#b45309;}
+.btn-gray{background:#6b7280;color:#fff;}
+.btn-gray:hover{background:#4b5563;}
 .btn-sm{padding:6px 13px;font-size:12px;}
-.btn-xs{padding:4px 8px;font-size:11px;border-radius:6px;}
+.btn-xs{padding:4px 9px;font-size:11px;border-radius:6px;}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;}
 
-/* FORM */
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;align-items:center;}
+.filter-bar input,.filter-bar select{
+  padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;font-size:13px;color:var(--blue);background:#fff;
+}
+.filter-bar input:focus,.filter-bar select:focus{outline:none;border-color:var(--gold);}
+
+/* ── MESSAGES ── */
+.msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:13px;
+  line-height:1.5;display:flex;align-items:flex-start;gap:8px;}
+.msg i{margin-top:1px;flex-shrink:0;}
+.msg-error{background:#fef2f2;color:#991b1b;border:1px solid #fecaca;}
+.msg-success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;}
+.msg-info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
+.msg-warn{background:#fffbeb;color:#92400e;border:1px solid #fde68a;}
+
+/* ── FORM ── */
 .form-group{margin-bottom:14px;}
-.form-label{display:block;font-size:11.5px;font-weight:700;color:var(--blue);
-  letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;}
+.form-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:var(--blue);
+  letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px;
+}
+.form-label i{font-size:12px;color:var(--gold);}
 .req{color:var(--maroon);}
 .form-input,.form-select,.form-textarea{
-  width:100%;padding:10px 12px;border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);font-family:'Inter',sans-serif;
-  font-size:13px;color:var(--blue);background:#fff;transition:border-color .2s;}
+  width:100%;padding:10px 13px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;
+  font-size:13.5px;color:var(--blue);background:#fff;transition:border-color .2s;
+}
 .form-input:focus,.form-select:focus,.form-textarea:focus{
-  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,166,74,.13);}
-.form-textarea{resize:vertical;min-height:65px;}
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,58,.12);
+}
+.form-textarea{resize:vertical;min-height:72px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.form-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
 
-/* FILTER BAR */
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.filter-bar .form-input{max-width:200px;}
-.filter-bar .form-select{max-width:150px;}
+/* ── MODAL ── */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
+  z-index:500;align-items:center;justify-content:center;padding:16px;
+}
+.modal-backdrop.open{display:flex;}
+.modal{
+  background:#fff;border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.25);
+  width:100%;max-width:680px;max-height:90vh;overflow-y:auto;
+}
+.modal-head{
+  background:var(--blue);color:#fff;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-radius:var(--radius) var(--radius) 0 0;position:sticky;top:0;z-index:1;
+}
+.modal-head h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
+.modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:18px;cursor:pointer;padding:4px;}
+.modal-close:hover{color:#fff;}
+.modal-body{padding:20px;}
+.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
 
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);
-  display:none;align-items:center;justify-content:center;z-index:1000;padding:14px;}
-.modal-bg.open{display:flex;}
-.modal-box{background:#fff;border-radius:var(--radius);padding:24px;
-  width:100%;max-width:520px;box-shadow:var(--shadow);max-height:90vh;overflow-y:auto;}
-.modal-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--blue);margin-bottom:18px;}
-.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap;}
+/* ── INSTR GRID ── */
+.instr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.instr-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.instr-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(30,48,87,.13);}
+.ic-img{width:100%;height:120px;object-fit:cover;}
+.ic-img-placeholder{width:100%;height:90px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:30px;color:rgba(255,255,255,.2);}
+.ic-head{background:var(--blue);padding:12px 15px;color:#fff;}
+.ic-head h3{font-size:13.5px;font-weight:700;margin-bottom:3px;display:flex;align-items:center;gap:7px;}
+.ic-head h3 i{color:var(--gold);}
+.ic-head p{font-size:11px;opacity:.6;display:flex;align-items:center;gap:5px;}
+.ic-body{padding:12px 15px;}
+.ic-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.ic-desc{font-size:12px;color:var(--gray);margin-bottom:8px;line-height:1.5;}
+.ic-meta{font-size:11.5px;color:var(--gray);margin-bottom:4px;display:flex;align-items:center;gap:5px;}
+.ic-meta i{color:var(--gold);flex-shrink:0;width:14px;}
+.ic-actions{display:flex;gap:6px;margin-top:10px;}
 
-/* CALENDAR */
-.cal-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:16px;}
-.cal-top{background:var(--blue);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+/* ── CALENDAR ── */
+.cal-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;}
+.cal-top{background:var(--blue);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;}
 .cal-top h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
-.cal-nav{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;
-  padding:6px 12px;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;}
+.cal-nav{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;
+  padding:6px 13px;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;
+  display:flex;align-items:center;gap:5px;transition:background .2s;}
 .cal-nav:hover{background:rgba(255,255,255,.1);}
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);background:var(--blue2);}
-.cal-dh{padding:7px 4px;text-align:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;}
+.cal-dh{padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
 .cal-cell{border:.5px solid #edf0f5;padding:5px;min-height:72px;cursor:pointer;background:#fff;transition:background .15s;}
-.cal-cell:hover{background:#f8f9ff;}
-.cal-cell.today .date-n{background:var(--gold);color:var(--blue);
-  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.date-n{font-size:12px;font-weight:600;margin-bottom:2px;}
-.cal-ev{font-size:9px;border-radius:3px;padding:2px 3px;margin-top:1px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;}
-.ce-a{background:#d1fae5;color:#065f46;}
-.ce-p{background:#fef3c7;color:#92400e;}
-.cal-legend{display:flex;gap:14px;padding:10px 14px;border-top:1px solid #f0f2f7;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gray);}
-.legend-dot{width:11px;height:11px;border-radius:3px;}
+.cal-cell:hover{background:#f5f7ff;}
+.cal-cell.other{background:#f9f9fb;cursor:default;}
+.cal-cell.today .date-num{background:var(--gold);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.date-num{font-size:12px;font-weight:600;margin-bottom:2px;}
+.cal-event{font-size:9.5px;border-radius:3px;padding:2px 4px;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ce-approved{background:#dcfce7;color:#166534;}
+.ce-pending{background:#fef9c3;color:#854d0e;}
+.cal-legend{display:flex;gap:14px;padding:10px 16px;border-top:1px solid #f0f2f7;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);}
 
-/* SLOT TIMING EDITOR */
-.time-range{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.time-range label{font-size:12px;font-weight:600;color:var(--blue);}
-.time-range input[type=time]{padding:7px 10px;border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:13px;color:var(--blue);}
-.time-range input[type=time]:focus{outline:none;border-color:var(--gold);}
+/* ── SLOT PICKER ── */
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:7px;margin-bottom:10px;}
+.slot-btn{padding:9px 4px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--blue);background:#fff;cursor:pointer;transition:all .2s;text-align:center;}
+.slot-btn:hover{border-color:var(--gold);background:#fffbf0;}
+.slot-btn.selected{background:var(--gold);color:#fff;border-color:var(--gold);}
+.slot-btn.busy{background:#fef2f2;color:#991b1b;border-color:#fca5a5;cursor:not-allowed;}
 
-/* MSG */
-.msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:12px;line-height:1.5;}
-.msg-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;}
-.msg-success{background:#d1fae5;color:#065f46;border:1px solid #86efac;}
-.msg-info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
-
-/* TOAST */
-#toast{position:fixed;bottom:20px;right:20px;z-index:9999;
-  padding:11px 18px;border-radius:var(--radius-sm);font-size:13px;
-  background:var(--blue);color:#fff;box-shadow:var(--shadow);
-  transform:translateY(60px);opacity:0;transition:all .3s;max-width:300px;}
+/* ── TOAST ── */
+#toast{position:fixed;bottom:20px;right:20px;z-index:9999;padding:11px 18px;border-radius:var(--radius-sm);font-size:13px;background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.2);transform:translateY(70px);opacity:0;transition:all .3s;max-width:300px;display:flex;align-items:center;gap:8px;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.ok{background:#16a34a;}
 #toast.err{background:var(--maroon);}
 
-/* SPINNER */
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
-  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
+/* ── SPINNER ── */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .nav-tabs{display:none;}
-  .hamburger{display:block;}
-  .form-row-3{grid-template-columns:1fr 1fr;}
-}
+/* ── USER AVATAR ── */
+.u-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;overflow:hidden;flex-shrink:0;}
+.u-avatar img{width:100%;height:100%;object-fit:cover;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.nav-tabs{display:none;}.hamburger{display:block;}}
 @media(max-width:600px){
-  .form-row,.form-row-3{grid-template-columns:1fr;}
-  .main{padding:12px;}
-  table{min-width:600px;}
-  .filter-bar .form-input,.filter-bar .form-select{max-width:100%;}
+  .form-row,.form-row3{grid-template-columns:1fr;}
+  .main{padding:12px 10px;}
+  table{min-width:500px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:440px){
+  .instr-grid{grid-template-columns:1fr;}
+  .cal-cell{min-height:44px;}
+  .cal-event{display:none;}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="topnav">
   <div class="nav-brand">
-    <img src="https://static.wixstatic.com/media/81ba89_81dcdb9d1e384b618fdc78760c61c426~mv2.png"
-         width="28" height="28" alt="Loyola" style="filter:brightness(0) invert(1);"/>
-    <img src="https://static.wixstatic.com/media/e98a4d_b935ab57540b41bdb320efa88b5e69b1~mv2.png"
-         width="26" height="26" alt="AZBT" style="border-radius:50%;border:1.5px solid rgba(212,166,74,.5);"/>
+    <img src="https://static.wixstatic.com/media/81ba89_81dcdb9d1e384b618fdc78760c61c426~mv2.png" width="28" height="35" alt="Loyola" style="border-radius:4px;flex-shrink:0;"/>
+    <img src="https://static.wixstatic.com/media/e98a4d_b935ab57540b41bdb320efa88b5e69b1~mv2.png" width="26" height="26" alt="AZBT" style="border-radius:50%;border:1.5px solid rgba(201,151,58,.5);flex-shrink:0;"/>
     <div>
-      <div class="t1">AZBT · LIMS &nbsp;<span class="admin-pill">Admin</span></div>
-      <div class="t2">PG &amp; Research Dept — Loyola College</div>
+      <div class="t1">AZBT · LIMS <span class="admin-badge">ADMIN</span></div>
+      <div class="t2">Dept. of Adv. Zoology &amp; Biotech.</div>
     </div>
   </div>
   <div class="nav-tabs" id="navTabs">
-    <button class="nav-tab active" onclick="switchPanel('overview')">Overview</button>
-    <button class="nav-tab" onclick="switchPanel('users')">Users</button>
-    <button class="nav-tab" onclick="switchPanel('instruments')">Instruments</button>
-    <button class="nav-tab" onclick="switchPanel('bookings')">Bookings</button>
-    <button class="nav-tab" onclick="switchPanel('calendar')">Calendar</button>
-    <button class="nav-tab" onclick="switchPanel('reports')">Reports</button>
+    <button class="nav-tab active" onclick="switchPanel('dashboard')"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+    <button class="nav-tab" onclick="switchPanel('bookings')"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+    <button class="nav-tab" onclick="switchPanel('users')"><i class="fa-solid fa-users"></i> Users</button>
+    <button class="nav-tab" onclick="switchPanel('instruments')"><i class="fa-solid fa-microscope"></i> Instruments</button>
+    <button class="nav-tab" onclick="switchPanel('calendar')"><i class="fa-regular fa-calendar"></i> Calendar</button>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-    <div style="width:32px;height:32px;border-radius:50%;background:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;border:2px solid rgba(255,255,255,.2);">A</div>
-    <div style="line-height:1.3;display:none;" class="nav-uinfo">
-      <div style="font-size:12px;color:#fff;font-weight:600;">Administrator</div>
-      <div style="font-size:10px;color:var(--maroon2);">AZBT Admin</div>
-    </div>
-    <button class="btn btn-sm btn-red" onclick="doLogout()">Logout</button>
-    <button class="hamburger" onclick="toggleDrawer()">
-      <span></span><span></span><span></span>
-    </button>
+  <div class="nav-right">
+    <div class="nav-avatar"><i class="fa-solid fa-user-shield"></i></div>
+    <button class="btn btn-sm btn-red" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    <button class="hamburger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
 <div class="drawer" id="drawer">
-  <button class="nav-tab" onclick="switchPanel('overview');closeDrawer()">📊 Overview</button>
-  <button class="nav-tab" onclick="switchPanel('users');closeDrawer()">👥 Users</button>
-  <button class="nav-tab" onclick="switchPanel('instruments');closeDrawer()">🔬 Instruments</button>
-  <button class="nav-tab" onclick="switchPanel('bookings');closeDrawer()">📋 Bookings</button>
-  <button class="nav-tab" onclick="switchPanel('calendar');closeDrawer()">📅 Calendar</button>
-  <button class="nav-tab" onclick="switchPanel('reports');closeDrawer()">📈 Reports</button>
-  <button class="nav-tab" onclick="doLogout()" style="color:#ff8a8a;margin-top:6px;">⬅ Logout</button>
+  <button class="nav-tab" onclick="switchPanel('dashboard');closeDrawer()"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+  <button class="nav-tab" onclick="switchPanel('bookings');closeDrawer()"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+  <button class="nav-tab" onclick="switchPanel('users');closeDrawer()"><i class="fa-solid fa-users"></i> Users</button>
+  <button class="nav-tab" onclick="switchPanel('instruments');closeDrawer()"><i class="fa-solid fa-microscope"></i> Instruments</button>
+  <button class="nav-tab" onclick="switchPanel('calendar');closeDrawer()"><i class="fa-regular fa-calendar"></i> Calendar</button>
+  <button class="nav-tab" onclick="doLogout()" style="color:#fca5a5;margin-top:6px;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
 </div>
 
 <div class="main">
 
-  <!-- ===== OVERVIEW ===== -->
-  <div id="overviewPanel" class="panel active">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-num" id="ovUsers">0</div><div class="stat-lbl">Total Users</div></div>
-      <div class="stat-card danger"><div class="stat-num" id="ovPending">0</div><div class="stat-lbl">Pending Approvals</div></div>
-      <div class="stat-card"><div class="stat-num" id="ovInstr">0</div><div class="stat-lbl">Instruments</div></div>
-      <div class="stat-card"><div class="stat-num" id="ovBookings">0</div><div class="stat-lbl">Total Bookings</div></div>
-      <div class="stat-card"><div class="stat-num" id="ovTodayBook">0</div><div class="stat-lbl">Today's Bookings</div></div>
-      <div class="stat-card danger"><div class="stat-num" id="ovPendBook">0</div><div class="stat-lbl">Pending Bookings</div></div>
+  <!-- ===== DASHBOARD ===== -->
+  <div id="dashboardPanel" class="panel active">
+    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+      <i class="fa-solid fa-gauge-high" style="color:var(--gold);"></i> Admin Dashboard
     </div>
-    <div style="margin-bottom:20px;">
-      <div class="sec-title">⏳ Pending User Approvals</div>
+    <div class="stats-row" id="dashStats">
+      <div class="stat-card amber">
+        <div class="stat-icon"><i class="fa-solid fa-clock" style="color:var(--amber);"></i></div>
+        <div class="stat-num" id="dPendingBk">—</div><div class="stat-lbl">Pending Bookings</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-icon"><i class="fa-solid fa-circle-check" style="color:var(--green);"></i></div>
+        <div class="stat-num" id="dApprovedBk">—</div><div class="stat-lbl">Approved Bookings</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-icon"><i class="fa-solid fa-user-clock" style="color:var(--amber);"></i></div>
+        <div class="stat-num" id="dPendingUs">—</div><div class="stat-lbl">Pending Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-users" style="color:var(--gold);"></i></div>
+        <div class="stat-num" id="dTotalUs">—</div><div class="stat-lbl">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-microscope" style="color:var(--gold);"></i></div>
+        <div class="stat-num" id="dTotalInstr">—</div><div class="stat-lbl">Instruments</div>
+      </div>
+    </div>
+
+    <!-- Pending Bookings Quick View -->
+    <div class="card">
+      <div class="card-title"><i class="fa-solid fa-clock"></i> Pending Booking Approvals
+        <button class="btn btn-blue btn-sm" style="margin-left:auto;" onclick="switchPanel('bookings')">View All →</button>
+      </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Photo</th><th>Name</th><th>ID</th><th>Role</th><th>Class</th><th>Email</th><th>Registered</th><th>Actions</th></tr></thead>
-          <tbody id="ovPendingBody"></tbody>
+          <thead><tr><th>Booking ID</th><th>User</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Actions</th></tr></thead>
+          <tbody id="dashPendingBody"></tbody>
         </table>
       </div>
     </div>
-    <div>
-      <div class="sec-title">📋 Pending Booking Approvals</div>
+
+    <!-- Pending User Approvals -->
+    <div class="card">
+      <div class="card-title"><i class="fa-solid fa-user-clock"></i> Pending User Registrations
+        <button class="btn btn-blue btn-sm" style="margin-left:auto;" onclick="switchPanel('users')">View All →</button>
+      </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>ID</th><th>User</th><th>Instrument</th><th>Date</th><th>Slot</th><th>Hrs</th><th>Purpose</th><th>Actions</th></tr></thead>
-          <tbody id="ovPendBookBody"></tbody>
+          <thead><tr><th>Name</th><th>ID</th><th>Role</th><th>Email</th><th>Registered</th><th>Actions</th></tr></thead>
+          <tbody id="dashPendingUsersBody"></tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- ===== BOOKINGS ===== -->
+  <div id="bookingsPanel" class="panel">
+    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+      <i class="fa-solid fa-calendar-check" style="color:var(--gold);"></i> Booking Management
+      <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold btn-sm" onclick="openManualBookingModal()"><i class="fa-solid fa-plus"></i> Manual Booking</button>
+        <button class="btn btn-blue btn-sm" onclick="printAllBookings()"><i class="fa-solid fa-print"></i> Print</button>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="bkSearch" placeholder="Search ID, user, instrument…" oninput="renderBookings()" style="flex:1;min-width:160px;"/>
+      <select id="bkStatusFilter" onchange="renderBookings()">
+        <option value="">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+      <select id="bkInstrFilter" onchange="renderBookings()">
+        <option value="">All Instruments</option>
+      </select>
+    </div>
+    <div id="bkMsg"></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Booking ID</th><th>User</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="bookingsBody"></tbody>
+      </table>
     </div>
   </div>
 
   <!-- ===== USERS ===== -->
   <div id="usersPanel" class="panel">
-    <div class="sec-hdr">
-      <div class="sec-title" style="margin-bottom:0;border:none;padding:0;">User Management</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-gold btn-sm" onclick="openAddUserModal()">+ Add User</button>
-        <button class="btn btn-blue btn-sm" onclick="exportUsers()">⬇ Export CSV</button>
-      </div>
+    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+      <i class="fa-solid fa-users" style="color:var(--gold);"></i> User Management
+      <button class="btn btn-gold btn-sm" style="margin-left:auto;" onclick="openAddUserModal()"><i class="fa-solid fa-user-plus"></i> Add User</button>
     </div>
     <div class="filter-bar">
-      <input type="text" id="usrSearch" class="form-input" placeholder="Search name or ID…" oninput="renderUsers()"/>
-      <select id="usrRole" class="form-select" onchange="renderUsers()">
+      <input type="text" id="usSearch" placeholder="Search name, ID, email…" oninput="renderUsers()" style="flex:1;min-width:160px;"/>
+      <select id="usRoleFilter" onchange="renderUsers()">
         <option value="">All Roles</option>
-        <option>Student</option><option>Research Scholar</option><option>Staff</option>
+        <option value="Student">Student</option>
+        <option value="Research Scholar">Research Scholar</option>
+        <option value="Staff">Staff</option>
+        <option value="Admin">Admin</option>
       </select>
-      <select id="usrClass" class="form-select" onchange="renderUsers()">
-        <option value="">All Classes</option>
-        <option>1st UG</option><option>2nd UG</option><option>3rd UG</option>
-        <option>1st PG</option><option>2nd PG</option>
-      </select>
-      <select id="usrStatus" class="form-select" onchange="renderUsers()">
-        <option value="">All Status</option>
-        <option>Approved</option><option>Pending</option><option>Rejected</option><option>Blocked</option>
+      <select id="usStatusFilter" onchange="renderUsers()">
+        <option value="">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Blocked">Blocked</option>
       </select>
     </div>
+    <div id="usMsg"></div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Photo</th><th>Name</th><th>ID / Code</th><th>Role</th><th>Class</th><th>Batch</th><th>Email</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Photo</th><th>Name</th><th>ID</th><th>Role / Class</th><th>Email</th><th>Phone</th><th>Batch</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="usersBody"></tbody>
       </table>
     </div>
@@ -307,62 +423,29 @@ tbody tr:last-child td{border-bottom:none;}
 
   <!-- ===== INSTRUMENTS ===== -->
   <div id="instrumentsPanel" class="panel">
-    <div class="sec-hdr">
-      <div class="sec-title" style="margin-bottom:0;border:none;padding:0;">Instrument Management</div>
-      <button class="btn btn-gold btn-sm" onclick="openInstrModal()">+ Add Instrument</button>
+    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+      <i class="fa-solid fa-microscope" style="color:var(--gold);"></i> Instrument Management
+      <button class="btn btn-gold btn-sm" style="margin-left:auto;" onclick="openInstrModal()"><i class="fa-solid fa-plus"></i> Add Instrument</button>
     </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Name</th><th>Lab</th><th>Model</th><th>Slot Hours</th><th>Max Hrs/Day</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="instrBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ===== BOOKINGS ===== -->
-  <div id="bookingsPanel" class="panel">
-    <div class="sec-hdr">
-      <div class="sec-title" style="margin-bottom:0;border:none;padding:0;">Booking Management</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-gold btn-sm" onclick="openManualBookModal()">+ Manual Entry</button>
-        <button class="btn btn-blue btn-sm" onclick="exportBookings()">⬇ Export CSV</button>
-      </div>
-    </div>
-    <div class="filter-bar">
-      <input type="text" id="bkSearch" class="form-input" placeholder="Search user or instrument…" oninput="renderBookings()"/>
-      <select id="bkStatus" class="form-select" onchange="renderBookings()">
-        <option value="">All Status</option>
-        <option>Pending</option><option>Approved</option><option>Rejected</option>
-      </select>
-      <input type="date" id="bkDate" class="form-input" onchange="renderBookings()" style="max-width:155px;"/>
-      <select id="bkInstr" class="form-select" onchange="renderBookings()">
-        <option value="">All Instruments</option>
-      </select>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>ID</th><th>User</th><th>Role</th><th>Instrument</th><th>Date</th><th>Slot</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="bookBody"></tbody>
-      </table>
-    </div>
+    <div id="instrMsg"></div>
+    <div class="instr-grid" id="instrGrid"></div>
   </div>
 
   <!-- ===== CALENDAR ===== -->
   <div id="calendarPanel" class="panel">
-    <div class="sec-hdr">
-      <div class="sec-title" style="margin-bottom:0;border:none;padding:0;">Booking Calendar</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <select id="aCalInstr" class="form-select" style="max-width:200px;" onchange="buildAdminCal()">
-          <option value="">All Instruments</option>
-        </select>
-        <button class="btn btn-gold btn-sm" onclick="openManualBookModal()">+ Manual Entry</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);display:flex;align-items:center;gap:8px;">
+        <i class="fa-regular fa-calendar-days" style="color:var(--gold);"></i> Booking Calendar
       </div>
+      <select id="calFilter" class="form-select" style="max-width:220px;padding:7px 10px;" onchange="buildCalendar()">
+        <option value="">All Instruments</option>
+      </select>
     </div>
     <div class="cal-card">
       <div class="cal-top">
-        <button class="cal-nav" onclick="moveMonth(-1)">‹ Prev</button>
+        <button class="cal-nav" onclick="moveMonth(-1)"><i class="fa-solid fa-chevron-left"></i> Prev</button>
         <h3 id="calTitle">—</h3>
-        <button class="cal-nav" onclick="moveMonth(1)">Next ›</button>
+        <button class="cal-nav" onclick="moveMonth(1)">Next <i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <div class="cal-head">
         <div class="cal-dh">Sun</div><div class="cal-dh">Mon</div><div class="cal-dh">Tue</div>
@@ -371,805 +454,923 @@ tbody tr:last-child td{border-bottom:none;}
       </div>
       <div class="cal-grid" id="calGrid"></div>
       <div class="cal-legend">
-        <div class="legend-item"><div class="legend-dot ce-a"></div>Approved</div>
-        <div class="legend-item"><div class="legend-dot ce-p"></div>Pending</div>
-      </div>
-    </div>
-    <!-- Day detail -->
-    <div id="dayDetail" class="card" style="display:none;">
-      <div class="sec-title" id="dayDetailTitle">—</div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>User</th><th>Instrument</th><th>Slot</th><th>Hrs</th><th>Purpose</th><th>Status</th><th>Actions</th></tr></thead>
-          <tbody id="dayDetailBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== REPORTS ===== -->
-  <div id="reportsPanel" class="panel">
-    <div class="sec-title">Usage Reports</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:20px;" id="reportCards"></div>
-    <div class="card">
-      <div style="font-weight:700;font-size:14px;color:var(--blue);margin-bottom:14px;">📊 Instrument Usage Summary</div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>Instrument</th><th>Total Bookings</th><th>Approved</th><th>Pending</th><th>Total Hours</th></tr></thead>
-          <tbody id="reportBody"></tbody>
-        </table>
+        <div class="legend-item"><div style="width:12px;height:12px;border-radius:3px;background:#dcfce7;border:1px solid #86efac;"></div> Approved</div>
+        <div class="legend-item"><div style="width:12px;height:12px;border-radius:3px;background:#fef9c3;border:1px solid #fde047;"></div> Pending</div>
       </div>
     </div>
   </div>
 
 </div><!-- main -->
 
-<!-- ====== MODALS ====== -->
+<!-- ===== MODALS ===== -->
 
-<!-- EDIT USER -->
-<div class="modal-bg" id="editUserModal">
-  <div class="modal-box">
-    <div class="modal-title">✏️ Edit User</div>
-    <input type="hidden" id="euId"/>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Full Name <span class="req">*</span></label>
-        <input type="text" id="euName" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Role</label>
-        <select id="euRole" class="form-select" onchange="toggleEuClass()">
-          <option>Student</option><option>Research Scholar</option><option>Staff</option><option>Admin</option>
-        </select>
-      </div>
+<!-- Approve/Reject Booking Modal -->
+<div class="modal-backdrop" id="bkActionModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="bkActionTitle">Booking Action</h3>
+      <button class="modal-close" onclick="closeModal('bkActionModal')"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="form-group" id="euClassGroup">
-      <label class="form-label">Class</label>
-      <select id="euClass" class="form-select">
-        <option value="">Not applicable</option>
-        <option>1st UG</option><option>2nd UG</option><option>3rd UG</option>
-        <option>1st PG</option><option>2nd PG</option>
-      </select>
-    </div>
-    <div class="form-row">
+    <div class="modal-body">
+      <div id="bkActionInfo" style="background:var(--light);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;font-size:13px;line-height:1.8;"></div>
       <div class="form-group">
-        <label class="form-label">Email <span class="req">*</span></label>
-        <input type="email" id="euEmail" class="form-input"/>
+        <label class="form-label"><i class="fa-solid fa-note-sticky"></i> Admin Note (optional)</label>
+        <textarea id="bkAdminNote" class="form-textarea" placeholder="Enter a note for the user (optional)…" rows="3"></textarea>
       </div>
-      <div class="form-group">
-        <label class="form-label">Phone</label>
-        <input type="tel" id="euPhone" class="form-input"/>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Batch / Year</label>
-        <input type="text" id="euBatch" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Status</label>
-        <select id="euStatus" class="form-select">
-          <option>Approved</option><option>Pending</option><option>Rejected</option><option>Blocked</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Reset Password <span style="font-size:11px;color:var(--gray);font-weight:400;text-transform:none;">(leave blank to keep current)</span></label>
-      <input type="text" id="euPwd" class="form-input" placeholder="Enter new password to reset"/>
-    </div>
-    <div id="euMsg"></div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" onclick="closeModal('editUserModal')">Cancel</button>
-      <button class="btn btn-gold btn-sm" onclick="saveEditUser()">Save Changes</button>
-    </div>
-  </div>
-</div>
-
-<!-- ADD USER -->
-<div class="modal-bg" id="addUserModal">
-  <div class="modal-box">
-    <div class="modal-title">➕ Add New User</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Full Name <span class="req">*</span></label>
-        <input type="text" id="auName" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Role <span class="req">*</span></label>
-        <select id="auRole" class="form-select" onchange="toggleAuClass()">
-          <option value="">Select</option>
-          <option>Student</option><option>Research Scholar</option><option>Staff</option><option>Admin</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group" id="auClassGroup" style="display:none;">
-      <label class="form-label">Class <span class="req">*</span></label>
-      <select id="auClass" class="form-select">
-        <option value="">Select class</option>
-        <option>1st UG</option><option>2nd UG</option><option>3rd UG</option>
-        <option>1st PG</option><option>2nd PG</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Dept No / Staff Code <span class="req">*</span></label>
-        <input type="text" id="auUid" class="form-input" placeholder="Unique ID"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">College Email <span class="req">*</span></label>
-        <input type="email" id="auEmail" class="form-input" placeholder="@loyolacollege.edu"/>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Phone</label>
-        <input type="tel" id="auPhone" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Batch / Year</label>
-        <input type="text" id="auBatch" class="form-input"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Password <span class="req">*</span></label>
-      <input type="text" id="auPwd" class="form-input" placeholder="Initial password for user"/>
-    </div>
-    <div id="auMsg"></div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" onclick="closeModal('addUserModal')">Cancel</button>
-      <button class="btn btn-gold btn-sm" onclick="saveAddUser()">Add User</button>
-    </div>
-  </div>
-</div>
-
-<!-- INSTRUMENT MODAL -->
-<div class="modal-bg" id="instrModal">
-  <div class="modal-box">
-    <div class="modal-title" id="instrModalTitle">🔬 Add Instrument</div>
-    <input type="hidden" id="imId"/>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Instrument Name <span class="req">*</span></label>
-        <input type="text" id="imName" class="form-input" placeholder="e.g. UV-Vis Spectrophotometer"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Lab / Location <span class="req">*</span></label>
-        <input type="text" id="imLab" class="form-input" placeholder="e.g. Instrumentation Lab"/>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Make / Model</label>
-        <input type="text" id="imModel" class="form-input" placeholder="Manufacturer and model"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Status</label>
-        <select id="imStatus" class="form-select">
-          <option>Available</option><option>Maintenance</option>
-        </select>
-      </div>
-    </div>
-    <!-- SLOT TIMING — KEY FEATURE -->
-    <div style="background:var(--light);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;">
-      <div style="font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">
-        ⏰ Booking Slot Timing
-      </div>
-      <div class="time-range" style="margin-bottom:10px;">
-        <label>Available From:</label>
-        <input type="time" id="imStart" value="08:00"/>
-        <label>To:</label>
-        <input type="time" id="imEnd" value="17:00"/>
-      </div>
-      <div class="form-group" style="margin-bottom:0;">
-        <label class="form-label">Max Hours Per Day</label>
-        <input type="number" id="imMaxH" class="form-input" value="8" min="1" max="12" style="max-width:120px;"/>
-      </div>
-      <div style="font-size:11px;color:var(--gray);margin-top:8px;">
-        Users can only book within this time window. Slots are generated hourly between From and To.
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Description</label>
-      <textarea id="imDesc" class="form-textarea" placeholder="Brief description of the instrument and its uses"></textarea>
-    </div>
-    <div id="imMsg"></div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" onclick="closeModal('instrModal')">Cancel</button>
-      <button class="btn btn-gold btn-sm" onclick="saveInstrument()">Save Instrument</button>
-    </div>
-  </div>
-</div>
-
-<!-- MANUAL BOOKING MODAL -->
-<div class="modal-bg" id="manualBookModal">
-  <div class="modal-box">
-    <div class="modal-title">📝 Manual Booking Entry</div>
-    <div id="mbMsg"></div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">User ID / Staff Code <span class="req">*</span></label>
-        <input type="text" id="mbUid" class="form-input" placeholder="e.g. ZB2024001"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Instrument <span class="req">*</span></label>
-        <select id="mbInstr" class="form-select" onchange="onMbInstrChange()"></select>
-      </div>
-    </div>
-    <div id="mbInstrInfo" style="display:none;" class="msg msg-info" style="margin-bottom:12px;font-size:12px;"></div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Date <span class="req">*</span></label>
-        <input type="date" id="mbDate" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Start Time <span class="req">*</span></label>
-        <input type="time" id="mbTime" class="form-input" value="09:00"/>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Duration (hours)</label>
-        <select id="mbDur" class="form-select">
-          <option value="1">1 hour</option><option value="2">2 hours</option>
-          <option value="3">3 hours</option><option value="4">4 hours</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Booking Status</label>
-        <select id="mbStatus" class="form-select">
-          <option value="Approved">Approved (direct)</option>
-          <option value="Pending">Pending (for review)</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Purpose <span class="req">*</span></label>
-      <input type="text" id="mbPurpose" class="form-input" placeholder="Experiment or work description"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Guide / Supervisor</label>
-      <input type="text" id="mbGuide" class="form-input" placeholder="Name of guide or supervisor"/>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" onclick="closeModal('manualBookModal')">Cancel</button>
-      <button class="btn btn-gold btn-sm" onclick="saveManualBooking()">Save Booking</button>
+      <button class="btn btn-gray btn-sm" onclick="closeModal('bkActionModal')">Cancel</button>
+      <button class="btn btn-red btn-sm" id="bkRejectBtn" onclick="confirmBookingAction('Rejected')"><i class="fa-solid fa-xmark"></i> Reject</button>
+      <button class="btn btn-green btn-sm" id="bkApproveBtn" onclick="confirmBookingAction('Approved')"><i class="fa-solid fa-check"></i> Approve</button>
     </div>
   </div>
 </div>
 
-<!-- PHOTO VIEW -->
-<div class="modal-bg" id="photoModal" onclick="closeModal('photoModal')">
-  <div class="modal-box" onclick="event.stopPropagation()" style="text-align:center;max-width:280px;">
-    <div class="modal-title">User Photo</div>
-    <img id="photoImg" src="" alt="User" style="max-width:180px;border-radius:var(--radius);border:3px solid var(--gold);display:block;margin:0 auto;"/>
-    <div class="modal-footer" style="justify-content:center;">
-      <button class="btn btn-outline btn-sm" onclick="closeModal('photoModal')">Close</button>
+<!-- Edit/Add User Modal -->
+<div class="modal-backdrop" id="userModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="userModalTitle">Edit User</h3>
+      <button class="modal-close" onclick="closeModal('userModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="userModalMsg"></div>
+      <input type="hidden" id="umUid"/>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-user"></i> Full Name <span class="req">*</span></label>
+          <input type="text" id="umName" class="form-input" placeholder="Full name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-id-badge"></i> UID <span class="req">*</span></label>
+          <input type="text" id="umUidField" class="form-input" placeholder="Unique ID"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-users"></i> Role <span class="req">*</span></label>
+          <select id="umRole" class="form-select">
+            <option value="Student">Student</option>
+            <option value="Research Scholar">Research Scholar</option>
+            <option value="Staff">Staff</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-graduation-cap"></i> Class</label>
+          <input type="text" id="umClass" class="form-input" placeholder="e.g. 1st PG"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-envelope"></i> Email <span class="req">*</span></label>
+          <input type="email" id="umEmail" class="form-input" placeholder="name@loyolacollege.edu"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-phone"></i> Phone</label>
+          <input type="tel" id="umPhone" class="form-input" placeholder="10-digit"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-calendar"></i> Batch</label>
+          <input type="text" id="umBatch" class="form-input" placeholder="e.g. 2024–2026"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-toggle-on"></i> Status <span class="req">*</span></label>
+          <select id="umStatus" class="form-select">
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Blocked">Blocked</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-lock"></i> New Password <span style="font-size:10px;color:var(--gray);text-transform:none;font-weight:400;">(leave blank to keep current)</span></label>
+        <input type="password" id="umPwd" class="form-input" placeholder="Min 8 characters"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-gray btn-sm" onclick="closeModal('userModal')">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="saveUser()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
     </div>
   </div>
 </div>
 
-<div id="toast"></div>
+<!-- Add/Edit Instrument Modal -->
+<div class="modal-backdrop" id="instrModal">
+  <div class="modal" style="max-width:760px;">
+    <div class="modal-head">
+      <h3 id="instrModalTitle">Add Instrument</h3>
+      <button class="modal-close" onclick="closeModal('instrModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="instrModalMsg"></div>
+      <input type="hidden" id="imId"/>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-flask-vial"></i> Instrument Name <span class="req">*</span></label>
+          <input type="text" id="imName" class="form-input" placeholder="e.g. UV-Vis Spectrophotometer"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-toggle-on"></i> Status <span class="req">*</span></label>
+          <select id="imStatus" class="form-select">
+            <option value="Available">Available</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-building"></i> Lab Name <span class="req">*</span></label>
+          <input type="text" id="imLab" class="form-input" placeholder="e.g. Instrumentation Lab"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-door-open"></i> Room Number</label>
+          <input type="text" id="imRoomNo" class="form-input" placeholder="e.g. Room 201"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-tag"></i> Model</label>
+          <input type="text" id="imModel" class="form-input" placeholder="e.g. Shimadzu UV-1900"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-industry"></i> Make / Manufacturer</label>
+          <input type="text" id="imMake" class="form-input" placeholder="e.g. Shimadzu"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-user-tie"></i> Lab In-charge</label>
+        <input type="text" id="imLabIncharge" class="form-input" placeholder="e.g. Dr. A. Xavier"/>
+      </div>
+      <div class="form-row3">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-regular fa-clock"></i> Start Hour</label>
+          <input type="number" id="imStartHour" class="form-input" min="0" max="23" value="8"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-regular fa-clock"></i> End Hour</label>
+          <input type="number" id="imEndHour" class="form-input" min="0" max="23" value="17"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-hourglass"></i> Max Hours/Day</label>
+          <input type="number" id="imMaxH" class="form-input" min="1" max="12" value="8"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-image"></i> Image URL</label>
+        <input type="url" id="imImageUrl" class="form-input" placeholder="https://… (direct image link)"/>
+        <div style="font-size:11px;color:var(--gray);margin-top:4px;">Paste a direct image URL (from Google Drive thumbnail, Imgur, etc.)</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-align-left"></i> Description</label>
+        <textarea id="imDesc" class="form-textarea" placeholder="Brief description of the instrument and its use…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-gray btn-sm" onclick="closeModal('instrModal')">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="saveInstrument()"><i class="fa-solid fa-floppy-disk"></i> Save Instrument</button>
+    </div>
+  </div>
+</div>
+
+<!-- Manual Booking Modal -->
+<div class="modal-backdrop" id="manualBkModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Manual Booking</h3>
+      <button class="modal-close" onclick="closeModal('manualBkModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="manualBkMsg"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-user"></i> User ID <span class="req">*</span></label>
+          <input type="text" id="mbUid" class="form-input" placeholder="Enter user UID"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-microscope"></i> Instrument <span class="req">*</span></label>
+          <select id="mbInstr" class="form-select" onchange="onMbInstrChange()">
+            <option value="">— Select —</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-regular fa-calendar"></i> Date <span class="req">*</span></label>
+          <input type="date" id="mbDate" class="form-input" onchange="loadMbSlots()"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-hourglass-half"></i> Duration <span class="req">*</span></label>
+          <select id="mbDur" class="form-select"></select>
+        </div>
+      </div>
+      <!-- Slot Picker -->
+      <div id="mbSlotSection" style="display:none;background:var(--light);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;"><i class="fa-regular fa-clock" style="color:var(--gold);"></i> Select Time Slot *</div>
+        <div class="slot-grid" id="mbSlotGrid"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-flask"></i> Purpose <span class="req">*</span></label>
+        <input type="text" id="mbPurpose" class="form-input" placeholder="Experiment / purpose"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-user-tie"></i> Guide <span class="req">*</span></label>
+          <input type="text" id="mbGuide" class="form-input" placeholder="Guide / supervisor name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-note-sticky"></i> Notes</label>
+          <input type="text" id="mbNotes" class="form-input" placeholder="Optional notes"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-gray btn-sm" onclick="closeModal('manualBkModal')">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="submitManualBooking()"><i class="fa-solid fa-paper-plane"></i> Submit Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- Day Booking Detail Modal -->
+<div class="modal-backdrop" id="dayModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="dayModalTitle">Bookings on —</h3>
+      <button class="modal-close" onclick="closeModal('dayModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="tbl-wrap">
+        <table style="min-width:400px;">
+          <thead><tr><th>ID</th><th>User</th><th>Instrument</th><th>Time</th><th>Hrs</th><th>Status</th></tr></thead>
+          <tbody id="dayModalBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-gray btn-sm" onclick="closeModal('dayModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><i class="fa-solid fa-circle-check" id="toastIcon"></i> <span id="toastMsg"></span></div>
 
 <script>
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyfVUvYwDIzYwt5kLBo7KHteLd18C3ejKvT9dvHgWSGVSA4JFLddG14WNjcgaw5KzVNQA/exec';
 
-// ===== DEMO DATA — Replace with Apps Script fetch calls =====
-let USERS=[
-  {uid:'ZB2024001',name:'Arjun Rajan',role:'Student',cls:'1st PG',email:'arjun@loyolacollege.edu',phone:'9876543210',batch:'2024-2026',status:'Approved',photo:'',pwd:'demo123',reg:'2024-06-01'},
-  {uid:'ZBR2023001',name:'Priya Meenakshi',role:'Research Scholar',cls:'',email:'priya@loyolacollege.edu',phone:'9876543211',batch:'2023-2026',status:'Approved',photo:'',pwd:'demo456',reg:'2023-07-10'},
-  {uid:'ST101',name:'Dr. S. Kannan',role:'Staff',cls:'',email:'kannan@loyolacollege.edu',phone:'9876543212',batch:'',status:'Approved',photo:'',pwd:'staff123',reg:'2022-01-01'},
-  {uid:'ZB2024003',name:'Kavitha Nair',role:'Student',cls:'2nd PG',email:'kavitha@loyolacollege.edu',phone:'9876543213',batch:'2023-2025',status:'Pending',photo:'',pwd:'test123',reg:'2024-07-01'},
-  {uid:'ZB2024004',name:'Rahul Dev',role:'Student',cls:'1st UG',email:'rahul@loyolacollege.edu',phone:'9876543214',batch:'2024-2027',status:'Pending',photo:'',pwd:'test456',reg:'2024-07-02'},
-];
-let INSTRUMENTS=[
-  {id:'I001',name:'UV-Vis Spectrophotometer',lab:'Instrumentation Lab',model:'Shimadzu UV-1900',status:'Available',startH:'08:00',endH:'17:00',maxH:8,desc:'UV-Visible absorption measurements for biological and chemical samples.'},
-  {id:'I002',name:'PCR Thermal Cycler',lab:'Molecular Biology Lab',model:'Bio-Rad T100',status:'Available',startH:'09:00',endH:'17:00',maxH:8,desc:'DNA amplification by polymerase chain reaction.'},
-  {id:'I003',name:'Gel Electrophoresis System',lab:'Molecular Biology Lab',model:'Bio-Rad Mini-Sub Cell',status:'Available',startH:'08:00',endH:'16:00',maxH:6,desc:'Separation of DNA/RNA/protein by size.'},
-  {id:'I004',name:'High-Speed Centrifuge',lab:'Research Lab',model:'Eppendorf 5430R',status:'Available',startH:'08:00',endH:'17:00',maxH:8,desc:'Refrigerated centrifuge for sample processing.'},
-  {id:'I005',name:'Fluorescence Microscope',lab:'Imaging Lab',model:'Leica DM6000',status:'Maintenance',startH:'10:00',endH:'16:00',maxH:4,desc:'Fluorescence and phase-contrast imaging.'},
-  {id:'I006',name:'ELISA Reader',lab:'Immunology Lab',model:'BioTek ELx800',status:'Available',startH:'09:00',endH:'17:00',maxH:8,desc:'Microplate reader for ELISA and colorimetric assays.'},
-];
-let BOOKINGS=[
-  {id:'BK001',userId:'ZB2024001',userName:'Arjun Rajan',userRole:'Student',instrId:'I001',instrName:'UV-Vis Spectrophotometer',date:'2025-07-14',time:'09:00',dur:2,purpose:'Protein absorbance study',guide:'Dr. Kannan',notes:'',status:'Approved'},
-  {id:'BK002',userId:'ZB2024001',userName:'Arjun Rajan',userRole:'Student',instrId:'I002',instrName:'PCR Thermal Cycler',date:'2025-07-16',time:'11:00',dur:1,purpose:'Gene amplification',guide:'Dr. Meera',notes:'',status:'Pending'},
-  {id:'BK003',userId:'ZBR2023001',userName:'Priya Meenakshi',userRole:'Research Scholar',instrId:'I001',instrName:'UV-Vis Spectrophotometer',date:'2025-07-14',time:'11:00',dur:2,purpose:'Enzyme kinetics',guide:'Dr. Suresh',notes:'',status:'Approved'},
-  {id:'BK004',userId:'ST101',userName:'Dr. S. Kannan',userRole:'Staff',instrId:'I004',instrName:'High-Speed Centrifuge',date:'2025-07-15',time:'10:00',dur:1,purpose:'Lab demo',guide:'—',notes:'',status:'Pending'},
-];
+let allBookings=[],allUsers=[],instruments=[],calDate=new Date();
+let currentBkId=null,mbSelectedSlot=null;
 
-let calDate=new Date();
-
-// ===== INIT =====
+/* ── INIT ── */
 window.addEventListener('load',()=>{
   const saved=sessionStorage.getItem('limsUser');
   if(!saved){window.location.href='index.html';return;}
-  const u=JSON.parse(saved);
-  if(u.role!=='Admin'){window.location.href='booking.html';return;}
-  loadOverview();
-  populateBkInstrFilter();
-  populateCalInstr();
+  const user=JSON.parse(saved);
+  if(user.role!=='Admin'){window.location.href='booking.html';return;}
+  fetchAll();
 });
 
-// ===== NAV =====
-const PANELS=['overview','users','instruments','bookings','calendar','reports'];
-function switchPanel(pid){
-  PANELS.forEach((p,i)=>{
-    document.getElementById(p+'Panel').classList.toggle('active',p===pid);
-    document.querySelectorAll('.nav-tab')[i]?.classList.toggle('active',p===pid);
+function fetchAll(){
+  Promise.all([
+    fetch(SCRIPT_URL+'?action=getAllBookings').then(r=>r.json()).catch(()=>({status:'error'})),
+    fetch(SCRIPT_URL+'?action=getAllUsers').then(r=>r.json()).catch(()=>({status:'error'})),
+    fetch(SCRIPT_URL+'?action=getInstruments').then(r=>r.json()).catch(()=>({status:'error'}))
+  ]).then(([bkRes,usRes,inRes])=>{
+    allBookings=bkRes.status==='ok'?(bkRes.bookings||[]):[];
+    allUsers=usRes.status==='ok'?(usRes.users||[]):[];
+    instruments=inRes.status==='ok'?(inRes.instruments||[]):[];
+    updateDashboard();
+    renderBookings();
+    renderUsers();
+    renderInstrGrid();
+    populateCalFilter();
+    populateBkInstrFilter();
+    populateMbInstrSelect();
+    buildCalendar();
   });
-  if(pid==='users')renderUsers();
-  if(pid==='instruments')renderInstr();
-  if(pid==='bookings')renderBookings();
-  if(pid==='calendar')buildAdminCal();
-  if(pid==='reports')buildReports();
-}
-function toggleDrawer(){document.getElementById('drawer').classList.toggle('open');}
-function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-function doLogout(){sessionStorage.removeItem('limsUser');window.location.href='index.html';}
-
-// ===== OVERVIEW =====
-function loadOverview(){
-  const nonAdmin=USERS.filter(u=>u.role!=='Admin');
-  const today=new Date().toISOString().split('T')[0];
-  document.getElementById('ovUsers').textContent=nonAdmin.length;
-  document.getElementById('ovPending').textContent=USERS.filter(u=>u.status==='Pending').length;
-  document.getElementById('ovInstr').textContent=INSTRUMENTS.length;
-  document.getElementById('ovBookings').textContent=BOOKINGS.length;
-  document.getElementById('ovTodayBook').textContent=BOOKINGS.filter(b=>b.date===today).length;
-  document.getElementById('ovPendBook').textContent=BOOKINGS.filter(b=>b.status==='Pending').length;
-  // Pending users
-  const pu=USERS.filter(u=>u.status==='Pending');
-  document.getElementById('ovPendingBody').innerHTML=pu.length?pu.map(u=>`
-    <tr>
-      <td>${u.photo?`<img src="${u.photo}" onclick="viewPhoto('${u.photo}')" style="width:30px;height:30px;border-radius:50%;cursor:pointer;object-fit:cover;"/>`
-        :`<div style="width:30px;height:30px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">${u.name[0]}</div>`}</td>
-      <td style="font-weight:600;">${u.name}</td>
-      <td><code style="font-size:11px;font-weight:700;">${u.uid}</code></td>
-      <td><span class="badge b-${u.role==='Staff'?'staff':u.role==='Research Scholar'?'research':'student'}">${u.role}</span></td>
-      <td>${u.cls||'—'}</td>
-      <td style="font-size:12px;">${u.email}</td>
-      <td style="font-size:11px;color:var(--gray);">${u.reg||'—'}</td>
-      <td>
-        <button class="btn btn-xs btn-green" onclick="approveUser('${u.uid}')" style="margin:2px;">✓ Approve</button>
-        <button class="btn btn-xs btn-red" onclick="rejectUser('${u.uid}')" style="margin:2px;">✗ Reject</button>
-      </td>
-    </tr>`).join('')
-  :`<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:20px;">No pending approvals 🎉</td></tr>`;
-  // Pending bookings
-  const pb=BOOKINGS.filter(b=>b.status==='Pending');
-  document.getElementById('ovPendBookBody').innerHTML=pb.length?pb.map(b=>`
-    <tr>
-      <td><code style="font-size:11px;">${b.id}</code></td>
-      <td>${b.userName}<br><span style="font-size:10px;color:var(--gray);">${b.userId}</span></td>
-      <td style="font-size:12px;">${b.instrName}</td>
-      <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
-      <td style="font-size:12px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${b.purpose}</td>
-      <td>
-        <button class="btn btn-xs btn-green" onclick="approveBooking('${b.id}')" style="margin:2px;">✓ Approve</button>
-        <button class="btn btn-xs btn-red" onclick="rejectBooking('${b.id}')" style="margin:2px;">✗ Reject</button>
-      </td>
-    </tr>`).join('')
-  :`<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:20px;">No pending bookings</td></tr>`;
 }
 
-// ===== USERS =====
+/* ── DASHBOARD ── */
+function updateDashboard(){
+  const pendingBk=allBookings.filter(b=>b.status==='Pending');
+  const approvedBk=allBookings.filter(b=>b.status==='Approved');
+  const pendingUs=allUsers.filter(u=>u.status==='Pending');
+  document.getElementById('dPendingBk').textContent=pendingBk.length;
+  document.getElementById('dApprovedBk').textContent=approvedBk.length;
+  document.getElementById('dPendingUs').textContent=pendingUs.length;
+  document.getElementById('dTotalUs').textContent=allUsers.length;
+  document.getElementById('dTotalInstr').textContent=instruments.length;
+
+  // Pending bookings table (max 8)
+  const pbBody=document.getElementById('dashPendingBody');
+  pbBody.innerHTML=pendingBk.length
+    ?pendingBk.slice(0,8).map(b=>`<tr>
+        <td><code style="font-size:11px;font-weight:700;">${b.id}</code></td>
+        <td style="font-size:12px;">${b.userId}</td>
+        <td style="font-size:12px;">${b.instrName}</td>
+        <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+        <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">${b.purpose}</td>
+        <td>
+          <button class="btn btn-green btn-xs" onclick="openBkActionModal('${b.id}')"><i class="fa-solid fa-check"></i> Review</button>
+        </td>
+      </tr>`).join('')
+    :`<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:20px;"><i class="fa-solid fa-circle-check" style="color:var(--green);"></i> No pending bookings</td></tr>`;
+
+  // Pending users table (max 6)
+  const puBody=document.getElementById('dashPendingUsersBody');
+  puBody.innerHTML=pendingUs.length
+    ?pendingUs.slice(0,6).map(u=>`<tr>
+        <td style="font-weight:600;">${u.name}</td>
+        <td><code style="font-size:11px;">${u.uid}</code></td>
+        <td><span class="badge b-${(u.role||'student').toLowerCase().replace(' ','-')}">${u.role}</span></td>
+        <td style="font-size:12px;">${u.email}</td>
+        <td style="font-size:11px;color:var(--gray);">${u.registered?u.registered.split(' ')[0]:'—'}</td>
+        <td style="display:flex;gap:5px;flex-wrap:wrap;">
+          <button class="btn btn-green btn-xs" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-check"></i> Approve</button>
+          <button class="btn btn-red btn-xs" onclick="quickRejectUser('${u.uid}')"><i class="fa-solid fa-xmark"></i> Reject</button>
+        </td>
+      </tr>`).join('')
+    :`<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px;"><i class="fa-solid fa-circle-check" style="color:var(--green);"></i> No pending registrations</td></tr>`;
+}
+
+/* ── BOOKINGS ── */
+function renderBookings(){
+  const q=(document.getElementById('bkSearch').value||'').toLowerCase();
+  const st=document.getElementById('bkStatusFilter').value;
+  const instr=document.getElementById('bkInstrFilter').value;
+  const filtered=allBookings.filter(b=>{
+    if(st&&b.status!==st)return false;
+    if(instr&&b.instrId!==instr)return false;
+    if(q&&!(b.id+b.userId+b.instrName+b.purpose+b.guide).toLowerCase().includes(q))return false;
+    return true;
+  }).reverse();
+  const tbody=document.getElementById('bookingsBody');
+  tbody.innerHTML=filtered.length
+    ?filtered.map(b=>`<tr>
+        <td><code style="font-size:11px;font-weight:700;color:var(--blue);">${b.id}</code></td>
+        <td style="font-size:12px;font-weight:600;">${b.userId}</td>
+        <td style="font-size:12px;">${b.instrName}</td>
+        <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+        <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;" title="${b.purpose}">${b.purpose}</td>
+        <td style="font-size:12px;">${b.guide}</td>
+        <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
+        <td style="display:flex;gap:5px;flex-wrap:wrap;">
+          ${b.status==='Pending'
+            ?`<button class="btn btn-green btn-xs" onclick="openBkActionModal('${b.id}')"><i class="fa-solid fa-check"></i> Approve</button>
+               <button class="btn btn-red btn-xs" onclick="openBkRejectModal('${b.id}')"><i class="fa-solid fa-xmark"></i> Reject</button>`
+            :`<button class="btn btn-amber btn-xs" onclick="openBkActionModal('${b.id}')"><i class="fa-solid fa-eye"></i> View</button>`}
+          <button class="btn btn-blue btn-xs" onclick="printBooking('${b.id}')"><i class="fa-solid fa-print"></i></button>
+        </td>
+      </tr>`).join('')
+    :`<tr><td colspan="10" style="text-align:center;color:var(--gray);padding:24px;">No bookings found</td></tr>`;
+}
+
+function populateBkInstrFilter(){
+  const sel=document.getElementById('bkInstrFilter');
+  sel.innerHTML='<option value="">All Instruments</option>'+instruments.map(i=>`<option value="${i.id}">${i.name}</option>`).join('');
+}
+
+function openBkActionModal(bkId){
+  currentBkId=bkId;
+  const b=allBookings.find(x=>x.id===bkId);
+  if(!b)return;
+  document.getElementById('bkActionTitle').textContent='Booking: '+bkId;
+  document.getElementById('bkAdminNote').value='';
+  document.getElementById('bkActionInfo').innerHTML=`
+    <div><strong>Booking ID:</strong> ${b.id}</div>
+    <div><strong>User:</strong> ${b.userId}</div>
+    <div><strong>Instrument:</strong> ${b.instrName}</div>
+    <div><strong>Date:</strong> ${b.date} &nbsp; <strong>Time:</strong> ${b.time} &nbsp; <strong>Duration:</strong> ${b.dur}h</div>
+    <div><strong>Purpose:</strong> ${b.purpose}</div>
+    <div><strong>Guide:</strong> ${b.guide}</div>
+    ${b.notes?`<div><strong>Notes:</strong> ${b.notes}</div>`:''}
+    <div><strong>Current Status:</strong> <span class="badge b-${b.status.toLowerCase()}">${b.status}</span></div>
+  `;
+  const isPending=b.status==='Pending';
+  document.getElementById('bkApproveBtn').style.display=isPending?'':'none';
+  document.getElementById('bkRejectBtn').style.display=isPending?'':'none';
+  openModal('bkActionModal');
+}
+
+function openBkRejectModal(bkId){
+  openBkActionModal(bkId);
+  document.getElementById('bkApproveBtn').style.display='none';
+  document.getElementById('bkRejectBtn').style.display='';
+}
+
+function confirmBookingAction(action){
+  if(!currentBkId)return;
+  const note=document.getElementById('bkAdminNote').value.trim();
+  const btn=action==='Approved'?document.getElementById('bkApproveBtn'):document.getElementById('bkRejectBtn');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+  const body=action==='Approved'
+    ?{action:'approveBooking',bookingId:currentBkId,adminNote:note}
+    :{action:'rejectBooking',bookingId:currentBkId,adminNote:note};
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
+    .then(r=>r.json()).then(res=>{
+      btn.disabled=false;
+      if(res.status==='ok'){
+        toast('Booking '+action+'!','ok');
+        closeModal('bkActionModal');
+        fetchAll();
+      }else{
+        setMsg('bkMsg',res.msg||'Action failed.');
+        btn.innerHTML=action==='Approved'?'<i class="fa-solid fa-check"></i> Approve':'<i class="fa-solid fa-xmark"></i> Reject';
+      }
+    }).catch(()=>{btn.disabled=false;setMsg('bkMsg','Connection error.');});
+}
+
+/* ── USERS ── */
 function renderUsers(){
-  const search=(document.getElementById('usrSearch').value||'').toLowerCase();
-  const role=document.getElementById('usrRole').value;
-  const cls=document.getElementById('usrClass').value;
-  const status=document.getElementById('usrStatus').value;
-  const filtered=USERS.filter(u=>{
-    if(u.role==='Admin')return false;
+  const q=(document.getElementById('usSearch').value||'').toLowerCase();
+  const role=document.getElementById('usRoleFilter').value;
+  const status=document.getElementById('usStatusFilter').value;
+  const filtered=allUsers.filter(u=>{
     if(role&&u.role!==role)return false;
-    if(cls&&u.cls!==cls)return false;
     if(status&&u.status!==status)return false;
-    if(search&&!u.name.toLowerCase().includes(search)&&!u.uid.toLowerCase().includes(search))return false;
+    if(q&&!(u.name+u.uid+u.email+u.phone).toLowerCase().includes(q))return false;
     return true;
   });
-  document.getElementById('usersBody').innerHTML=filtered.length?filtered.map(u=>`
-    <tr>
-      <td>${u.photo?`<img src="${u.photo}" onclick="viewPhoto('${u.photo}')" style="width:30px;height:30px;border-radius:50%;cursor:pointer;object-fit:cover;"/>`
-        :`<div style="width:30px;height:30px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">${u.name[0]}</div>`}</td>
-      <td style="font-weight:600;">${u.name}</td>
-      <td><code style="font-size:11px;font-weight:700;">${u.uid}</code></td>
-      <td><span class="badge b-${u.role==='Staff'?'staff':u.role==='Research Scholar'?'research':'student'}">${u.role}</span></td>
-      <td>${u.cls||'—'}</td>
-      <td style="font-size:12px;">${u.batch||'—'}</td>
-      <td style="font-size:12px;">${u.email}</td>
-      <td style="font-size:12px;">${u.phone||'—'}</td>
-      <td><span class="badge b-${u.status.toLowerCase()}">${u.status}</span></td>
-      <td style="white-space:nowrap;">
-        <button class="btn btn-xs btn-outline" onclick="openEditUser('${u.uid}')" style="margin:2px;">Edit</button>
-        ${u.status==='Pending'?`<button class="btn btn-xs btn-green" onclick="approveUser('${u.uid}')" style="margin:2px;">Approve</button>`:''}
-        ${u.status!=='Blocked'?`<button class="btn btn-xs btn-orange" onclick="blockUser('${u.uid}')" style="margin:2px;">Block</button>`:''}
-        ${u.status==='Blocked'?`<button class="btn btn-xs btn-green" onclick="unblockUser('${u.uid}')" style="margin:2px;">Unblock</button>`:''}
-        <button class="btn btn-xs btn-red" onclick="deleteUser('${u.uid}')" style="margin:2px;">Delete</button>
-      </td>
-    </tr>`).join('')
-  :`<tr><td colspan="10" style="text-align:center;color:var(--gray);padding:28px;">No users match filter</td></tr>`;
+  const roleClass={'Student':'b-student','Research Scholar':'b-research','Staff':'b-staff','Admin':'b-admin'};
+  document.getElementById('usersBody').innerHTML=filtered.length
+    ?filtered.map(u=>`<tr>
+        <td>
+          <div class="u-avatar">
+            ${u.photo?`<img src="${u.photo}" alt=""/>`:`<span>${(u.name||'?')[0].toUpperCase()}</span>`}
+          </div>
+        </td>
+        <td style="font-weight:600;">${u.name}</td>
+        <td><code style="font-size:11px;font-weight:700;">${u.uid}</code></td>
+        <td><span class="badge ${roleClass[u.role]||'b-student'}">${u.role}</span>${u.cls?`<div style="font-size:11px;color:var(--gray);margin-top:3px;">${u.cls}</div>`:''}</td>
+        <td style="font-size:12px;">${u.email}</td>
+        <td style="font-size:12px;">${u.phone||'—'}</td>
+        <td style="font-size:12px;">${u.batch||'—'}</td>
+        <td><span class="badge b-${(u.status||'pending').toLowerCase()}">${u.status}</span></td>
+        <td>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;">
+            ${u.status==='Pending'
+              ?`<button class="btn btn-green btn-xs" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-check"></i></button>
+                <button class="btn btn-red btn-xs" onclick="quickRejectUser('${u.uid}')"><i class="fa-solid fa-xmark"></i></button>`:''}
+            ${u.status==='Approved'
+              ?`<button class="btn btn-amber btn-xs" onclick="blockUser('${u.uid}')"><i class="fa-solid fa-ban"></i></button>`:''}
+            ${u.status==='Blocked'
+              ?`<button class="btn btn-green btn-xs" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-unlock"></i></button>`:''}
+            <button class="btn btn-blue btn-xs" onclick="openEditUserModal('${u.uid}')"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-red btn-xs" onclick="deleteUser('${u.uid}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`).join('')
+    :`<tr><td colspan="9" style="text-align:center;color:var(--gray);padding:24px;">No users found</td></tr>`;
 }
 
-// ===== USER ACTIONS =====
-function approveUser(uid){
-  const u=USERS.find(u=>u.uid===uid);
-  if(u){u.status='Approved';toast(u.name+' approved!','ok');loadOverview();renderUsers();}
-  // In production: fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'updateUserStatus',uid,status:'Approved'})})
+function quickApproveUser(uid){
+  doUserAction({action:'approveUser',uid},'User approved!');
 }
-function rejectUser(uid){
-  const u=USERS.find(u=>u.uid===uid);
-  if(u){u.status='Rejected';toast(u.name+' rejected.','err');loadOverview();renderUsers();}
+function quickRejectUser(uid){
+  if(!confirm('Reject this user?'))return;
+  doUserAction({action:'rejectUser',uid},'User rejected.');
 }
 function blockUser(uid){
-  const u=USERS.find(u=>u.uid===uid);
-  if(u&&confirm('Block '+u.name+'? They will not be able to log in.')){
-    u.status='Blocked';toast(u.name+' blocked.','err');renderUsers();
-  }
-}
-function unblockUser(uid){
-  const u=USERS.find(u=>u.uid===uid);
-  if(u){u.status='Approved';toast(u.name+' unblocked.','ok');renderUsers();}
+  if(!confirm('Block this user?'))return;
+  doUserAction({action:'blockUser',uid},'User blocked.');
 }
 function deleteUser(uid){
-  const u=USERS.find(u=>u.uid===uid);
-  if(u&&confirm('Permanently delete '+u.name+'? This cannot be undone.')){
-    USERS=USERS.filter(u=>u.uid!==uid);
-    BOOKINGS=BOOKINGS.filter(b=>b.userId!==uid);
-    toast('User deleted.','err');renderUsers();loadOverview();
-  }
+  if(!confirm('Permanently delete user '+uid+'? This cannot be undone.'))return;
+  doUserAction({action:'deleteUser',uid},'User deleted.');
+}
+function doUserAction(body,successMsg){
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){toast(successMsg,'ok');fetchAll();}
+      else{setMsg('usMsg',res.msg||'Action failed.');}
+    }).catch(()=>setMsg('usMsg','Connection error.'));
 }
 
-// ===== EDIT USER =====
-function toggleEuClass(){
-  const role=document.getElementById('euRole').value;
-  document.getElementById('euClassGroup').style.display=role==='Student'?'block':'none';
-}
-function toggleAuClass(){
-  const role=document.getElementById('auRole').value;
-  document.getElementById('auClassGroup').style.display=role==='Student'?'block':'none';
-}
-function openEditUser(uid){
-  const u=USERS.find(u=>u.uid===uid);if(!u)return;
-  document.getElementById('euId').value=uid;
-  document.getElementById('euName').value=u.name;
-  document.getElementById('euRole').value=u.role;
-  document.getElementById('euClass').value=u.cls||'';
-  document.getElementById('euClassGroup').style.display=u.role==='Student'?'block':'none';
-  document.getElementById('euEmail').value=u.email;
-  document.getElementById('euPhone').value=u.phone||'';
-  document.getElementById('euBatch').value=u.batch||'';
-  document.getElementById('euStatus').value=u.status;
-  document.getElementById('euPwd').value='';
-  setMsg('euMsg','');
-  openModal('editUserModal');
-}
-function saveEditUser(){
-  const uid=document.getElementById('euId').value;
-  const u=USERS.find(u=>u.uid===uid);if(!u)return;
-  const email=document.getElementById('euEmail').value.trim().toLowerCase();
-  if(!email.endsWith('@loyolacollege.edu')){setMsg('euMsg','Only @loyolacollege.edu emails allowed.','error');return;}
-  // Check duplicate email (excluding self)
-  if(USERS.find(x=>x.email===email&&x.uid!==uid)){setMsg('euMsg','This email is already used by another user.','error');return;}
-  u.name=document.getElementById('euName').value.trim();
-  u.role=document.getElementById('euRole').value;
-  u.cls=document.getElementById('euClass').value;
-  u.email=email;
-  u.phone=document.getElementById('euPhone').value.trim();
-  u.batch=document.getElementById('euBatch').value.trim();
-  u.status=document.getElementById('euStatus').value;
-  const np=document.getElementById('euPwd').value;
-  if(np)u.pwd=np;
-  closeModal('editUserModal');
-  toast('User updated!','ok');
-  renderUsers();loadOverview();
-}
 function openAddUserModal(){
-  ['auName','auUid','auEmail','auPhone','auBatch','auPwd'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('auRole').value='';
-  document.getElementById('auClassGroup').style.display='none';
-  setMsg('auMsg','');
-  openModal('addUserModal');
-}
-function saveAddUser(){
-  const name=document.getElementById('auName').value.trim();
-  const role=document.getElementById('auRole').value;
-  const cls=document.getElementById('auClass').value;
-  const uid=document.getElementById('auUid').value.trim().toUpperCase();
-  const email=document.getElementById('auEmail').value.trim().toLowerCase();
-  const phone=document.getElementById('auPhone').value.trim();
-  const batch=document.getElementById('auBatch').value.trim();
-  const pwd=document.getElementById('auPwd').value;
-  if(!name||!role||!uid||!email||!pwd){setMsg('auMsg','Please fill all required fields.','error');return;}
-  if(!email.endsWith('@loyolacollege.edu')){setMsg('auMsg','Only @loyolacollege.edu emails are accepted.','error');return;}
-  if(USERS.find(u=>u.uid===uid)){setMsg('auMsg','This ID/Code already exists.','error');return;}
-  if(USERS.find(u=>u.email===email)){setMsg('auMsg','This email is already registered.','error');return;}
-  if(role==='Student'&&!cls){setMsg('auMsg','Please select the student class.','error');return;}
-  USERS.push({uid,name,role,cls:role==='Student'?cls:'',email,phone,batch,status:'Approved',photo:'',pwd,reg:new Date().toISOString().split('T')[0]});
-  closeModal('addUserModal');
-  toast('User added!','ok');renderUsers();loadOverview();
+  document.getElementById('userModalTitle').textContent='Add User';
+  document.getElementById('umUid').value='';
+  document.getElementById('umUidField').value='';
+  document.getElementById('umUidField').readOnly=false;
+  document.getElementById('umName').value='';
+  document.getElementById('umRole').value='Student';
+  document.getElementById('umClass').value='';
+  document.getElementById('umEmail').value='';
+  document.getElementById('umPhone').value='';
+  document.getElementById('umBatch').value='';
+  document.getElementById('umStatus').value='Approved';
+  document.getElementById('umPwd').value='';
+  setMsg('userModalMsg','');
+  openModal('userModal');
 }
 
-// ===== INSTRUMENTS =====
-function renderInstr(){
-  document.getElementById('instrBody').innerHTML=INSTRUMENTS.map(i=>`
-    <tr>
-      <td style="font-weight:600;">${i.name}</td>
-      <td>${i.lab}</td>
-      <td style="font-size:12px;">${i.model||'—'}</td>
-      <td style="font-size:12px;color:var(--blue);font-weight:600;">🕐 ${i.startH} – ${i.endH}</td>
-      <td>${i.maxH}h</td>
-      <td><span class="badge ${i.status==='Available'?'b-available':'b-maintenance'}">${i.status}</span></td>
-      <td style="white-space:nowrap;">
-        <button class="btn btn-xs btn-outline" onclick="openEditInstr('${i.id}')" style="margin:2px;">Edit</button>
-        <button class="btn btn-xs ${i.status==='Available'?'btn-orange':'btn-green'}" onclick="toggleMaint('${i.id}')" style="margin:2px;">
-          ${i.status==='Available'?'Set Maint.':'Set Available'}
-        </button>
-      </td>
-    </tr>`).join('');
+function openEditUserModal(uid){
+  const u=allUsers.find(x=>x.uid===uid);
+  if(!u)return;
+  document.getElementById('userModalTitle').textContent='Edit User: '+uid;
+  document.getElementById('umUid').value=uid;
+  document.getElementById('umUidField').value=uid;
+  document.getElementById('umUidField').readOnly=true;
+  document.getElementById('umName').value=u.name||'';
+  document.getElementById('umRole').value=u.role||'Student';
+  document.getElementById('umClass').value=u.cls||'';
+  document.getElementById('umEmail').value=u.email||'';
+  document.getElementById('umPhone').value=u.phone||'';
+  document.getElementById('umBatch').value=u.batch||'';
+  document.getElementById('umStatus').value=u.status||'Pending';
+  document.getElementById('umPwd').value='';
+  setMsg('userModalMsg','');
+  openModal('userModal');
 }
-function openInstrModal(){
-  document.getElementById('instrModalTitle').textContent='🔬 Add Instrument';
-  document.getElementById('imId').value='';
-  ['imName','imLab','imModel','imDesc'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('imStart').value='08:00';
-  document.getElementById('imEnd').value='17:00';
-  document.getElementById('imMaxH').value=8;
-  document.getElementById('imStatus').value='Available';
-  setMsg('imMsg','');
+
+function saveUser(){
+  const uid=document.getElementById('umUid').value;
+  const isEdit=!!uid;
+  const name=document.getElementById('umName').value.trim();
+  const uidField=document.getElementById('umUidField').value.trim().toUpperCase();
+  const role=document.getElementById('umRole').value;
+  const cls=document.getElementById('umClass').value.trim();
+  const email=document.getElementById('umEmail').value.trim();
+  const phone=document.getElementById('umPhone').value.trim();
+  const batch=document.getElementById('umBatch').value.trim();
+  const status=document.getElementById('umStatus').value;
+  const pwd=document.getElementById('umPwd').value;
+
+  if(!name||!uidField||!email){setMsg('userModalMsg','Please fill required fields.');return;}
+
+  const body=isEdit
+    ?{action:'editUser',uid:uidField,name,role,cls,email,phone,batch,status,pwd:pwd||undefined}
+    :{action:'addUser',uid:uidField,name,role,cls,email,phone,batch,status,pwd};
+  if(!isEdit&&(!pwd||pwd.length<8)){setMsg('userModalMsg','Password must be at least 8 characters for new users.');return;}
+
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){
+        toast(isEdit?'User updated!':'User added!','ok');
+        closeModal('userModal');fetchAll();
+      }else{setMsg('userModalMsg',res.msg||'Failed.');}
+    }).catch(()=>setMsg('userModalMsg','Connection error.'));
+}
+
+/* ── INSTRUMENTS ── */
+function renderInstrGrid(){
+  const grid=document.getElementById('instrGrid');
+  if(!instruments.length){
+    grid.innerHTML='<p style="color:var(--gray);padding:20px;grid-column:1/-1;"><i class="fa-solid fa-circle-exclamation"></i> No instruments. Click "Add Instrument" to get started.</p>';
+    return;
+  }
+  grid.innerHTML=instruments.map(i=>`
+    <div class="instr-card">
+      ${i.imageUrl
+        ?`<img src="${i.imageUrl}" alt="${i.name}" class="ic-img" onerror="this.style.display='none'">`
+        :`<div class="ic-img-placeholder"><i class="fa-solid fa-flask-vial"></i></div>`}
+      <div class="ic-head">
+        <h3><i class="fa-solid fa-flask-vial"></i> ${i.name}</h3>
+        <p><i class="fa-solid fa-location-dot"></i> ${i.lab}${i.roomNo?' · '+i.roomNo:''}</p>
+      </div>
+      <div class="ic-body">
+        <div class="ic-row">
+          <span class="badge ${i.status==='Available'?'b-available':'b-maintenance'}">${i.status}</span>
+          <span style="font-size:11px;color:var(--gray);">Max ${i.maxH}h/day</span>
+        </div>
+        ${i.model?`<div class="ic-meta"><i class="fa-solid fa-tag"></i><strong>Model:</strong> ${i.model}</div>`:''}
+        ${i.make?`<div class="ic-meta"><i class="fa-solid fa-industry"></i><strong>Make:</strong> ${i.make}</div>`:''}
+        ${i.labIncharge?`<div class="ic-meta"><i class="fa-solid fa-user-tie"></i><strong>In-charge:</strong> ${i.labIncharge}</div>`:''}
+        <div class="ic-meta"><i class="fa-regular fa-clock"></i> ${pad(i.startHour)}:00 – ${pad(i.endHour)}:00</div>
+        <p class="ic-desc">${i.desc||''}</p>
+        <div class="ic-actions">
+          <button class="btn btn-blue btn-xs" onclick="openInstrModal('${i.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+          <button class="btn btn-red btn-xs" onclick="deleteInstrument('${i.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openInstrModal(id){
+  setMsg('instrModalMsg','');
+  if(id){
+    const i=instruments.find(x=>x.id===id);
+    if(!i)return;
+    document.getElementById('instrModalTitle').textContent='Edit Instrument: '+id;
+    document.getElementById('imId').value=id;
+    document.getElementById('imName').value=i.name;
+    document.getElementById('imLab').value=i.lab;
+    document.getElementById('imRoomNo').value=i.roomNo||'';
+    document.getElementById('imModel').value=i.model||'';
+    document.getElementById('imMake').value=i.make||'';
+    document.getElementById('imStatus').value=i.status;
+    document.getElementById('imStartHour').value=i.startHour;
+    document.getElementById('imEndHour').value=i.endHour;
+    document.getElementById('imMaxH').value=i.maxH;
+    document.getElementById('imDesc').value=i.desc||'';
+    document.getElementById('imLabIncharge').value=i.labIncharge||'';
+    document.getElementById('imImageUrl').value=i.imageUrl||'';
+  }else{
+    document.getElementById('instrModalTitle').textContent='Add Instrument';
+    document.getElementById('imId').value='';
+    document.getElementById('imName').value='';
+    document.getElementById('imLab').value='';
+    document.getElementById('imRoomNo').value='';
+    document.getElementById('imModel').value='';
+    document.getElementById('imMake').value='';
+    document.getElementById('imStatus').value='Available';
+    document.getElementById('imStartHour').value='8';
+    document.getElementById('imEndHour').value='17';
+    document.getElementById('imMaxH').value='8';
+    document.getElementById('imDesc').value='';
+    document.getElementById('imLabIncharge').value='';
+    document.getElementById('imImageUrl').value='';
+  }
   openModal('instrModal');
 }
-function openEditInstr(iid){
-  const i=INSTRUMENTS.find(x=>x.id===iid);if(!i)return;
-  document.getElementById('instrModalTitle').textContent='✏️ Edit Instrument';
-  document.getElementById('imId').value=iid;
-  document.getElementById('imName').value=i.name;
-  document.getElementById('imLab').value=i.lab;
-  document.getElementById('imModel').value=i.model||'';
-  document.getElementById('imStart').value=i.startH;
-  document.getElementById('imEnd').value=i.endH;
-  document.getElementById('imMaxH').value=i.maxH;
-  document.getElementById('imStatus').value=i.status;
-  document.getElementById('imDesc').value=i.desc||'';
-  setMsg('imMsg','');
-  openModal('instrModal');
-}
+
 function saveInstrument(){
-  const iid=document.getElementById('imId').value;
+  const id=document.getElementById('imId').value;
   const name=document.getElementById('imName').value.trim();
   const lab=document.getElementById('imLab').value.trim();
-  const startH=document.getElementById('imStart').value;
-  const endH=document.getElementById('imEnd').value;
-  const maxH=parseInt(document.getElementById('imMaxH').value)||8;
-  if(!name||!lab){setMsg('imMsg','Name and lab are required.','error');return;}
-  if(startH>=endH){setMsg('imMsg','Start time must be before end time.','error');return;}
-  const data={name,lab,model:document.getElementById('imModel').value,
-    startH,endH,maxH,status:document.getElementById('imStatus').value,desc:document.getElementById('imDesc').value};
-  if(iid){
-    const i=INSTRUMENTS.find(x=>x.id===iid);
-    if(i)Object.assign(i,data);
-    toast('Instrument updated!','ok');
-  }else{
-    data.id='I'+String(INSTRUMENTS.length+1).padStart(3,'0');
-    INSTRUMENTS.push(data);
-    toast('Instrument added!','ok');
-  }
-  closeModal('instrModal');
-  renderInstr();populateBkInstrFilter();populateCalInstr();
-}
-function toggleMaint(iid){
-  const i=INSTRUMENTS.find(x=>x.id===iid);
-  if(i){i.status=i.status==='Available'?'Maintenance':'Available';renderInstr();toast('Status updated.','ok');}
-}
-
-// ===== BOOKINGS =====
-function populateBkInstrFilter(){
-  const sel=document.getElementById('bkInstr');
-  sel.innerHTML='<option value="">All Instruments</option>'+INSTRUMENTS.map(i=>`<option value="${i.id}">${i.name}</option>`).join('');
-}
-function renderBookings(){
-  const search=(document.getElementById('bkSearch').value||'').toLowerCase();
-  const status=document.getElementById('bkStatus').value;
-  const dateF=document.getElementById('bkDate').value;
-  const instrF=document.getElementById('bkInstr').value;
-  const filtered=BOOKINGS.filter(b=>{
-    if(status&&b.status!==status)return false;
-    if(dateF&&b.date!==dateF)return false;
-    if(instrF&&b.instrId!==instrF)return false;
-    if(search&&!b.instrName.toLowerCase().includes(search)&&!b.userName.toLowerCase().includes(search)&&!b.userId.toLowerCase().includes(search))return false;
-    return true;
-  });
-  document.getElementById('bookBody').innerHTML=filtered.length?filtered.map(b=>`
-    <tr>
-      <td><code style="font-size:11px;">${b.id}</code></td>
-      <td>${b.userName}<br><span style="font-size:10px;color:var(--gray);">${b.userId}</span></td>
-      <td><span class="badge b-${b.userRole==='Staff'?'staff':b.userRole==='Research Scholar'?'research':'student'}" style="font-size:10px;">${b.userRole}</span></td>
-      <td style="font-size:12px;">${b.instrName}</td>
-      <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
-      <td style="font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${b.purpose}</td>
-      <td style="font-size:12px;">${b.guide||'—'}</td>
-      <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
-      <td style="white-space:nowrap;">
-        ${b.status==='Pending'?`<button class="btn btn-xs btn-green" onclick="approveBooking('${b.id}')" style="margin:2px;">✓</button>
-        <button class="btn btn-xs btn-red" onclick="rejectBooking('${b.id}')" style="margin:2px;">✗</button>`:''}
-        <button class="btn btn-xs btn-red" onclick="deleteBooking('${b.id}')" style="margin:2px;background:#6b7280;">🗑</button>
-      </td>
-    </tr>`).join('')
-  :`<tr><td colspan="11" style="text-align:center;color:var(--gray);padding:28px;">No bookings match</td></tr>`;
-}
-function approveBooking(bid){
-  const b=BOOKINGS.find(b=>b.id===bid);
-  if(b){b.status='Approved';toast('Booking '+bid+' approved!','ok');renderBookings();loadOverview();}
-}
-function rejectBooking(bid){
-  const b=BOOKINGS.find(b=>b.id===bid);
-  if(b){b.status='Rejected';toast('Booking '+bid+' rejected.','err');renderBookings();loadOverview();}
-}
-function deleteBooking(bid){
-  if(!confirm('Delete booking '+bid+'?'))return;
-  BOOKINGS=BOOKINGS.filter(b=>b.id!==bid);toast('Booking deleted.','err');renderBookings();loadOverview();
+  if(!name||!lab){setMsg('instrModalMsg','Name and Lab are required.');return;}
+  const body={
+    action:'saveInstrument',
+    id:id||undefined,
+    name,lab,
+    roomNo:document.getElementById('imRoomNo').value.trim(),
+    model:document.getElementById('imModel').value.trim(),
+    make:document.getElementById('imMake').value.trim(),
+    status:document.getElementById('imStatus').value,
+    startHour:parseInt(document.getElementById('imStartHour').value)||8,
+    endHour:parseInt(document.getElementById('imEndHour').value)||17,
+    maxH:parseInt(document.getElementById('imMaxH').value)||8,
+    desc:document.getElementById('imDesc').value.trim(),
+    labIncharge:document.getElementById('imLabIncharge').value.trim(),
+    imageUrl:document.getElementById('imImageUrl').value.trim()
+  };
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){
+        toast(id?'Instrument updated!':'Instrument added!','ok');
+        closeModal('instrModal');fetchAll();
+      }else{setMsg('instrModalMsg',res.msg||'Failed.');}
+    }).catch(()=>setMsg('instrModalMsg','Connection error.'));
 }
 
-// ===== MANUAL BOOKING =====
-function openManualBookModal(){
-  document.getElementById('mbInstr').innerHTML=INSTRUMENTS.map(i=>`<option value="${i.id}">${i.name} · ${i.lab}</option>`).join('');
+function deleteInstrument(id){
+  if(!confirm('Delete this instrument? Existing bookings will remain.'))return;
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'deleteInstrument',id})})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){toast('Instrument deleted.','ok');fetchAll();}
+      else{setMsg('instrMsg',res.msg||'Failed.');}
+    }).catch(()=>setMsg('instrMsg','Connection error.'));
+}
+
+/* ── MANUAL BOOKING ── */
+function openManualBookingModal(){
+  document.getElementById('mbUid').value='';
+  document.getElementById('mbInstr').value='';
   document.getElementById('mbDate').value=new Date().toISOString().split('T')[0];
-  document.getElementById('mbTime').value='09:00';
-  ['mbUid','mbPurpose','mbGuide'].forEach(id=>document.getElementById(id).value='');
-  setMsg('mbMsg','');
-  onMbInstrChange();
-  openModal('manualBookModal');
+  document.getElementById('mbDur').innerHTML='<option value="1">1 hour</option>';
+  document.getElementById('mbPurpose').value='';
+  document.getElementById('mbGuide').value='';
+  document.getElementById('mbNotes').value='';
+  document.getElementById('mbSlotSection').style.display='none';
+  mbSelectedSlot=null;
+  setMsg('manualBkMsg','');
+  openModal('manualBkModal');
 }
+
+function populateMbInstrSelect(){
+  const sel=document.getElementById('mbInstr');
+  sel.innerHTML='<option value="">— Select Instrument —</option>'+
+    instruments.filter(i=>i.status==='Available')
+      .map(i=>`<option value="${i.id}">${i.name} · ${i.lab}</option>`).join('');
+}
+
 function onMbInstrChange(){
   const instrId=document.getElementById('mbInstr').value;
-  const i=INSTRUMENTS.find(x=>x.id===instrId);
-  const info=document.getElementById('mbInstrInfo');
-  if(i){info.style.display='block';info.textContent=`⏰ Slot: ${i.startH} – ${i.endH} | Max ${i.maxH}h/day | ${i.lab}`;}
-  else info.style.display='none';
+  const instr=instruments.find(i=>i.id===instrId);
+  const durSel=document.getElementById('mbDur');
+  if(instr){
+    durSel.innerHTML='';
+    for(let h=1;h<=instr.maxH;h++)durSel.innerHTML+=`<option value="${h}">${h} hour${h>1?'s':''}</option>`;
+  }
+  loadMbSlots();
 }
-function saveManualBooking(){
+
+function loadMbSlots(){
+  const instrId=document.getElementById('mbInstr').value;
+  const date=document.getElementById('mbDate').value;
+  const sec=document.getElementById('mbSlotSection');
+  mbSelectedSlot=null;
+  if(!instrId||!date){sec.style.display='none';return;}
+  const instr=instruments.find(i=>i.id===instrId);
+  if(!instr){sec.style.display='none';return;}
+  sec.style.display='block';
+  const slots=[];
+  for(let h=instr.startHour;h<instr.endHour;h++)slots.push(pad(h)+':00');
+  const busySlots=allBookings.filter(b=>b.instrId===instrId&&b.date===date&&b.status!=='Rejected');
+  document.getElementById('mbSlotGrid').innerHTML=slots.map(slot=>{
+    const busy=busySlots.find(b=>b.time===slot);
+    if(busy)return`<div class="slot-btn busy">${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i></span></div>`;
+    return`<div class="slot-btn" onclick="selectMbSlot(this,'${slot}')">${slot}</div>`;
+  }).join('');
+}
+
+function selectMbSlot(el,slot){
+  document.querySelectorAll('#mbSlotGrid .slot-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');mbSelectedSlot=slot;
+}
+
+function submitManualBooking(){
   const uid=document.getElementById('mbUid').value.trim().toUpperCase();
   const instrId=document.getElementById('mbInstr').value;
   const date=document.getElementById('mbDate').value;
-  const time=document.getElementById('mbTime').value;
   const dur=parseInt(document.getElementById('mbDur').value);
   const purpose=document.getElementById('mbPurpose').value.trim();
   const guide=document.getElementById('mbGuide').value.trim();
-  const status=document.getElementById('mbStatus').value;
-  if(!uid||!instrId||!date||!time||!purpose){setMsg('mbMsg','Please fill all required fields.','error');return;}
-  const user=USERS.find(u=>u.uid===uid);
-  if(!user){setMsg('mbMsg','User ID not found. Please check and try again.','error');return;}
-  const instr=INSTRUMENTS.find(i=>i.id===instrId);
-  // Conflict check
-  const ns=tm(time),ne=ns+dur*60;
-  const conflict=BOOKINGS.find(b=>{
-    if(b.instrId!==instrId||b.date!==date||b.status==='Rejected')return false;
-    const es=tm(b.time),ee=es+b.dur*60;
-    return es<ne&&ns<ee;
-  });
-  if(conflict){setMsg('mbMsg','⚠ Time conflict with booking '+conflict.id+'. Please choose a different slot.','error');return;}
-  const newId='BK'+String(BOOKINGS.length+1).padStart(3,'0');
-  BOOKINGS.push({id:newId,userId:uid,userName:user.name,userRole:user.role,instrId,instrName:instr.name,date,time,dur,purpose,guide,notes:'Admin manual entry',status});
-  closeModal('manualBookModal');
-  toast('Booking added!','ok');renderBookings();loadOverview();
+  const notes=document.getElementById('mbNotes').value.trim();
+  const instr=instruments.find(i=>i.id===instrId);
+  if(!uid){setMsg('manualBkMsg','Please enter a User ID.');return;}
+  if(!instrId){setMsg('manualBkMsg','Please select an instrument.');return;}
+  if(!date){setMsg('manualBkMsg','Please select a date.');return;}
+  if(!mbSelectedSlot){setMsg('manualBkMsg','Please select a time slot.');return;}
+  if(!purpose){setMsg('manualBkMsg','Please enter the purpose.');return;}
+  if(!guide){setMsg('manualBkMsg','Please enter the guide name.');return;}
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({
+    action:'manualBooking',uid,userId:uid,instrId,instrName:instr?instr.name:'',
+    date,time:mbSelectedSlot,dur,purpose,guide,notes
+  })}).then(r=>r.json()).then(res=>{
+    if(res.status==='ok'){
+      toast('Manual booking created: '+res.bookingId,'ok');
+      closeModal('manualBkModal');fetchAll();
+    }else{setMsg('manualBkMsg',res.msg||'Failed.');}
+  }).catch(()=>setMsg('manualBkMsg','Connection error.'));
 }
-function tm(t){const[h,m]=t.split(':').map(Number);return h*60+m;}
 
-// ===== CALENDAR =====
-function populateCalInstr(){
-  const sel=document.getElementById('aCalInstr');
-  sel.innerHTML='<option value="">All Instruments</option>'+INSTRUMENTS.map(i=>`<option value="${i.id}">${i.name}</option>`).join('');
+/* ── CALENDAR ── */
+function populateCalFilter(){
+  const sel=document.getElementById('calFilter');
+  sel.innerHTML='<option value="">All Instruments</option>'+instruments.map(i=>`<option value="${i.id}">${i.name}</option>`).join('');
 }
-function moveMonth(d){calDate=new Date(calDate.getFullYear(),calDate.getMonth()+d,1);buildAdminCal();}
-function buildAdminCal(){
+function moveMonth(d){calDate=new Date(calDate.getFullYear(),calDate.getMonth()+d,1);buildCalendar();}
+function buildCalendar(){
   const month=calDate.getMonth(),year=calDate.getFullYear();
-  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('calTitle').textContent=months[month]+' '+year;
-  const filter=document.getElementById('aCalInstr').value;
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calTitle').textContent=MONTHS[month]+' '+year;
+  const filter=document.getElementById('calFilter').value;
   const first=new Date(year,month,1).getDay();
   const days=new Date(year,month+1,0).getDate();
   const today=new Date();
-  const relevant=BOOKINGS.filter(b=>{
+  const relevant=allBookings.filter(b=>{
     if(b.status==='Rejected')return false;
     if(filter&&b.instrId!==filter)return false;
-    const bd=new Date(b.date);
-    return bd.getFullYear()===year&&bd.getMonth()===month;
+    const bd=new Date(b.date);return bd.getFullYear()===year&&bd.getMonth()===month;
   });
   let cells='';
-  for(let i=0;i<first;i++)cells+=`<div class="cal-cell" style="background:#f9f9fb;"><div class="date-n"></div></div>`;
+  for(let i=0;i<first;i++)cells+=`<div class="cal-cell other"><div class="date-num"></div></div>`;
   for(let d=1;d<=days;d++){
     const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isToday=today.getDate()===d&&today.getMonth()===month&&today.getFullYear()===year;
     const dayBooks=relevant.filter(b=>b.date===ds);
-    const events=dayBooks.slice(0,3).map(b=>`<div class="cal-ev ce-${b.status==='Approved'?'a':'p'}" title="${b.userName} — ${b.instrName} — ${b.time}">${b.instrName.split(' ')[0]} ${b.time}</div>`).join('');
+    const events=dayBooks.slice(0,3).map(b=>`<div class="cal-event ce-${b.status.toLowerCase()}">${b.instrName.split(' ')[0]}</div>`).join('');
     const more=dayBooks.length>3?`<div style="font-size:9px;color:var(--gray);">+${dayBooks.length-3} more</div>`:'';
-    cells+=`<div class="cal-cell${isToday?' today':''}" onclick="showDayDetail('${ds}')">
-      <div class="date-n">${d}</div>${events}${more}</div>`;
+    cells+=`<div class="cal-cell${isToday?' today':''}" onclick="showDayModal('${ds}')"><div class="date-num">${d}</div>${events}${more}</div>`;
   }
   document.getElementById('calGrid').innerHTML=cells;
 }
-function showDayDetail(date){
-  const dd=document.getElementById('dayDetail');
-  const dayBooks=BOOKINGS.filter(b=>b.date===date);
-  document.getElementById('dayDetailTitle').textContent='📅 Bookings for '+date;
-  document.getElementById('dayDetailBody').innerHTML=dayBooks.length?dayBooks.map(b=>`
-    <tr>
-      <td>${b.userName}<br><span style="font-size:10px;color:var(--gray);">${b.userId}</span></td>
-      <td style="font-size:12px;">${b.instrName}</td>
-      <td>${b.time}</td><td>${b.dur}h</td>
-      <td style="font-size:12px;">${b.purpose}</td>
-      <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
-      <td>
-        ${b.status==='Pending'?`<button class="btn btn-xs btn-green" onclick="approveBooking('${b.id}');showDayDetail('${date}')">✓</button>
-        <button class="btn btn-xs btn-red" onclick="rejectBooking('${b.id}');showDayDetail('${date}')">✗</button>`:''}
-      </td>
-    </tr>`).join('')
-  :`<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:16px;">No bookings on this date</td></tr>`;
-  dd.style.display='block';
-  dd.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+function showDayModal(date){
+  const dayBooks=allBookings.filter(b=>b.date===date&&b.status!=='Rejected');
+  document.getElementById('dayModalTitle').textContent='Bookings on '+date;
+  document.getElementById('dayModalBody').innerHTML=dayBooks.length
+    ?dayBooks.map(b=>`<tr>
+        <td><code style="font-size:11px;">${b.id}</code></td>
+        <td style="font-size:12px;">${b.userId}</td>
+        <td style="font-size:12px;">${b.instrName}</td>
+        <td>${b.time}</td><td>${b.dur}h</td>
+        <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
+      </tr>`).join('')
+    :`<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:18px;">No bookings on this day</td></tr>`;
+  openModal('dayModal');
 }
 
-// ===== REPORTS =====
-function buildReports(){
-  const nonAdmin=USERS.filter(u=>u.role!=='Admin');
-  const rCards=[
-    {label:'Students',count:nonAdmin.filter(u=>u.role==='Student').length,icon:'🎓'},
-    {label:'Research Scholars',count:nonAdmin.filter(u=>u.role==='Research Scholar').length,icon:'🔬'},
-    {label:'Staff',count:nonAdmin.filter(u=>u.role==='Staff').length,icon:'👨‍🏫'},
-    {label:'Total Hours Booked',count:BOOKINGS.filter(b=>b.status==='Approved').reduce((s,b)=>s+b.dur,0)+'h',icon:'⏱'},
-  ];
-  document.getElementById('reportCards').innerHTML=rCards.map(c=>`
-    <div class="stat-card" style="text-align:left;">
-      <div style="font-size:24px;margin-bottom:6px;">${c.icon}</div>
-      <div class="stat-num">${c.count}</div>
-      <div class="stat-lbl">${c.label}</div>
-    </div>`).join('');
-  document.getElementById('reportBody').innerHTML=INSTRUMENTS.map(i=>{
-    const ib=BOOKINGS.filter(b=>b.instrId===i.id);
-    const app=ib.filter(b=>b.status==='Approved');
-    return`<tr>
-      <td style="font-weight:600;">${i.name}</td>
-      <td>${ib.length}</td>
-      <td><span style="color:#065f46;font-weight:600;">${app.length}</span></td>
-      <td><span style="color:#92400e;font-weight:600;">${ib.filter(b=>b.status==='Pending').length}</span></td>
-      <td style="font-weight:600;">${app.reduce((s,b)=>s+b.dur,0)}h</td>
-    </tr>`;}).join('');
+/* ── PRINT ── */
+function printAllBookings(){
+  const filtered=allBookings.filter(b=>{
+    const st=document.getElementById('bkStatusFilter').value;
+    const instr=document.getElementById('bkInstrFilter').value;
+    if(st&&b.status!==st)return false;
+    if(instr&&b.instrId!==instr)return false;
+    return true;
+  }).reverse();
+  const rows=filtered.map(b=>`<tr>
+    <td>${b.id}</td><td>${b.userId}</td><td>${b.instrName}</td>
+    <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+    <td>${b.purpose}</td><td>${b.guide}</td><td>${b.status}</td>
+  </tr>`).join('');
+  const w=window.open('','_blank');
+  w.document.write(printHeader('All Bookings Report')+
+    `<table><thead><tr><th>Booking ID</th><th>User</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th></tr></thead>
+    <tbody>${rows||'<tr><td colspan="9" style="text-align:center;padding:18px;">No bookings</td></tr>'}</tbody></table>`+
+    printFooter());
+  w.document.close();w.print();
 }
 
-// ===== EXPORT =====
-function exportUsers(){
-  const csv=['Name,ID/Code,Role,Class,Email,Phone,Batch,Status']
-    .concat(USERS.filter(u=>u.role!=='Admin').map(u=>`"${u.name}","${u.uid}","${u.role}","${u.cls||''}","${u.email}","${u.phone||''}","${u.batch||''}","${u.status}"`))
-    .join('\n');
-  downloadCSV(csv,'AZBT_Users.csv');
-}
-function exportBookings(){
-  const csv=['ID,User,UserID,Instrument,Date,Time,Hours,Purpose,Guide,Status']
-    .concat(BOOKINGS.map(b=>`"${b.id}","${b.userName}","${b.userId}","${b.instrName}","${b.date}","${b.time}","${b.dur}","${b.purpose}","${b.guide||''}","${b.status}"`))
-    .join('\n');
-  downloadCSV(csv,'AZBT_Bookings.csv');
-}
-function downloadCSV(csv,name){
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download=name;a.click();
+function printBooking(bkId){
+  const b=allBookings.find(x=>x.id===bkId);
+  if(!b)return;
+  const instr=instruments.find(i=>i.id===b.instrId);
+  const w=window.open('','_blank');
+  w.document.write(printHeader('Booking Receipt — '+bkId)+`
+    <div class="receipt">
+      <h3>Booking Receipt</h3>
+      <table class="info-table">
+        <tr><td><strong>Booking ID</strong></td><td>${b.id}</td></tr>
+        <tr><td><strong>User ID</strong></td><td>${b.userId}</td></tr>
+        <tr><td><strong>Instrument</strong></td><td>${b.instrName}</td></tr>
+        ${instr&&instr.lab?`<tr><td><strong>Lab</strong></td><td>${instr.lab}${instr.roomNo?' · '+instr.roomNo:''}</td></tr>`:''}
+        ${instr&&instr.labIncharge?`<tr><td><strong>Lab In-charge</strong></td><td>${instr.labIncharge}</td></tr>`:''}
+        <tr><td><strong>Date</strong></td><td>${b.date}</td></tr>
+        <tr><td><strong>Time</strong></td><td>${b.time}</td></tr>
+        <tr><td><strong>Duration</strong></td><td>${b.dur} hour(s)</td></tr>
+        <tr><td><strong>Purpose</strong></td><td>${b.purpose}</td></tr>
+        <tr><td><strong>Guide / Supervisor</strong></td><td>${b.guide}</td></tr>
+        ${b.notes?`<tr><td><strong>Notes</strong></td><td>${b.notes}</td></tr>`:''}
+        <tr><td><strong>Status</strong></td><td><strong>${b.status}</strong></td></tr>
+        <tr><td><strong>Submitted</strong></td><td>${b.createdAt||'—'}</td></tr>
+        ${b.approvedAt?`<tr><td><strong>Approved/Rejected On</strong></td><td>${b.approvedAt}</td></tr>`:''}
+      </table>
+      <div class="sign-row">
+        <div class="sign-box"><div class="sign-line"></div><div>User Signature</div></div>
+        <div class="sign-box"><div class="sign-line"></div><div>Lab In-charge Signature</div></div>
+        <div class="sign-box"><div class="sign-line"></div><div>HOD / Admin Signature</div></div>
+      </div>
+    </div>`+printFooter('receipt'));
+  w.document.close();w.print();
 }
 
-// ===== UTILS =====
-function viewPhoto(url){
-  document.getElementById('photoImg').src=url;
-  openModal('photoModal');
+function printHeader(title){
+  return`<!DOCTYPE html><html><head><title>${title} — AZBT LIMS</title><style>
+    body{font-family:Arial,sans-serif;margin:30px;color:#1E3057;}
+    h1{text-align:center;font-size:16px;margin-bottom:2px;}
+    h2{text-align:center;font-size:13px;font-weight:normal;color:#555;margin-bottom:2px;}
+    h3{text-align:center;font-size:14px;margin-bottom:16px;color:#1E3057;}
+    .hdr{text-align:center;margin-bottom:20px;border-bottom:2px solid #C9973A;padding-bottom:14px;}
+    .hdr .title{font-size:18px;font-weight:700;color:#C9973A;margin-top:8px;}
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th{background:#1E3057;color:#C9973A;padding:9px 8px;text-align:left;}
+    td{padding:8px;border-bottom:1px solid #ddd;vertical-align:top;}
+    tr:nth-child(even) td{background:#f9f9fb;}
+    .receipt{max-width:600px;margin:0 auto;}
+    .info-table td:first-child{font-weight:600;width:180px;color:#1E3057;}
+    .sign-row{display:flex;gap:30px;margin-top:50px;justify-content:space-around;}
+    .sign-box{text-align:center;font-size:11px;color:#555;}
+    .sign-line{border-top:1px solid #333;width:140px;margin:0 auto 6px;}
+    .footer{text-align:center;margin-top:30px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:14px;}
+    @media print{body{margin:15px;}}
+  </style></head><body>
+  <div class="hdr">
+    <div><strong>Loyola College (Autonomous), Chennai — 600 034</strong></div>
+    <div style="font-size:12px;color:#555;">PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology</div>
+    <div class="title">${title}</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;">Printed: ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})}</div>
+  </div>`;
 }
-function setMsg(id,msg,type='error'){
+function printFooter(){
+  return`<div class="footer">AZBT LIMS, Loyola College &nbsp;|&nbsp; hodzoology@loyolacollege.edu &nbsp;|&nbsp; loyolacollegezoology@gmail.com</div></body></html>`;
+}
+
+/* ── PANEL & MODAL UTILS ── */
+function switchPanel(pid){
+  ['dashboard','bookings','users','instruments','calendar'].forEach((p,i)=>{
+    document.getElementById(p+'Panel').classList.toggle('active',p===pid);
+    document.querySelectorAll('.nav-tab')[i]?.classList.toggle('active',p===pid);
+  });
+  closeDrawer();
+  if(pid==='calendar')buildCalendar();
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function toggleDrawer(){document.getElementById('drawer').classList.toggle('open');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+function doLogout(){sessionStorage.removeItem('limsUser');window.location.href='index.html';}
+function pad(h){return String(h).padStart(2,'0');}
+function setMsg(id,html,type='error'){
   const el=document.getElementById(id);if(!el)return;
-  el.innerHTML=msg?`<div class="msg msg-${type}">${msg}</div>`:'';
+  const icon={error:'fa-circle-xmark',success:'fa-circle-check',info:'fa-circle-info'};
+  el.innerHTML=html?`<div class="msg msg-${type}"><i class="fa-solid ${icon[type]||'fa-circle-info'}"></i><span>${html}</span></div>`:'';
 }
 function toast(msg,type='ok'){
   const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast show '+type;
-  setTimeout(()=>t.className='toast',3200);
+  document.getElementById('toastMsg').textContent=msg;
+  const ic=document.getElementById('toastIcon');
+  ic.className=type==='ok'?'fa-solid fa-circle-check':'fa-solid fa-circle-xmark';
+  t.className='toast show '+type;
+  setTimeout(()=>t.className='toast',3500);
 }
-document.querySelectorAll('.modal-bg').forEach(bg=>{
-  bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('open');});
+// Close modal on backdrop click
+document.querySelectorAll('.modal-backdrop').forEach(bd=>{
+  bd.addEventListener('click',e=>{if(e.target===bd)bd.classList.remove('open');});
 });
 </script>
 </body>
