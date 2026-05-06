@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>LIMS Login — AZBT Loyola College</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue:#23365D;--blue2:#1a2847;--blue3:#2e4475;
+  --maroon:#6C232E;--maroon2:#85293a;
+  --gold:#D4A64A;--gold2:#e8bc6a;--gold3:#f5d898;
+  --light:#F4F6F9;--white:#ffffff;--gray:#6b7280;
+  --border:#d8dde8;--radius:12px;--radius-sm:8px;
+  --shadow:0 4px 24px rgba(35,54,93,.14);
+  --shadow-sm:0 2px 8px rgba(35,54,93,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;min-height:100vh;
+  background:linear-gradient(135deg,var(--blue2) 0%,var(--blue) 45%,var(--maroon) 100%);
+  display:flex;align-items:flex-start;justify-content:center;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+.wrap{width:100%;max-width:480px;padding:24px 16px 40px;}
+
+/* HEADER */
+.header{text-align:center;padding:28px 0 22px;}
+.logos{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:14px;}
+.logo-college{width:64px;height:64px;object-fit:contain;filter:brightness(0) invert(1);}
+.logo-div{width:1px;height:60px;background:rgba(212,166,74,.35);}
+.logo-dept{width:60px;height:60px;object-fit:cover;border-radius:50%;border:2px solid rgba(212,166,74,.5);}
+.college-name{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold2);letter-spacing:.4px;}
+.dept-name{font-size:11.5px;color:rgba(255,255,255,.65);margin-top:3px;}
+.motto{font-size:11px;color:var(--gold);letter-spacing:1.8px;text-transform:uppercase;margin-top:10px;font-style:italic;}
+.tagline{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;font-style:italic;}
+
+/* CARD */
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+.tab-bar{display:flex;background:var(--blue);}
+.tab-btn{flex:1;padding:15px 8px;background:transparent;border:none;
+  color:rgba(255,255,255,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.3px;}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-content{padding:26px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* FORM */
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:11.5px;font-weight:700;color:var(--blue);
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.req{color:var(--maroon);}
+.form-input,.form-select{
+  width:100%;padding:11px 13px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--blue);
+  background:#fff;transition:border-color .2s,box-shadow .2s;}
+.form-input:focus,.form-select:focus{
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(212,166,74,.14);}
+.form-input::placeholder{color:#aab;}
+.form-select option{color:var(--blue);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-hint{font-size:11px;color:var(--gray);margin-top:4px;line-height:1.4;}
+.form-hint.err-hint{color:var(--maroon);}
+.form-hint.ok-hint{color:#16a34a;}
+
+/* CLASS SELECTOR */
+.class-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.class-chip{
+  padding:7px 14px;border:1.5px solid var(--border);border-radius:20px;
+  font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;
+  background:#fff;transition:all .2s;}
+.class-chip:hover{border-color:var(--gold);background:#fffbf0;}
+.class-chip.selected{background:var(--gold);color:var(--blue);border-color:var(--gold);}
+
+/* PHOTO UPLOAD */
+.photo-area{
+  border:2px dashed var(--gold);border-radius:var(--radius-sm);
+  padding:18px;text-align:center;cursor:pointer;
+  background:#fffbf0;transition:all .2s;}
+.photo-area:hover{border-color:var(--maroon);}
+.photo-preview{width:68px;height:68px;border-radius:50%;object-fit:cover;
+  border:3px solid var(--gold);display:none;margin:0 auto 8px;}
+.upload-icon{font-size:30px;margin-bottom:6px;}
+.photo-area p{font-size:12px;color:var(--gray);}
+
+/* MESSAGES */
+.msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:14px;line-height:1.5;}
+.msg-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;}
+.msg-success{background:#d1fae5;color:#065f46;border:1px solid #86efac;}
+.msg-info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
+.msg-warn{background:#fef3c7;color:#92400e;border:1px solid #fcd34d;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:12px 22px;border-radius:var(--radius-sm);font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;}
+.btn-primary{background:var(--gold);color:var(--blue);width:100%;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(212,166,74,.4);}
+.btn-blue{background:var(--blue);color:#fff;width:100%;}
+.btn-blue:hover{background:var(--blue3);}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;}
+
+.footer-note{text-align:center;font-size:11px;color:rgba(255,255,255,.4);margin-top:14px;line-height:1.7;}
+
+/* OTP BOX */
+.otp-wrap{display:none;}
+.otp-wrap.show{display:block;}
+.new-pwd-wrap{display:none;}
+.new-pwd-wrap.show{display:block;}
+
+/* STRENGTH BAR */
+.strength-bar{height:4px;border-radius:2px;margin-top:6px;background:#e5e7eb;overflow:hidden;}
+.strength-fill{height:100%;border-radius:2px;transition:all .3s;width:0;}
+
+/* SPINNER */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+@media(max-width:480px){
+  .form-row{grid-template-columns:1fr;}
+  .logos{gap:12px;}
+  .logo-college{width:52px;height:52px;}
+  .logo-dept{width:48px;height:48px;}
+  .college-name{font-size:13px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logos">
+      <img src="https://static.wixstatic.com/media/81ba89_81dcdb9d1e384b618fdc78760c61c426~mv2.png"
+           class="logo-college" alt="Loyola College"/>
+      <div class="logo-div"></div>
+      <img src="https://static.wixstatic.com/media/e98a4d_b935ab57540b41bdb320efa88b5e69b1~mv2.png"
+           class="logo-dept" alt="AZBT Dept"/>
+    </div>
+    <div class="college-name">Loyola College (Autonomous), Chennai — 600 034</div>
+    <div class="dept-name">PG &amp; Research Department of Advanced Zoology &amp; Biotechnology</div>
+    <div class="motto">✦ Let Your Light Shine ✦</div>
+    <div class="tagline">Where Zoology meets Innovation</div>
+  </div>
+
+  <!-- CARD -->
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+      <button class="tab-btn" onclick="switchTab('reset')">Reset Password</button>
+    </div>
+    <div class="tab-content">
+
+      <!-- ===== LOGIN ===== -->
+      <div id="tabLogin" class="tab-panel active">
+        <div id="loginMsg"></div>
+        <div class="form-group">
+          <label class="form-label">Department Number / Staff Code <span class="req">*</span></label>
+          <input type="text" id="loginId" class="form-input" placeholder="e.g. ZB2024001 or ST101" autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="req">*</span></label>
+          <input type="password" id="loginPwd" class="form-input" placeholder="Your password" autocomplete="current-password"/>
+        </div>
+        <button class="btn btn-primary" id="loginBtn" onclick="doLogin()">Sign In →</button>
+        <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:14px;">
+          Only <strong>@loyolacollege.edu</strong> accounts are accepted
+        </p>
+      </div>
+
+      <!-- ===== REGISTER ===== -->
+      <div id="tabRegister" class="tab-panel">
+        <div id="regMsg"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span class="req">*</span></label>
+            <input type="text" id="rName" class="form-input" placeholder="As per ID card"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Role <span class="req">*</span></label>
+            <select id="rRole" class="form-select" onchange="onRoleChange()">
+              <option value="">Select role</option>
+              <option value="Student">Student</option>
+              <option value="Research Scholar">Research Scholar</option>
+              <option value="Staff">Staff / Faculty</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Class selector — shown only for Student -->
+        <div id="classGroup" class="form-group" style="display:none;">
+          <label class="form-label">Class <span class="req">*</span></label>
+          <div class="class-row" id="classChips">
+            <div class="class-chip" onclick="selectClass(this,'1st UG')">1st UG</div>
+            <div class="class-chip" onclick="selectClass(this,'2nd UG')">2nd UG</div>
+            <div class="class-chip" onclick="selectClass(this,'3rd UG')">3rd UG</div>
+            <div class="class-chip" onclick="selectClass(this,'1st PG')">1st PG</div>
+            <div class="class-chip" onclick="selectClass(this,'2nd PG')">2nd PG</div>
+          </div>
+          <input type="hidden" id="rClass"/>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="uidLabel">Department Number <span class="req">*</span></label>
+            <input type="text" id="rUid" class="form-input" placeholder="e.g. ZB2024001"/>
+            <div class="form-hint" id="uidHint">Unique number on your ID card</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">College Email <span class="req">*</span></label>
+            <input type="email" id="rEmail" class="form-input" placeholder="yourname@loyolacollege.edu"
+                   oninput="validateEmail(this)"/>
+            <div class="form-hint" id="emailHint">Must be @loyolacollege.edu</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" id="rPhone" class="form-input" placeholder="10-digit mobile"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Batch / Year</label>
+            <input type="text" id="rBatch" class="form-input" placeholder="e.g. 2023-2025"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Password <span class="req">*</span></label>
+            <input type="password" id="rPwd" class="form-input" placeholder="Min 8 characters" oninput="checkStrength(this)"/>
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <div class="form-hint" id="strengthTxt"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password <span class="req">*</span></label>
+            <input type="password" id="rPwd2" class="form-input" placeholder="Repeat password" oninput="checkMatch()"/>
+            <div class="form-hint" id="matchHint"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Profile Photo</label>
+          <div class="photo-area" onclick="document.getElementById('rPhoto').click()">
+            <img id="photoPrev" class="photo-preview" src="" alt="Preview"/>
+            <div class="upload-icon">📷</div>
+            <p>Click to upload your photo</p>
+            <p style="font-size:11px;color:var(--gold);margin-top:3px;">JPG/PNG · Max 2MB · Stored in Google Drive</p>
+          </div>
+          <input type="file" id="rPhoto" accept="image/jpeg,image/png" style="display:none" onchange="prevPhoto(this)"/>
+        </div>
+
+        <button class="btn btn-blue" id="regBtn" onclick="doRegister()">Submit Registration →</button>
+        <div class="msg msg-warn" style="margin-top:14px;font-size:12px;">
+          ⏳ Your registration will be reviewed by the lab administrator before access is granted.
+        </div>
+      </div>
+
+      <!-- ===== RESET PASSWORD ===== -->
+      <div id="tabReset" class="tab-panel">
+        <div id="resetMsg"></div>
+
+        <!-- Step 1: Enter ID + Email -->
+        <div id="resetStep1">
+          <div class="msg msg-info" style="font-size:12px;margin-bottom:16px;">
+            Enter your registered ID and email. An OTP will be sent to your email for verification.
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department Number / Staff Code <span class="req">*</span></label>
+            <input type="text" id="resetUid" class="form-input" placeholder="Your unique ID"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Registered College Email <span class="req">*</span></label>
+            <input type="email" id="resetEmail" class="form-input" placeholder="yourname@loyolacollege.edu"/>
+          </div>
+          <button class="btn btn-blue" id="otpSendBtn" onclick="sendOtp()">Send OTP to Email →</button>
+        </div>
+
+        <!-- Step 2: OTP -->
+        <div id="resetStep2" class="otp-wrap">
+          <div class="msg msg-success" style="font-size:12px;margin-bottom:16px;">
+            ✅ OTP sent! Check your @loyolacollege.edu inbox (also check spam folder).
+          </div>
+          <div class="form-group">
+            <label class="form-label">Enter 6-digit OTP <span class="req">*</span></label>
+            <input type="text" id="otpInput" class="form-input" placeholder="e.g. 483921" maxlength="6"
+                   style="letter-spacing:6px;font-size:20px;font-weight:700;text-align:center;"/>
+            <div class="form-hint">OTP expires in <span id="otpTimer" style="color:var(--maroon);font-weight:700;">10:00</span></div>
+          </div>
+          <button class="btn btn-blue" onclick="verifyOtp()">Verify OTP →</button>
+          <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:10px;">
+            Didn't receive? <a href="#" onclick="resendOtp()" style="color:var(--blue);">Resend OTP</a>
+          </p>
+        </div>
+
+        <!-- Step 3: New Password -->
+        <div id="resetStep3" class="new-pwd-wrap">
+          <div class="msg msg-success" style="font-size:12px;margin-bottom:16px;">
+            ✅ OTP verified! Set your new password.
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password <span class="req">*</span></label>
+            <input type="password" id="newPwd" class="form-input" placeholder="Min 8 characters" oninput="checkStrength2(this)"/>
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill2"></div></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password <span class="req">*</span></label>
+            <input type="password" id="newPwd2" class="form-input" placeholder="Repeat new password"/>
+          </div>
+          <button class="btn btn-primary" onclick="saveNewPwd()">Save New Password →</button>
+        </div>
+      </div>
+
+    </div><!-- tab-content -->
+  </div><!-- card -->
+
+  <div class="footer-note">
+    📧 hodzoology@loyolacollege.edu &nbsp;|&nbsp; loyolacollegezoology@gmail.com<br/>
+    Lab Instrument Management System — AZBT, Loyola College
+  </div>
+</div><!-- wrap -->
+
+<script>
+// ================================================================
+// CONFIG — Replace SCRIPT_URL with your deployed Apps Script URL
+// ================================================================
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+// ===== TAB SWITCHING =====
+function switchTab(tab) {
+  ['login','register','reset'].forEach((t,i) => {
+    document.getElementById('tab'+cap(t)).classList.toggle('active', t===tab);
+    document.querySelectorAll('.tab-btn')[i].classList.toggle('active', t===tab);
+  });
+  clearMsgs();
+}
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+function clearMsgs() {
+  ['loginMsg','regMsg','resetMsg'].forEach(id => setMsg(id,''));
+}
+function setMsg(id, html, type='error') {
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerHTML = html ? `<div class="msg msg-${type}">${html}</div>` : '';
+}
+
+// ===== ROLE CHANGE =====
+function onRoleChange() {
+  const role = document.getElementById('rRole').value;
+  const cg = document.getElementById('classGroup');
+  const lbl = document.getElementById('uidLabel');
+  const hint = document.getElementById('uidHint');
+  const uid = document.getElementById('rUid');
+  if(role==='Student') {
+    cg.style.display='block';
+    lbl.innerHTML='Department Number <span class="req">*</span>';
+    hint.textContent='Unique department number on your ID card';
+    uid.placeholder='e.g. ZB2024001';
+  } else if(role==='Research Scholar') {
+    cg.style.display='none';
+    lbl.innerHTML='Department Number <span class="req">*</span>';
+    hint.textContent='Your research scholar department number';
+    uid.placeholder='e.g. ZBR2023001';
+  } else if(role==='Staff') {
+    cg.style.display='none';
+    lbl.innerHTML='Staff Code <span class="req">*</span>';
+    hint.textContent='Your official staff code';
+    uid.placeholder='e.g. ST101';
+  }
+}
+function selectClass(el, val) {
+  document.querySelectorAll('.class-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('rClass').value=val;
+}
+
+// ===== EMAIL VALIDATION =====
+function validateEmail(input) {
+  const hint = document.getElementById('emailHint');
+  const val = input.value.trim().toLowerCase();
+  if(!val) { hint.textContent='Must be @loyolacollege.edu'; hint.className='form-hint'; return; }
+  if(!val.endsWith('@loyolacollege.edu')) {
+    hint.textContent='❌ Only @loyolacollege.edu emails are accepted';
+    hint.className='form-hint err-hint'; return;
+  }
+  hint.textContent='✅ Valid email'; hint.className='form-hint ok-hint';
+}
+function isLoyola(email) { return email.trim().toLowerCase().endsWith('@loyolacollege.edu'); }
+
+// ===== PASSWORD STRENGTH =====
+function checkStrength(input) {
+  const v = input.value;
+  const fill = document.getElementById('strengthFill');
+  const txt = document.getElementById('strengthTxt');
+  let s = 0;
+  if(v.length>=8) s++;
+  if(/[A-Z]/.test(v)) s++;
+  if(/[0-9]/.test(v)) s++;
+  if(/[^A-Za-z0-9]/.test(v)) s++;
+  const colors=['#ef4444','#f97316','#eab308','#16a34a'];
+  const labels=['Weak','Fair','Good','Strong'];
+  fill.style.width=(s*25)+'%';
+  fill.style.background=colors[s-1]||'#e5e7eb';
+  txt.textContent=s>0?labels[s-1]:'';
+  txt.style.color=colors[s-1]||'';
+}
+function checkStrength2(input) {
+  const v=input.value;let s=0;
+  if(v.length>=8)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
+  const fill=document.getElementById('strengthFill2');
+  const c=['#ef4444','#f97316','#eab308','#16a34a'];
+  fill.style.width=(s*25)+'%';fill.style.background=c[s-1]||'#e5e7eb';
+}
+function checkMatch() {
+  const p1=document.getElementById('rPwd').value;
+  const p2=document.getElementById('rPwd2').value;
+  const h=document.getElementById('matchHint');
+  if(!p2){h.textContent='';return;}
+  if(p1===p2){h.textContent='✅ Passwords match';h.style.color='#16a34a';}
+  else{h.textContent='❌ Passwords do not match';h.style.color='var(--maroon)';}
+}
+
+// ===== PHOTO PREVIEW =====
+function prevPhoto(input) {
+  const f=input.files[0]; if(!f)return;
+  if(f.size>2*1024*1024){alert('Photo must be under 2MB.');input.value='';return;}
+  const r=new FileReader();
+  r.onload=e=>{
+    const prev=document.getElementById('photoPrev');
+    prev.src=e.target.result; prev.style.display='block';
+    document.querySelector('.upload-icon').style.display='none';
+  };
+  r.readAsDataURL(f);
+}
+
+// ===== LOGIN =====
+function doLogin() {
+  const uid=document.getElementById('loginId').value.trim();
+  const pwd=document.getElementById('loginPwd').value;
+  if(!uid||!pwd){setMsg('loginMsg','Please enter both ID and password.');return;}
+  const btn=document.getElementById('loginBtn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Signing in…';
+  // Call Apps Script
+  fetch(SCRIPT_URL+'?action=login&uid='+encodeURIComponent(uid)+'&pwd='+encodeURIComponent(pwd))
+    .then(r=>r.json()).then(res=>{
+      btn.disabled=false; btn.textContent='Sign In →';
+      if(res.status==='ok'){
+        sessionStorage.setItem('limsUser', JSON.stringify(res.user));
+        if(res.user.role==='Admin') window.location.href='admin.html';
+        else window.location.href='booking.html';
+      } else {
+        setMsg('loginMsg', res.msg||'Login failed. Please check your credentials.');
+      }
+    }).catch(()=>{
+      btn.disabled=false; btn.textContent='Sign In →';
+      setMsg('loginMsg','Connection error. Please try again.');
+    });
+}
+
+// ===== REGISTER =====
+function doRegister() {
+  const name=document.getElementById('rName').value.trim();
+  const role=document.getElementById('rRole').value;
+  const cls=document.getElementById('rClass').value;
+  const uid=document.getElementById('rUid').value.trim().toUpperCase();
+  const email=document.getElementById('rEmail').value.trim().toLowerCase();
+  const phone=document.getElementById('rPhone').value.trim();
+  const batch=document.getElementById('rBatch').value.trim();
+  const pwd=document.getElementById('rPwd').value;
+  const pwd2=document.getElementById('rPwd2').value;
+  const photoFile=document.getElementById('rPhoto').files[0];
+
+  if(!name||!role||!uid||!email||!pwd){setMsg('regMsg','Please fill all required fields.');return;}
+  if(role==='Student'&&!cls){setMsg('regMsg','Please select your class (e.g. 1st PG, 2nd UG).');return;}
+  if(!isLoyola(email)){setMsg('regMsg','❌ Only @loyolacollege.edu email addresses are accepted. Please use your college email.');return;}
+  if(pwd!==pwd2){setMsg('regMsg','Passwords do not match. Please re-enter.');return;}
+  if(pwd.length<8){setMsg('regMsg','Password must be at least 8 characters.');return;}
+
+  const btn=document.getElementById('regBtn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Submitting…';
+
+  const sendData=(photoUrl)=>{
+    const payload={name,role,cls:role==='Student'?cls:'',uid,email,phone,batch,pwd,photoUrl};
+    fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'register',...payload})})
+      .then(r=>r.json()).then(res=>{
+        btn.disabled=false; btn.textContent='Submit Registration →';
+        if(res.status==='ok'){
+          setMsg('regMsg','✅ Registration submitted successfully! The admin will review and approve your account. You will receive an email notification.','success');
+          setTimeout(()=>switchTab('login'),4000);
+        } else {
+          setMsg('regMsg',res.msg||'Registration failed. Please try again.');
+        }
+      }).catch(()=>{btn.disabled=false;btn.textContent='Submit Registration →';setMsg('regMsg','Connection error.');});
+  };
+
+  if(photoFile){
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const b64=e.target.result.split(',')[1];
+      const uploadPayload={action:'uploadPhoto',uid,b64,mime:photoFile.type};
+      fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(uploadPayload)})
+        .then(r=>r.json()).then(res=>sendData(res.url||''))
+        .catch(()=>sendData(''));
+    };
+    reader.readAsDataURL(photoFile);
+  } else { sendData(''); }
+}
+
+// ===== RESET PASSWORD =====
+let otpToken=''; let otpInterval=null;
+
+function sendOtp() {
+  const uid=document.getElementById('resetUid').value.trim();
+  const email=document.getElementById('resetEmail').value.trim().toLowerCase();
+  if(!uid||!email){setMsg('resetMsg','Please fill both fields.');return;}
+  if(!isLoyola(email)){setMsg('resetMsg','❌ Only @loyolacollege.edu email addresses are accepted.');return;}
+
+  const btn=document.getElementById('otpSendBtn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Sending…';
+
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'sendOtp',uid,email})})
+    .then(r=>r.json()).then(res=>{
+      btn.disabled=false; btn.textContent='Send OTP to Email →';
+      if(res.status==='ok'){
+        otpToken=res.token||'';
+        document.getElementById('resetStep2').classList.add('show');
+        startOtpTimer();
+        setMsg('resetMsg','');
+      } else {
+        setMsg('resetMsg',res.msg||'Could not find an account with this ID and email combination.');
+      }
+    }).catch(()=>{btn.disabled=false;btn.textContent='Send OTP to Email →';setMsg('resetMsg','Connection error.');});
+}
+
+function startOtpTimer() {
+  let secs=600;
+  clearInterval(otpInterval);
+  otpInterval=setInterval(()=>{
+    secs--;
+    const m=String(Math.floor(secs/60)).padStart(2,'0');
+    const s=String(secs%60).padStart(2,'0');
+    const el=document.getElementById('otpTimer');
+    if(el) el.textContent=m+':'+s;
+    if(secs<=0){clearInterval(otpInterval);if(el)el.textContent='Expired';}
+  },1000);
+}
+function resendOtp(){sendOtp();}
+
+function verifyOtp() {
+  const otp=document.getElementById('otpInput').value.trim();
+  if(otp.length!==6){setMsg('resetMsg','Please enter the 6-digit OTP.');return;}
+  const uid=document.getElementById('resetUid').value.trim();
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'verifyOtp',uid,otp,token:otpToken})})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){
+        clearInterval(otpInterval);
+        document.getElementById('resetStep2').classList.remove('show');
+        document.getElementById('resetStep3').classList.add('show');
+        setMsg('resetMsg','');
+      } else {
+        setMsg('resetMsg',res.msg||'Invalid OTP. Please try again.');
+      }
+    }).catch(()=>setMsg('resetMsg','Connection error.'));
+}
+
+function saveNewPwd() {
+  const pwd=document.getElementById('newPwd').value;
+  const pwd2=document.getElementById('newPwd2').value;
+  if(!pwd||pwd.length<8){setMsg('resetMsg','Password must be at least 8 characters.');return;}
+  if(pwd!==pwd2){setMsg('resetMsg','Passwords do not match.');return;}
+  const uid=document.getElementById('resetUid').value.trim();
+  fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'updatePassword',uid,pwd,token:otpToken})})
+    .then(r=>r.json()).then(res=>{
+      if(res.status==='ok'){
+        setMsg('resetMsg','✅ Password updated successfully! You can now sign in with your new password.','success');
+        document.getElementById('resetStep3').classList.remove('show');
+        setTimeout(()=>switchTab('login'),3000);
+      } else {
+        setMsg('resetMsg',res.msg||'Failed to update password.');
+      }
+    }).catch(()=>setMsg('resetMsg','Connection error.'));
+}
+
+// Enter key
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    if(document.getElementById('tabLogin').classList.contains('active'))doLogin();
+  }
+});
+</script>
+</body>
+</html>
