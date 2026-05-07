@@ -631,7 +631,7 @@ function initInstrGrid(){
         ${i.labIncharge?`<p style="font-size:11.5px;color:var(--gray);margin-bottom:6px;"><i class="fa-solid fa-user-tie" style="color:var(--gold);margin-right:3px;"></i><strong>In-charge:</strong> ${i.labIncharge}</p>`:''}
         <p class="ic-desc">${i.desc||''}</p>
         <div class="ic-timing">
-          <i class="fa-regular fa-clock"></i> ${pad(i.startHour)}:00 – ${pad(i.endHour)}:00
+          <i class="fa-regular fa-clock"></i> ${formatTime(pad(i.startHour)+':00')} – ${formatTime(pad(i.endHour)+':00')}
         </div>
         <button class="btn-book" ${i.status!=='Available'?'disabled':''} onclick="quickBook('${i.id}')">
           ${i.status==='Available'?'<i class="fa-solid fa-calendar-plus"></i> Book Now':'<i class="fa-solid fa-wrench"></i> Under Maintenance'}
@@ -665,7 +665,7 @@ function onInstrChange(){
   const bar=document.getElementById('instrInfoBar');
   if(instr){
     bar.style.display='flex';
-    bar.innerHTML=`<i class="fa-regular fa-clock"></i> Available: <strong>${pad(instr.startHour)}:00 – ${pad(instr.endHour)}:00</strong> &nbsp;|&nbsp; Max <strong>${instr.maxH}h</strong>/day &nbsp;|&nbsp; <i class="fa-solid fa-location-dot"></i> ${instr.lab}`;
+    bar.innerHTML=`<i class="fa-regular fa-clock"></i> Available: <strong>${formatTime(pad(instr.startHour)+':00')} – ${formatTime(pad(instr.endHour)+':00')}</strong> &nbsp;|&nbsp; Max <strong>${instr.maxH}h</strong>/day &nbsp;|&nbsp; <i class="fa-solid fa-location-dot"></i> ${instr.lab}`;
     // Update duration options
     const durSel=document.getElementById('bDur');
     durSel.innerHTML='';
@@ -717,7 +717,20 @@ function loadSlots(){
         </div>`;
       }
     }
-    return `<div class="slot-btn" onclick="selectSlot(this,'${slot}')">${slot}</div>`;
+    // Format the 'Yours' slot label
+      if(overlap.userId === user.uid){
+          return `<div class="slot-btn mine" onclick="cancelSlotBooking('${overlap.id}')">
+            ${formatTime(slot)}<br><span style="font-size:9px;"><i class="fa-solid fa-user-check"></i> Yours</span>
+          </div>`;
+      } else {
+          // Format the 'Booked' slot label
+          return `<div class="slot-btn busy">
+            ${formatTime(slot)}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i> Booked</span>
+          </div>`;
+      }
+      
+      // Format the available slot label
+      return `<div class="slot-btn" onclick="selectSlot(this,'${slot}')">${formatTime(slot)}</div>`;
   }).join('');
 }
 
@@ -874,7 +887,17 @@ function printMyBookings(){
     .footer{text-align:center;margin-top:30px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:14px;}
     @media print{body{margin:15px;}}
   </style></head><body>
-  <h2>AZBT LIMS — My Booking History</h2>
+  <h2>`<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #C9973A;padding-bottom:12px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <img src="YOUR_COLLEGE_LOGO_URL" style="height:52px;object-fit:contain;" alt="Loyola"/>
+    <img src="YOUR_DEPT_LOGO_URL"    style="height:52px;object-fit:contain;" alt="AZBT"/>
+  </div>
+  <div style="text-align:center;">
+    <h2 style="margin:0;font-size:17px;color:#1E3057;">AZBT LIMS — My Booking History</h2>
+    <div style="font-size:11px;color:#555;margin-top:3px;">PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology, Loyola College</div>
+  </div>
+  <div style="font-size:11px;color:#888;">Printed: ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})}</div>
+</div>`</h2>
   <div class="sub">PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology, Loyola College, Chennai — 600 034</div>
   <div class="user-info">Name: <strong>${user.name}</strong> &nbsp;|&nbsp; ID: <strong>${user.uid}</strong> &nbsp;|&nbsp; Role: <strong>${user.role}${user.cls?' · '+user.cls:''}</strong> &nbsp;|&nbsp; Email: <strong>${user.email}</strong></div>
   <table>
@@ -884,6 +907,65 @@ function printMyBookings(){
   <div class="footer">Printed on ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})} &nbsp;|&nbsp; AZBT LIMS, Loyola College &nbsp;|&nbsp; hodzoology@loyolacollege.edu</div>
   </body></html>`);
   w.document.close();w.print();
+}
+function printSingleBooking(bkId){
+  const b = myBookings.find(x => x.id === bkId);
+  if(!b){ toast('Booking not found','err'); return; }
+  const w = window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Booking ${bkId}</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:30px;color:#1E3057;}
+    .header{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #C9973A;padding-bottom:12px;margin-bottom:20px;}
+    .logos{display:flex;align-items:center;gap:12px;}
+    .logos img{height:56px;object-fit:contain;}
+    .title{text-align:center;}
+    h2{margin:0;font-size:18px;color:#1E3057;}
+    .sub{font-size:11px;color:#555;margin-top:3px;}
+    table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;}
+    td{padding:9px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;}
+    td:first-child{font-weight:700;color:#1E3057;width:40%;}
+    .status{display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;}
+    .s-approved{background:#dcfce7;color:#166534;}
+    .s-pending{background:#fef9c3;color:#854d0e;}
+    .s-rejected{background:#fee2e2;color:#991b1b;}
+    .watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);
+      font-size:80px;color:rgba(30,48,87,.05);font-weight:900;pointer-events:none;z-index:0;}
+    .footer{text-align:center;margin-top:28px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:12px;}
+    @media print{body{margin:10px;}}
+  </style></head><body>
+  <div class="watermark">AZBT LIMS</div>
+  <div class="header">
+    <div class="logos">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Loyola_College_Chennai_logo.png/100px-Loyola_College_Chennai_logo.png" alt="Loyola"/>
+      <!-- Replace both src values with your actual hosted logo URLs -->
+      <img src="YOUR_DEPT_LOGO_URL" alt="AZBT"/>
+    </div>
+    <div class="title">
+      <h2>AZBT LIMS — Booking Receipt</h2>
+      <div class="sub">PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology<br>Loyola College, Chennai — 600 034</div>
+    </div>
+    <div style="font-size:11px;color:#888;text-align:right;">
+      Printed: ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})}
+    </div>
+  </div>
+  <table>
+    <tr><td>Booking ID</td><td><strong>${b.id}</strong></td></tr>
+    <tr><td>User</td><td>${user.name} (${user.uid})</td></tr>
+    <tr><td>Email</td><td>${user.email}</td></tr>
+    <tr><td>Role / Class</td><td>${user.role}${user.cls?' · '+user.cls:''}</td></tr>
+    <tr><td>Instrument</td><td>${b.instrName}</td></tr>
+    <tr><td>Date</td><td>${b.date}</td></tr>
+    <tr><td>Time</td><td>${formatTime(b.time)}</td></tr>
+    <tr><td>Duration</td><td>${b.dur} hour(s)</td></tr>
+    <tr><td>Purpose</td><td>${b.purpose}</td></tr>
+    <tr><td>Guide / Supervisor</td><td>${b.guide}</td></tr>
+    <tr><td>Notes</td><td>${b.notes||'—'}</td></tr>
+    <tr><td>Status</td><td><span class="status s-${b.status.toLowerCase()}">${b.status}</span></td></tr>
+    <tr><td>Submitted At</td><td>${b.createdAt||'—'}</td></tr>
+  </table>
+  <div class="footer">AZBT LIMS, Loyola College · hodzoology@loyolacollege.edu</div>
+  </body></html>`);
+  w.document.close(); w.print();
 }
 </script>
 </body>
