@@ -389,7 +389,7 @@ tbody tr:hover td{background:#f8f9ff;}
       <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Bookings</div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>ID</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th></tr></thead>
+          <thead><tr><th>ID</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th><th>Actions</th></tr></thead>
           <tbody id="recentBody"></tbody>
         </table>
       </div>
@@ -407,7 +407,7 @@ tbody tr:hover td{background:#f8f9ff;}
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Booking ID</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th></tr></thead>
+        <thead><tr><th>Booking ID</th><th>Instrument</th><th>Date</th><th>Time</th><th>Hrs</th><th>Purpose</th><th>Guide</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="histBody"></tbody>
       </table>
     </div>
@@ -585,13 +585,25 @@ function initProfile(){
 }
 
 function bookingRow(b){
-  return`<tr>
+  const today = new Date().toISOString().split('T')[0];
+  const canCancel = (b.status === 'Pending' || b.status === 'Approved') && b.date >= today;
+  return `<tr>
     <td><code style="font-size:11px;font-weight:700;color:var(--blue);">${b.id}</code></td>
     <td style="font-size:12.5px;">${b.instrName}</td>
-    <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+    <td>${b.date}</td>
+    <td>${formatTime(b.time)}</td>
+    <td>${b.dur}h</td>
     <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">${b.purpose}</td>
     <td style="font-size:12px;">${b.guide}</td>
     <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
+    <td>
+      <button class="btn btn-blue btn-xs" onclick="printSingleBooking('${b.id}')" title="Print">
+        <i class="fa-solid fa-print"></i>
+      </button>
+      ${canCancel ? `<button class="btn btn-red btn-xs" onclick="cancelSlotBooking('${b.id}')" title="Cancel">
+        <i class="fa-solid fa-xmark"></i>
+      </button>` : ''}
+    </td>
   </tr>`;
 }
 
@@ -664,24 +676,48 @@ function onInstrChange(){
 function onDateChange(){loadSlots();}
 
 function loadSlots(){
-  const instrId=document.getElementById('bInstr').value;
-  const date=document.getElementById('bDate').value;
-  const sec=document.getElementById('slotSection');
-  selectedSlot=null;
-  if(!instrId||!date){sec.style.display='none';return;}
-  const instr=instruments.find(i=>i.id===instrId);
-  if(!instr){sec.style.display='none';return;}
-  sec.style.display='block';
-  const slots=[];
-  for(let h=instr.startHour;h<instr.endHour;h++){slots.push(pad(h)+':00');}
-  const busySlots=allBookings.filter(b=>b.instrId===instrId&&b.date===date&&b.status!=='Rejected');
-  const mySlots=myBookings.filter(b=>b.instrId===instrId&&b.date===date&&b.status!=='Rejected');
-  document.getElementById('slotGrid').innerHTML=slots.map(slot=>{
-    const mine=mySlots.find(b=>b.time===slot);
-    const busy=busySlots.find(b=>b.time===slot);
-    if(mine)return`<div class="slot-btn mine" title="Your booking">${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-check"></i></span></div>`;
-    if(busy)return`<div class="slot-btn busy">${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i></span></div>`;
-    return`<div class="slot-btn" onclick="selectSlot(this,'${slot}')">${slot}</div>`;
+  const instrId = document.getElementById('bInstr').value;
+  const date    = document.getElementById('bDate').value;
+  const sec     = document.getElementById('slotSection');
+  selectedSlot  = null;
+  if(!instrId || !date){ sec.style.display='none'; return; }
+  const instr = instruments.find(i => i.id === instrId);
+  if(!instr){ sec.style.display='none'; return; }
+  sec.style.display = 'block';
+
+  const slots = [];
+  for(let h = instr.startHour; h < instr.endHour; h++) slots.push(pad(h)+':00');
+
+  // Build per-slot occupancy using duration overlap
+  const activeBooks = allBookings.filter(b =>
+    b.instrId === instrId && b.date === date && b.status !== 'Rejected'
+  );
+
+  document.getElementById('slotGrid').innerHTML = slots.map(slot => {
+    const slotStart = timeToM(slot);
+    const slotEnd   = slotStart + 60; // each slot = 1 hour
+
+    // Find any booking that overlaps this slot
+    const overlap = activeBooks.find(b => {
+      const bs = timeToM(b.time), be = bs + (b.dur * 60);
+      return bs < slotEnd && slotStart < be;
+    });
+
+    if(overlap){
+      if(overlap.userId === user.uid){
+        // Current user's own booking — show "Yours" with cancel option
+        return `<div class="slot-btn mine" title="Your booking: ${overlap.id}&#10;Status: ${overlap.status}&#10;Click to cancel"
+          onclick="cancelSlotBooking('${overlap.id}')">
+          ${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-user-check"></i> Yours</span>
+        </div>`;
+      } else {
+        // Another user's booking
+        return `<div class="slot-btn busy" title="Booked">
+          ${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i> Booked</span>
+        </div>`;
+      }
+    }
+    return `<div class="slot-btn" onclick="selectSlot(this,'${slot}')">${slot}</div>`;
   }).join('');
 }
 
@@ -689,7 +725,20 @@ function selectSlot(el,slot){
   document.querySelectorAll('.slot-btn').forEach(b=>b.classList.remove('selected'));
   el.classList.add('selected');selectedSlot=slot;
 }
-
+function cancelSlotBooking(bkId){
+  if(!confirm('Cancel your booking ' + bkId + '?')) return;
+  fetch(SCRIPT_URL, {
+    method:'POST',
+    body: JSON.stringify({ action:'cancelBooking', bookingId: bkId })
+  }).then(r => r.json()).then(res => {
+    if(res.status === 'ok'){
+      toast('Booking cancelled.', 'ok');
+      fetchData();
+    } else {
+      toast(res.msg || 'Cancel failed.', 'err');
+    }
+  });
+}
 function submitBooking(){
   const instrId=document.getElementById('bInstr').value;
   const date=document.getElementById('bDate').value;
@@ -776,6 +825,14 @@ function setMsg(id,msg,type='error'){
   const el=document.getElementById(id);if(!el)return;
   const icon={error:'fa-circle-xmark',success:'fa-circle-check',info:'fa-circle-info'};
   el.innerHTML=msg?`<div class="msg msg-${type}"><i class="fa-solid ${icon[type]||'fa-circle-info'}"></i><span>${msg}</span></div>`:'';
+}
+function formatTime(t){
+  if(!t) return '—';
+  const [hStr, mStr] = t.split(':');
+  let h = parseInt(hStr), m = parseInt(mStr)||0;
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} ${ampm}`;
 }
 function toast(msg,type='ok'){
   const t=document.getElementById('toast');
