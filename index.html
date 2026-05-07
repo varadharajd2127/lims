@@ -35,7 +35,6 @@ body::before{
 
 .wrap{width:100%;max-width:500px;padding:24px 16px 44px;position:relative;z-index:1;}
 
-/* HEADER */
 .header{text-align:center;padding:28px 0 24px;}
 .logos{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;}
 .logo-college{width:62px;height:62px;object-fit:contain;}
@@ -45,10 +44,8 @@ body::before{
 .dept-name{font-size:12px;color:#fff;margin-top:4px;}
 .motto{font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:10px;}
 
-/* CARD */
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
 
-/* TAB BAR */
 .tab-bar{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--blue);}
 .tab-btn{
   padding:14px 6px;background:transparent;border:none;border-bottom:3px solid transparent;
@@ -64,7 +61,6 @@ body::before{
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
 
-/* FORM ELEMENTS */
 .form-group{margin-bottom:15px;}
 .form-label{
   display:flex;align-items:center;gap:6px;
@@ -90,7 +86,6 @@ body::before{
 .form-hint.err{color:var(--maroon);}
 .form-hint.ok{color:#16a34a;}
 
-/* PASSWORD TOGGLE */
 .input-wrap{position:relative;}
 .input-wrap .form-input{padding-right:40px;}
 .pwd-toggle{
@@ -100,7 +95,6 @@ body::before{
 }
 .pwd-toggle:hover{color:var(--blue);}
 
-/* CLASS CHIPS */
 .class-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
 .class-chip{
   padding:6px 13px;border:1.5px solid var(--border);border-radius:20px;
@@ -110,7 +104,6 @@ body::before{
 .class-chip:hover{border-color:var(--gold);background:#fffbf0;}
 .class-chip.selected{background:var(--gold);color:#fff;border-color:var(--gold);}
 
-/* PHOTO UPLOAD */
 .photo-area{
   border:2px dashed var(--gold);border-radius:var(--radius-sm);
   padding:16px;text-align:center;cursor:pointer;
@@ -124,7 +117,6 @@ body::before{
 .photo-area .upload-icon{font-size:28px;color:var(--gold);margin-bottom:6px;}
 .photo-area p{font-size:12px;color:var(--gray);}
 
-/* MESSAGES */
 .msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:13px;
   line-height:1.5;display:flex;align-items:flex-start;gap:8px;}
 .msg i{margin-top:1px;flex-shrink:0;}
@@ -133,7 +125,6 @@ body::before{
 .msg-info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
 .msg-warn{background:#fffbeb;color:#92400e;border:1px solid #fde68a;}
 
-/* BUTTONS */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:12px 22px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;
@@ -146,11 +137,9 @@ body::before{
 .btn-blue:hover{background:var(--blue3);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,48,87,.35);}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
 
-/* STRENGTH BAR */
 .strength-bar{height:4px;border-radius:2px;margin-top:6px;background:#e5e7eb;overflow:hidden;}
 .strength-fill{height:100%;border-radius:2px;transition:all .3s;width:0;}
 
-/* OTP */
 .otp-wrap{display:none;}
 .otp-wrap.show{display:block;}
 .new-pwd-wrap{display:none;}
@@ -160,7 +149,6 @@ body::before{
   border:2px solid var(--gold);padding:13px;
 }
 
-/* SPINNER */
 .spinner{
   display:inline-block;width:15px;height:15px;
   border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
@@ -168,14 +156,12 @@ body::before{
 }
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* FOOTER */
 .footer-note{
   text-align:center;font-size:11px;color:#fff;
   margin-top:14px;line-height:1.8;
 }
 .footer-note i{color:rgba(201,151,58,.5);margin-right:4px;}
 
-/* WARN BANNER */
 .warn-banner{
   background:rgba(201,151,58,.12);border:1px solid rgba(201,151,58,.3);
   border-radius:var(--radius-sm);padding:10px 13px;
@@ -184,7 +170,6 @@ body::before{
 }
 .warn-banner i{color:var(--gold);flex-shrink:0;margin-top:1px;}
 
-/* RESPONSIVE */
 @media(max-width:500px){
   .wrap{padding:16px 10px 36px;}
   .tab-content{padding:18px 16px;}
@@ -237,7 +222,7 @@ body::before{
         <div id="loginMsg"></div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-id-card"></i> Dept No / Staff Code <span class="req">*</span></label>
-          <input type="text" id="loginId" class="form-input" placeholder="e.g. 26-UAZ-001 or Zoo001" autocomplete="username"/>
+          <input type="text" id="loginId" class="form-input" placeholder="e.g. 26-UAZ-001 or Zoo001 or ADMIN001" autocomplete="username"/>
         </div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-lock"></i> Password <span class="req">*</span></label>
@@ -253,7 +238,7 @@ body::before{
         </button>
         <p style="text-align:center;font-size:11.5px;color:var(--gray);margin-top:13px;">
           <i class="fa-solid fa-shield-halved" style="color:var(--gold);"></i>
-          Only <strong>@loyolacollege.edu</strong> accounts are accepted
+          Only <strong>@loyolacollege.edu</strong> accounts accepted (Admin has full access)
         </p>
       </div>
 
@@ -339,7 +324,7 @@ body::before{
             <img id="photoPrev" class="photo-preview" src="" alt="Preview"/>
             <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
             <p style="font-weight:600;color:var(--blue);margin-bottom:3px;">Click to upload your photo</p>
-            <p style="font-size:11px;color:var(--gold);">JPG / PNG &nbsp;·&nbsp; Max 2 MB &nbsp;·&nbsp; Only from ERP</p>
+            <p style="font-size:11px;color:var(--gold);">JPG / PNG &nbsp;·&nbsp; Max 2 MB</p>
           </div>
           <input type="file" id="rPhoto" accept="image/jpeg,image/png" style="display:none" onchange="prevPhoto(this)"/>
         </div>
@@ -369,7 +354,8 @@ body::before{
           </div>
           <div class="form-group">
             <label class="form-label"><i class="fa-solid fa-envelope"></i> Registered Email <span class="req">*</span></label>
-            <input type="email" id="resetEmail" class="form-input" placeholder="name@loyolacollege.edu"/>
+            <!-- NOTE: Admin can use loyolacollegezoology@gmail.com here — no domain restriction on reset -->
+            <input type="email" id="resetEmail" class="form-input" placeholder="Your registered email address"/>
           </div>
           <button class="btn btn-blue" id="otpSendBtn" onclick="sendOtp()">
             <i class="fa-solid fa-envelope-circle-check"></i> Send OTP to Email
@@ -380,7 +366,7 @@ body::before{
         <div id="resetStep2" class="otp-wrap">
           <div class="msg msg-success">
             <i class="fa-solid fa-circle-check"></i>
-            OTP sent! Check your @loyolacollege.edu inbox (and spam folder).
+            OTP sent! Check your inbox (and spam folder).
           </div>
           <div class="form-group">
             <label class="form-label"><i class="fa-solid fa-input-numeric"></i> Enter 6-digit OTP <span class="req">*</span></label>
@@ -438,7 +424,7 @@ body::before{
 <script>
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyfVUvYwDIzYwt5kLBo7KHteLd18C3ejKvT9dvHgWSGVSA4JFLddG14WNjcgaw5KzVNQA/exec';
 
-/* ── TAB SWITCHING ─────────────────────────────────────────── */
+/* ── TAB SWITCHING ── */
 function switchTab(tab){
   ['login','register','reset'].forEach((t,i)=>{
     document.getElementById('tab'+cap(t)).classList.toggle('active',t===tab);
@@ -455,7 +441,6 @@ function setMsg(id,html,type='error'){
   el.innerHTML=html?`<div class="msg msg-${type}"><i class="fa-solid ${icon[type]||'fa-circle-info'}"></i><span>${html}</span></div>`:'';
 }
 
-/* ── PASSWORD TOGGLE ───────────────────────────────────────── */
 function togglePwd(id,btn){
   const inp=document.getElementById(id);
   const show=inp.type==='password';
@@ -463,7 +448,6 @@ function togglePwd(id,btn){
   btn.querySelector('i').className=show?'fa-regular fa-eye-slash':'fa-regular fa-eye';
 }
 
-/* ── ROLE CHANGE ───────────────────────────────────────────── */
 function onRoleChange(){
   const role=document.getElementById('rRole').value;
   const cg=document.getElementById('classGroup');
@@ -493,7 +477,6 @@ function selectClass(el,val){
   document.getElementById('rClass').value=val;
 }
 
-/* ── EMAIL VALIDATION ──────────────────────────────────────── */
 function validateEmail(input){
   const hint=document.getElementById('emailHint');
   const val=input.value.trim().toLowerCase();
@@ -505,9 +488,9 @@ function validateEmail(input){
   hint.innerHTML='<i class="fa-solid fa-circle-check fa-xs"></i> Valid college email';
   hint.className='form-hint ok';
 }
+// Registration only — NOT used for OTP reset
 function isLoyola(e){return e.trim().toLowerCase().endsWith('@loyolacollege.edu');}
 
-/* ── PASSWORD STRENGTH ─────────────────────────────────────── */
 function pwdScore(v){
   let s=0;
   if(v.length>=8)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
@@ -537,7 +520,6 @@ function checkMatch(){
   else{h.innerHTML='<i class="fa-solid fa-circle-xmark fa-xs"></i> Passwords do not match';h.className='form-hint err';}
 }
 
-/* ── PHOTO PREVIEW ─────────────────────────────────────────── */
 function prevPhoto(input){
   const f=input.files[0];if(!f)return;
   if(f.size>2*1024*1024){alert('Photo must be under 2 MB.');input.value='';return;}
@@ -550,7 +532,7 @@ function prevPhoto(input){
   r.readAsDataURL(f);
 }
 
-/* ── LOGIN ─────────────────────────────────────────────────── */
+/* ── LOGIN ── */
 function doLogin(){
   const uid=document.getElementById('loginId').value.trim();
   const pwd=document.getElementById('loginPwd').value;
@@ -571,7 +553,7 @@ function doLogin(){
     });
 }
 
-/* ── REGISTER ──────────────────────────────────────────────── */
+/* ── REGISTER ── */
 function doRegister(){
   const name=document.getElementById('rName').value.trim();
   const role=document.getElementById('rRole').value;
@@ -618,14 +600,15 @@ function doRegister(){
   }else{sendData('');}
 }
 
-/* ── OTP RESET ─────────────────────────────────────────────── */
+/* ── OTP RESET ── */
+// IMPORTANT: No domain restriction here — admin's gmail allowed
 let otpToken='';let otpInterval=null;
 
 function sendOtp(){
   const uid=document.getElementById('resetUid').value.trim();
   const email=document.getElementById('resetEmail').value.trim().toLowerCase();
   if(!uid||!email){setMsg('resetMsg','Please fill both fields.');return;}
-  if(!isLoyola(email)){setMsg('resetMsg','Only @loyolacollege.edu emails are accepted.');return;}
+  // NO isLoyola() check here — admin uses gmail
   const btn=document.getElementById('otpSendBtn');
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Sending…';
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'sendOtp',uid,email})})
@@ -635,7 +618,7 @@ function sendOtp(){
         otpToken=res.token||'';
         document.getElementById('resetStep2').classList.add('show');
         startOtpTimer();setMsg('resetMsg','');
-      }else{setMsg('resetMsg',res.msg||'Could not find an account with this ID and email.');}
+      }else{setMsg('resetMsg',res.msg||'No account found with this ID and email.');}
     }).catch(()=>{btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-envelope-circle-check"></i> Send OTP to Email';setMsg('resetMsg','Connection error.');});
 }
 
@@ -683,7 +666,6 @@ function saveNewPwd(){
     }).catch(()=>setMsg('resetMsg','Connection error.'));
 }
 
-/* ── ENTER KEY ─────────────────────────────────────────────── */
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&document.getElementById('tabLogin').classList.contains('active'))doLogin();
 });
