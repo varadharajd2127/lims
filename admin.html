@@ -23,40 +23,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--blue);
 ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
 
 /* ── NAV ── */
-.topnav{
-  background:var(--blue);border-bottom:3px solid var(--gold);
-  height:58px;padding:0 16px;display:flex;align-items:center;
-  position:sticky;top:0;z-index:300;gap:8px;
-}
+.topnav{background:var(--blue);border-bottom:3px solid var(--gold);height:58px;padding:0 16px;display:flex;align-items:center;position:sticky;top:0;z-index:300;gap:8px;}
 .nav-brand{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
 .nav-brand .t1{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);font-weight:700;white-space:nowrap;}
 .nav-brand .t2{font-size:10px;color:rgba(255,255,255,.5);white-space:nowrap;}
 .admin-badge{background:var(--maroon);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.5px;flex-shrink:0;}
 .nav-tabs{display:flex;gap:2px;background:rgba(0,0,0,.22);border-radius:10px;padding:4px;flex-shrink:0;}
-.nav-tab{
-  padding:7px 11px;border:none;background:transparent;
-  color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:11.5px;font-weight:600;
-  cursor:pointer;border-radius:7px;transition:all .2s;white-space:nowrap;
-  display:flex;align-items:center;gap:5px;
-}
+.nav-tab{padding:7px 11px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;border-radius:7px;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px;}
 .nav-tab i{font-size:12px;}
 .nav-tab.active{background:var(--gold);color:#fff;}
 .nav-tab:hover:not(.active){background:rgba(255,255,255,.1);color:#fff;}
 .nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.nav-avatar{
-  width:34px;height:34px;border-radius:50%;background:var(--maroon);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:13px;color:#fff;overflow:hidden;border:2px solid rgba(255,255,255,.2);
-}
+.nav-avatar{width:34px;height:34px;border-radius:50%;background:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;overflow:hidden;border:2px solid rgba(255,255,255,.2);}
 .hamburger{display:none;background:transparent;border:none;cursor:pointer;padding:5px;flex-shrink:0;}
 .hamburger span{display:block;width:20px;height:2px;background:#fff;margin:4px 0;border-radius:2px;}
 
 /* DRAWER */
-.drawer{
-  display:none;position:fixed;top:58px;left:0;right:0;
-  background:var(--blue);z-index:299;padding:10px;
-  border-bottom:3px solid var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.25);
-}
+.drawer{display:none;position:fixed;top:58px;left:0;right:0;background:var(--blue);z-index:299;padding:10px;border-bottom:3px solid var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.25);}
 .drawer.open{display:block;}
 .drawer .nav-tab{display:flex;width:100%;text-align:left;padding:12px 14px;font-size:13.5px;margin-bottom:2px;border-radius:8px;}
 
@@ -67,19 +50,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--blue);
 
 /* ── CARDS ── */
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:18px 20px;margin-bottom:16px;}
-.card-title{
-  font-family:'Playfair Display',serif;font-size:17px;color:var(--blue);
-  margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold);
-  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
-}
+.card-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--blue);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
 .card-title i{color:var(--gold);font-size:16px;}
 
 /* ── STATS ── */
 .stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px;}
-.stat-card{
-  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);
-  padding:16px;text-align:center;border-top:3px solid var(--gold);
-}
+.stat-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;text-align:center;border-top:3px solid var(--gold);}
 .stat-card.red{border-top-color:var(--maroon);}
 .stat-card.green{border-top-color:var(--green);}
 .stat-card.amber{border-top-color:var(--amber);}
@@ -91,6 +67,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--blue);
 .badge{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;}
 .b-student{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
 .b-research{background:#faf5ff;color:#6b21a8;border:1px solid #e9d5ff;}
+.b-research\ scholar{background:#faf5ff;color:#6b21a8;border:1px solid #e9d5ff;}
 .b-staff{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;}
 .b-admin{background:#1E3057;color:var(--gold);border:1px solid rgba(201,151,58,.4);}
 .b-approved{background:#dcfce7;color:#166534;border:1px solid #86efac;}
@@ -103,20 +80,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--blue);
 /* ── TABLE ── */
 .tbl-wrap{overflow-x:auto;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);}
 table{width:100%;border-collapse:collapse;background:#fff;min-width:600px;}
-thead th{
-  background:var(--blue);color:#fff;padding:11px 13px;
-  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;
-}
+thead th{background:var(--blue);color:#fff;padding:11px 13px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
 tbody td{padding:10px 13px;font-size:13px;border-bottom:1px solid #edf0f7;vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:#f8f9ff;}
 
 /* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  padding:10px 18px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;
-  font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .22s;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 18px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .22s;}
 .btn-gold{background:var(--gold);color:#fff;}
 .btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
 .btn-blue{background:var(--blue);color:#fff;}
@@ -135,15 +105,11 @@ tbody tr:hover td{background:#f8f9ff;}
 
 /* ── FILTER BAR ── */
 .filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;align-items:center;}
-.filter-bar input,.filter-bar select{
-  padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  font-family:'DM Sans',sans-serif;font-size:13px;color:var(--blue);background:#fff;
-}
+.filter-bar input,.filter-bar select{padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--blue);background:#fff;}
 .filter-bar input:focus,.filter-bar select:focus{outline:none;border-color:var(--gold);}
 
 /* ── MESSAGES ── */
-.msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:13px;
-  line-height:1.5;display:flex;align-items:flex-start;gap:8px;}
+.msg{padding:10px 13px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:13px;line-height:1.5;display:flex;align-items:flex-start;gap:8px;}
 .msg i{margin-top:1px;flex-shrink:0;}
 .msg-error{background:#fef2f2;color:#991b1b;border:1px solid #fecaca;}
 .msg-success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;}
@@ -152,40 +118,26 @@ tbody tr:hover td{background:#f8f9ff;}
 
 /* ── FORM ── */
 .form-group{margin-bottom:14px;}
-.form-label{
-  display:flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;color:var(--blue);
-  letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px;
-}
+.form-label{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px;}
 .form-label i{font-size:12px;color:var(--gold);}
 .req{color:var(--maroon);}
-.form-input,.form-select,.form-textarea{
-  width:100%;padding:10px 13px;border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;
-  font-size:13.5px;color:var(--blue);background:#fff;transition:border-color .2s;
-}
-.form-input:focus,.form-select:focus,.form-textarea:focus{
-  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,58,.12);
-}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--blue);background:#fff;transition:border-color .2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,58,.12);}
 .form-textarea{resize:vertical;min-height:72px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .form-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
 
+/* Class chips inside modal */
+.class-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+.class-chip{padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;background:#fff;transition:all .2s;}
+.class-chip:hover{border-color:var(--gold);background:#fffbf0;}
+.class-chip.selected{background:var(--gold);color:#fff;border-color:var(--gold);}
+
 /* ── MODAL ── */
-.modal-backdrop{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
-  z-index:500;align-items:center;justify-content:center;padding:16px;
-}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center;padding:16px;}
 .modal-backdrop.open{display:flex;}
-.modal{
-  background:#fff;border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.25);
-  width:100%;max-width:680px;max-height:90vh;overflow-y:auto;
-}
-.modal-head{
-  background:var(--blue);color:#fff;padding:16px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-radius:var(--radius) var(--radius) 0 0;position:sticky;top:0;z-index:1;
-}
+.modal{background:#fff;border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.25);width:100%;max-width:680px;max-height:90vh;overflow-y:auto;}
+.modal-head{background:var(--blue);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius) var(--radius) 0 0;position:sticky;top:0;z-index:1;}
 .modal-head h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
 .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:18px;cursor:pointer;padding:4px;}
 .modal-close:hover{color:#fff;}
@@ -213,9 +165,7 @@ tbody tr:hover td{background:#f8f9ff;}
 .cal-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;}
 .cal-top{background:var(--blue);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;}
 .cal-top h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
-.cal-nav{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;
-  padding:6px 13px;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;
-  display:flex;align-items:center;gap:5px;transition:background .2s;}
+.cal-nav{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 13px;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;transition:background .2s;}
 .cal-nav:hover{background:rgba(255,255,255,.1);}
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);background:var(--blue2);}
 .cal-dh{padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;}
@@ -228,15 +178,20 @@ tbody tr:hover td{background:#f8f9ff;}
 .cal-event{font-size:9.5px;border-radius:3px;padding:2px 4px;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ce-approved{background:#dcfce7;color:#166534;}
 .ce-pending{background:#fef9c3;color:#854d0e;}
+.ce-rejected{background:#fee2e2;color:#991b1b;}
 .cal-legend{display:flex;gap:14px;padding:10px 16px;border-top:1px solid #f0f2f7;flex-wrap:wrap;}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);}
 
 /* ── SLOT PICKER ── */
-.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:7px;margin-bottom:10px;}
-.slot-btn{padding:9px 4px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--blue);background:#fff;cursor:pointer;transition:all .2s;text-align:center;}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:7px;margin-bottom:10px;}
+.slot-btn{padding:9px 4px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--blue);background:#fff;cursor:pointer;transition:all .2s;text-align:center;line-height:1.3;}
 .slot-btn:hover{border-color:var(--gold);background:#fffbf0;}
 .slot-btn.selected{background:var(--gold);color:#fff;border-color:var(--gold);}
 .slot-btn.busy{background:#fef2f2;color:#991b1b;border-color:#fca5a5;cursor:not-allowed;}
+
+/* ── USER AVATAR ── */
+.u-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;overflow:hidden;flex-shrink:0;}
+.u-avatar img{width:100%;height:100%;object-fit:cover;}
 
 /* ── TOAST ── */
 #toast{position:fixed;bottom:20px;right:20px;z-index:9999;padding:11px 18px;border-radius:var(--radius-sm);font-size:13px;background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.2);transform:translateY(70px);opacity:0;transition:all .3s;max-width:300px;display:flex;align-items:center;gap:8px;}
@@ -248,23 +203,10 @@ tbody tr:hover td{background:#f8f9ff;}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* ── USER AVATAR ── */
-.u-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;overflow:hidden;flex-shrink:0;}
-.u-avatar img{width:100%;height:100%;object-fit:cover;}
-
 /* ── RESPONSIVE ── */
 @media(max-width:900px){.nav-tabs{display:none;}.hamburger{display:block;}}
-@media(max-width:600px){
-  .form-row,.form-row3{grid-template-columns:1fr;}
-  .main{padding:12px 10px;}
-  table{min-width:500px;}
-  .stats-row{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:440px){
-  .instr-grid{grid-template-columns:1fr;}
-  .cal-cell{min-height:44px;}
-  .cal-event{display:none;}
-}
+@media(max-width:600px){.form-row,.form-row3{grid-template-columns:1fr;}.main{padding:12px 10px;}table{min-width:500px;}.stats-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:440px){.instr-grid{grid-template-columns:1fr;}.cal-cell{min-height:44px;}.cal-event{display:none;}}
 </style>
 </head>
 <body>
@@ -306,10 +248,10 @@ tbody tr:hover td{background:#f8f9ff;}
 
   <!-- ===== DASHBOARD ===== -->
   <div id="dashboardPanel" class="panel active">
-    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+    <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
       <i class="fa-solid fa-gauge-high" style="color:var(--gold);"></i> Admin Dashboard
     </div>
-    <div class="stats-row" id="dashStats">
+    <div class="stats-row">
       <div class="stat-card amber">
         <div class="stat-icon"><i class="fa-solid fa-clock" style="color:var(--amber);"></i></div>
         <div class="stat-num" id="dPendingBk">—</div><div class="stat-lbl">Pending Bookings</div>
@@ -332,7 +274,6 @@ tbody tr:hover td{background:#f8f9ff;}
       </div>
     </div>
 
-    <!-- Pending Bookings Quick View -->
     <div class="card">
       <div class="card-title"><i class="fa-solid fa-clock"></i> Pending Booking Approvals
         <button class="btn btn-blue btn-sm" style="margin-left:auto;" onclick="switchPanel('bookings')">View All →</button>
@@ -345,7 +286,6 @@ tbody tr:hover td{background:#f8f9ff;}
       </div>
     </div>
 
-    <!-- Pending User Approvals -->
     <div class="card">
       <div class="card-title"><i class="fa-solid fa-user-clock"></i> Pending User Registrations
         <button class="btn btn-blue btn-sm" style="margin-left:auto;" onclick="switchPanel('users')">View All →</button>
@@ -361,7 +301,7 @@ tbody tr:hover td{background:#f8f9ff;}
 
   <!-- ===== BOOKINGS ===== -->
   <div id="bookingsPanel" class="panel">
-    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+    <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
       <i class="fa-solid fa-calendar-check" style="color:var(--gold);"></i> Booking Management
       <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;">
         <button class="btn btn-gold btn-sm" onclick="openManualBookingModal()"><i class="fa-solid fa-plus"></i> Manual Booking</button>
@@ -391,7 +331,7 @@ tbody tr:hover td{background:#f8f9ff;}
 
   <!-- ===== USERS ===== -->
   <div id="usersPanel" class="panel">
-    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+    <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
       <i class="fa-solid fa-users" style="color:var(--gold);"></i> User Management
       <button class="btn btn-gold btn-sm" style="margin-left:auto;" onclick="openAddUserModal()"><i class="fa-solid fa-user-plus"></i> Add User</button>
     </div>
@@ -423,7 +363,7 @@ tbody tr:hover td{background:#f8f9ff;}
 
   <!-- ===== INSTRUMENTS ===== -->
   <div id="instrumentsPanel" class="panel">
-    <div class="card-title" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;">
+    <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
       <i class="fa-solid fa-microscope" style="color:var(--gold);"></i> Instrument Management
       <button class="btn btn-gold btn-sm" style="margin-left:auto;" onclick="openInstrModal()"><i class="fa-solid fa-plus"></i> Add Instrument</button>
     </div>
@@ -437,9 +377,17 @@ tbody tr:hover td{background:#f8f9ff;}
       <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--blue);display:flex;align-items:center;gap:8px;">
         <i class="fa-regular fa-calendar-days" style="color:var(--gold);"></i> Booking Calendar
       </div>
-      <select id="calFilter" class="form-select" style="max-width:220px;padding:7px 10px;" onchange="buildCalendar()">
-        <option value="">All Instruments</option>
-      </select>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <select id="calStatusFilter" class="form-select" style="max-width:160px;padding:7px 10px;" onchange="buildCalendar()">
+          <option value="">All Statuses</option>
+          <option value="Approved">Approved</option>
+          <option value="Pending">Pending</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+        <select id="calFilter" class="form-select" style="max-width:220px;padding:7px 10px;" onchange="buildCalendar()">
+          <option value="">All Instruments</option>
+        </select>
+      </div>
     </div>
     <div class="cal-card">
       <div class="cal-top">
@@ -456,6 +404,7 @@ tbody tr:hover td{background:#f8f9ff;}
       <div class="cal-legend">
         <div class="legend-item"><div style="width:12px;height:12px;border-radius:3px;background:#dcfce7;border:1px solid #86efac;"></div> Approved</div>
         <div class="legend-item"><div style="width:12px;height:12px;border-radius:3px;background:#fef9c3;border:1px solid #fde047;"></div> Pending</div>
+        <div class="legend-item"><div style="width:12px;height:12px;border-radius:3px;background:#fee2e2;border:1px solid #fca5a5;"></div> Rejected</div>
       </div>
     </div>
   </div>
@@ -486,11 +435,11 @@ tbody tr:hover td{background:#f8f9ff;}
   </div>
 </div>
 
-<!-- Edit/Add User Modal -->
+<!-- Add/Edit User Modal — Full fields like registration -->
 <div class="modal-backdrop" id="userModal">
-  <div class="modal">
+  <div class="modal" style="max-width:720px;">
     <div class="modal-head">
-      <h3 id="userModalTitle">Edit User</h3>
+      <h3 id="userModalTitle">Add User</h3>
       <button class="modal-close" onclick="closeModal('userModal')"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
@@ -499,26 +448,35 @@ tbody tr:hover td{background:#f8f9ff;}
       <div class="form-row">
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-user"></i> Full Name <span class="req">*</span></label>
-          <input type="text" id="umName" class="form-input" placeholder="Full name"/>
+          <input type="text" id="umName" class="form-input" placeholder="Full name as per ID card"/>
         </div>
         <div class="form-group">
-          <label class="form-label"><i class="fa-solid fa-id-badge"></i> UID <span class="req">*</span></label>
-          <input type="text" id="umUidField" class="form-input" placeholder="Unique ID"/>
+          <label class="form-label"><i class="fa-solid fa-id-badge"></i> UID / Dept No <span class="req">*</span></label>
+          <input type="text" id="umUidField" class="form-input" placeholder="e.g. 26-UAZ-001 or Zoo001"/>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-users"></i> Role <span class="req">*</span></label>
-          <select id="umRole" class="form-select">
+          <select id="umRole" class="form-select" onchange="onUmRoleChange()">
             <option value="Student">Student</option>
             <option value="Research Scholar">Research Scholar</option>
             <option value="Staff">Staff</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="umClassGroup">
           <label class="form-label"><i class="fa-solid fa-graduation-cap"></i> Class</label>
-          <input type="text" id="umClass" class="form-input" placeholder="e.g. 1st PG"/>
+          <div class="class-row" id="umClassChips">
+            <div class="class-chip" onclick="selectUmClass(this,'1st UG')">1st UG</div>
+            <div class="class-chip" onclick="selectUmClass(this,'2nd UG')">2nd UG</div>
+            <div class="class-chip" onclick="selectUmClass(this,'3rd UG')">3rd UG</div>
+            <div class="class-chip" onclick="selectUmClass(this,'1st PG')">1st PG</div>
+            <div class="class-chip" onclick="selectUmClass(this,'2nd PG')">2nd PG</div>
+          </div>
+          <input type="hidden" id="umClass"/>
+          <!-- fallback text input for custom class -->
+          <input type="text" id="umClassText" class="form-input" placeholder="Or type class manually" style="margin-top:8px;" oninput="document.getElementById('umClass').value=this.value"/>
         </div>
       </div>
       <div class="form-row">
@@ -528,32 +486,32 @@ tbody tr:hover td{background:#f8f9ff;}
         </div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-phone"></i> Phone</label>
-          <input type="tel" id="umPhone" class="form-input" placeholder="10-digit"/>
+          <input type="tel" id="umPhone" class="form-input" placeholder="10-digit mobile"/>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label"><i class="fa-solid fa-calendar"></i> Batch</label>
+          <label class="form-label"><i class="fa-solid fa-calendar-days"></i> Batch / Year</label>
           <input type="text" id="umBatch" class="form-input" placeholder="e.g. 2024–2026"/>
         </div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-toggle-on"></i> Status <span class="req">*</span></label>
           <select id="umStatus" class="form-select">
-            <option value="Pending">Pending</option>
             <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
             <option value="Blocked">Blocked</option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label"><i class="fa-solid fa-lock"></i> New Password <span style="font-size:10px;color:var(--gray);text-transform:none;font-weight:400;">(leave blank to keep current)</span></label>
+        <label class="form-label"><i class="fa-solid fa-lock"></i> Password <span id="umPwdReq" class="req">*</span> <span style="font-size:10px;color:var(--gray);text-transform:none;font-weight:400;" id="umPwdHint">(min 8 characters)</span></label>
         <input type="password" id="umPwd" class="form-input" placeholder="Min 8 characters"/>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-gray btn-sm" onclick="closeModal('userModal')">Cancel</button>
-      <button class="btn btn-gold btn-sm" onclick="saveUser()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+      <button class="btn btn-gold btn-sm" onclick="saveUser()"><i class="fa-solid fa-floppy-disk"></i> Save User</button>
     </div>
   </div>
 </div>
@@ -623,7 +581,7 @@ tbody tr:hover td{background:#f8f9ff;}
       <div class="form-group">
         <label class="form-label"><i class="fa-solid fa-image"></i> Image URL</label>
         <input type="url" id="imImageUrl" class="form-input" placeholder="https://… (direct image link)"/>
-        <div style="font-size:11px;color:var(--gray);margin-top:4px;">Paste a direct image URL (from Google Drive thumbnail, Imgur, etc.)</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:4px;">Paste a direct image URL (Google Drive thumbnail, Imgur, etc.)</div>
       </div>
       <div class="form-group">
         <label class="form-label"><i class="fa-solid fa-align-left"></i> Description</label>
@@ -637,9 +595,9 @@ tbody tr:hover td{background:#f8f9ff;}
   </div>
 </div>
 
-<!-- Manual Booking Modal -->
+<!-- Manual Booking Modal — Full fields -->
 <div class="modal-backdrop" id="manualBkModal">
-  <div class="modal">
+  <div class="modal" style="max-width:740px;">
     <div class="modal-head">
       <h3>Manual Booking</h3>
       <button class="modal-close" onclick="closeModal('manualBkModal')"><i class="fa-solid fa-xmark"></i></button>
@@ -649,12 +607,12 @@ tbody tr:hover td{background:#f8f9ff;}
       <div class="form-row">
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-user"></i> User ID <span class="req">*</span></label>
-          <input type="text" id="mbUid" class="form-input" placeholder="Enter user UID"/>
+          <input type="text" id="mbUid" class="form-input" placeholder="Enter user UID (e.g. 26-UAZ-001)"/>
         </div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-microscope"></i> Instrument <span class="req">*</span></label>
           <select id="mbInstr" class="form-select" onchange="onMbInstrChange()">
-            <option value="">— Select —</option>
+            <option value="">— Select Instrument —</option>
           </select>
         </div>
       </div>
@@ -665,7 +623,9 @@ tbody tr:hover td{background:#f8f9ff;}
         </div>
         <div class="form-group">
           <label class="form-label"><i class="fa-solid fa-hourglass-half"></i> Duration <span class="req">*</span></label>
-          <select id="mbDur" class="form-select"></select>
+          <select id="mbDur" class="form-select" onchange="loadMbSlots()">
+            <option value="1">1 hour</option>
+          </select>
         </div>
       </div>
       <!-- Slot Picker -->
@@ -674,18 +634,22 @@ tbody tr:hover td{background:#f8f9ff;}
         <div class="slot-grid" id="mbSlotGrid"></div>
       </div>
       <div class="form-group">
-        <label class="form-label"><i class="fa-solid fa-flask"></i> Purpose <span class="req">*</span></label>
-        <input type="text" id="mbPurpose" class="form-input" placeholder="Experiment / purpose"/>
+        <label class="form-label"><i class="fa-solid fa-flask"></i> Purpose / Experiment <span class="req">*</span></label>
+        <input type="text" id="mbPurpose" class="form-input" placeholder="Brief description of the experiment or purpose"/>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label"><i class="fa-solid fa-user-tie"></i> Guide <span class="req">*</span></label>
-          <input type="text" id="mbGuide" class="form-input" placeholder="Guide / supervisor name"/>
+          <label class="form-label"><i class="fa-solid fa-user-tie"></i> Guide / Supervisor <span class="req">*</span></label>
+          <input type="text" id="mbGuide" class="form-input" placeholder="Name of guide or supervisor"/>
         </div>
         <div class="form-group">
-          <label class="form-label"><i class="fa-solid fa-note-sticky"></i> Notes</label>
-          <input type="text" id="mbNotes" class="form-input" placeholder="Optional notes"/>
+          <label class="form-label"><i class="fa-solid fa-note-sticky"></i> Additional Notes</label>
+          <input type="text" id="mbNotes" class="form-input" placeholder="Any special requirements (optional)"/>
         </div>
+      </div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius-sm);padding:10px 13px;font-size:12.5px;color:var(--blue);">
+        <i class="fa-solid fa-circle-info" style="color:var(--gold);"></i>
+        This booking will be submitted as <strong>Pending</strong> and must be approved separately, or you can approve it right after. The user will receive an email notification.
       </div>
     </div>
     <div class="modal-footer">
@@ -697,7 +661,7 @@ tbody tr:hover td{background:#f8f9ff;}
 
 <!-- Day Booking Detail Modal -->
 <div class="modal-backdrop" id="dayModal">
-  <div class="modal">
+  <div class="modal" style="max-width:680px;">
     <div class="modal-head">
       <h3 id="dayModalTitle">Bookings on —</h3>
       <button class="modal-close" onclick="closeModal('dayModal')"><i class="fa-solid fa-xmark"></i></button>
@@ -705,7 +669,7 @@ tbody tr:hover td{background:#f8f9ff;}
     <div class="modal-body">
       <div class="tbl-wrap">
         <table style="min-width:400px;">
-          <thead><tr><th>ID</th><th>User</th><th>Instrument</th><th>Time</th><th>Hrs</th><th>Status</th></tr></thead>
+          <thead><tr><th>ID</th><th>User</th><th>Instrument</th><th>Time</th><th>Hrs</th><th>Status</th><th>Actions</th></tr></thead>
           <tbody id="dayModalBody"></tbody>
         </table>
       </div>
@@ -753,6 +717,20 @@ function fetchAll(){
   });
 }
 
+/* ── UTILS ── */
+function pad(h){return String(h).padStart(2,'0');}
+
+function formatTime(t){
+  if(!t||t==='—')return'—';
+  const parts=String(t).split(':');
+  let h=parseInt(parts[0]),m=parseInt(parts[1])||0;
+  const ampm=h>=12?'PM':'AM';
+  h=h%12||12;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function timeToM(t){const[h,m]=String(t).split(':').map(Number);return h*60+(m||0);}
+
 /* ── DASHBOARD ── */
 function updateDashboard(){
   const pendingBk=allBookings.filter(b=>b.status==='Pending');
@@ -764,22 +742,18 @@ function updateDashboard(){
   document.getElementById('dTotalUs').textContent=allUsers.length;
   document.getElementById('dTotalInstr').textContent=instruments.length;
 
-  // Pending bookings table (max 8)
   const pbBody=document.getElementById('dashPendingBody');
   pbBody.innerHTML=pendingBk.length
     ?pendingBk.slice(0,8).map(b=>`<tr>
         <td><code style="font-size:11px;font-weight:700;">${b.id}</code></td>
         <td style="font-size:12px;">${b.userId}</td>
         <td style="font-size:12px;">${b.instrName}</td>
-        <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+        <td>${b.date}</td><td>${formatTime(b.time)}</td><td>${b.dur}h</td>
         <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">${b.purpose}</td>
-        <td>
-          <button class="btn btn-green btn-xs" onclick="openBkActionModal('${b.id}')"><i class="fa-solid fa-check"></i> Review</button>
-        </td>
+        <td><button class="btn btn-green btn-xs" onclick="openBkActionModal('${b.id}')"><i class="fa-solid fa-check"></i> Review</button></td>
       </tr>`).join('')
     :`<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:20px;"><i class="fa-solid fa-circle-check" style="color:var(--green);"></i> No pending bookings</td></tr>`;
 
-  // Pending users table (max 6)
   const puBody=document.getElementById('dashPendingUsersBody');
   puBody.innerHTML=pendingUs.length
     ?pendingUs.slice(0,6).map(u=>`<tr>
@@ -804,18 +778,18 @@ function renderBookings(){
   const filtered=allBookings.filter(b=>{
     if(st&&b.status!==st)return false;
     if(instr&&b.instrId!==instr)return false;
-    if(q&&!(b.id+b.userId+b.instrName+b.purpose+b.guide).toLowerCase().includes(q))return false;
+    if(q&&!(b.id+b.userId+b.instrName+b.purpose+(b.guide||'')).toLowerCase().includes(q))return false;
     return true;
-  }).reverse();
+  }).slice().reverse();
   const tbody=document.getElementById('bookingsBody');
   tbody.innerHTML=filtered.length
     ?filtered.map(b=>`<tr>
         <td><code style="font-size:11px;font-weight:700;color:var(--blue);">${b.id}</code></td>
         <td style="font-size:12px;font-weight:600;">${b.userId}</td>
         <td style="font-size:12px;">${b.instrName}</td>
-        <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
+        <td>${b.date}</td><td>${formatTime(b.time)}</td><td>${b.dur}h</td>
         <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;" title="${b.purpose}">${b.purpose}</td>
-        <td style="font-size:12px;">${b.guide}</td>
+        <td style="font-size:12px;">${b.guide||'—'}</td>
         <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
         <td style="display:flex;gap:5px;flex-wrap:wrap;">
           ${b.status==='Pending'
@@ -841,13 +815,14 @@ function openBkActionModal(bkId){
   document.getElementById('bkAdminNote').value='';
   document.getElementById('bkActionInfo').innerHTML=`
     <div><strong>Booking ID:</strong> ${b.id}</div>
-    <div><strong>User:</strong> ${b.userId}</div>
+    <div><strong>User ID:</strong> ${b.userId}</div>
     <div><strong>Instrument:</strong> ${b.instrName}</div>
-    <div><strong>Date:</strong> ${b.date} &nbsp; <strong>Time:</strong> ${b.time} &nbsp; <strong>Duration:</strong> ${b.dur}h</div>
+    <div><strong>Date:</strong> ${b.date} &nbsp; <strong>Time:</strong> ${formatTime(b.time)} &nbsp; <strong>Duration:</strong> ${b.dur}h</div>
     <div><strong>Purpose:</strong> ${b.purpose}</div>
-    <div><strong>Guide:</strong> ${b.guide}</div>
+    <div><strong>Guide:</strong> ${b.guide||'—'}</div>
     ${b.notes?`<div><strong>Notes:</strong> ${b.notes}</div>`:''}
     <div><strong>Current Status:</strong> <span class="badge b-${b.status.toLowerCase()}">${b.status}</span></div>
+    ${b.createdAt?`<div><strong>Submitted:</strong> ${b.createdAt}</div>`:''}
   `;
   const isPending=b.status==='Pending';
   document.getElementById('bkApproveBtn').style.display=isPending?'':'none';
@@ -873,9 +848,7 @@ function confirmBookingAction(action){
     .then(r=>r.json()).then(res=>{
       btn.disabled=false;
       if(res.status==='ok'){
-        toast('Booking '+action+'!','ok');
-        closeModal('bkActionModal');
-        fetchAll();
+        toast('Booking '+action+'!','ok');closeModal('bkActionModal');fetchAll();
       }else{
         setMsg('bkMsg',res.msg||'Action failed.');
         btn.innerHTML=action==='Approved'?'<i class="fa-solid fa-check"></i> Approve':'<i class="fa-solid fa-xmark"></i> Reject';
@@ -891,17 +864,13 @@ function renderUsers(){
   const filtered=allUsers.filter(u=>{
     if(role&&u.role!==role)return false;
     if(status&&u.status!==status)return false;
-    if(q&&!(u.name+u.uid+u.email+u.phone).toLowerCase().includes(q))return false;
+    if(q&&!(u.name+u.uid+u.email+(u.phone||'')).toLowerCase().includes(q))return false;
     return true;
   });
   const roleClass={'Student':'b-student','Research Scholar':'b-research','Staff':'b-staff','Admin':'b-admin'};
   document.getElementById('usersBody').innerHTML=filtered.length
     ?filtered.map(u=>`<tr>
-        <td>
-          <div class="u-avatar">
-            ${u.photo?`<img src="${u.photo}" alt=""/>`:`<span>${(u.name||'?')[0].toUpperCase()}</span>`}
-          </div>
-        </td>
+        <td><div class="u-avatar">${u.photo?`<img src="${u.photo}" alt=""/>`:`<span>${(u.name||'?')[0].toUpperCase()}</span>`}</div></td>
         <td style="font-weight:600;">${u.name}</td>
         <td><code style="font-size:11px;font-weight:700;">${u.uid}</code></td>
         <td><span class="badge ${roleClass[u.role]||'b-student'}">${u.role}</span>${u.cls?`<div style="font-size:11px;color:var(--gray);margin-top:3px;">${u.cls}</div>`:''}</td>
@@ -915,9 +884,9 @@ function renderUsers(){
               ?`<button class="btn btn-green btn-xs" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-check"></i></button>
                 <button class="btn btn-red btn-xs" onclick="quickRejectUser('${u.uid}')"><i class="fa-solid fa-xmark"></i></button>`:''}
             ${u.status==='Approved'
-              ?`<button class="btn btn-amber btn-xs" onclick="blockUser('${u.uid}')"><i class="fa-solid fa-ban"></i></button>`:''}
+              ?`<button class="btn btn-amber btn-xs" title="Block" onclick="blockUser('${u.uid}')"><i class="fa-solid fa-ban"></i></button>`:''}
             ${u.status==='Blocked'
-              ?`<button class="btn btn-green btn-xs" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-unlock"></i></button>`:''}
+              ?`<button class="btn btn-green btn-xs" title="Unblock" onclick="quickApproveUser('${u.uid}')"><i class="fa-solid fa-unlock"></i></button>`:''}
             <button class="btn btn-blue btn-xs" onclick="openEditUserModal('${u.uid}')"><i class="fa-solid fa-pen"></i></button>
             <button class="btn btn-red btn-xs" onclick="deleteUser('${u.uid}')"><i class="fa-solid fa-trash"></i></button>
           </div>
@@ -926,21 +895,11 @@ function renderUsers(){
     :`<tr><td colspan="9" style="text-align:center;color:var(--gray);padding:24px;">No users found</td></tr>`;
 }
 
-function quickApproveUser(uid){
-  doUserAction({action:'approveUser',uid},'User approved!');
-}
-function quickRejectUser(uid){
-  if(!confirm('Reject this user?'))return;
-  doUserAction({action:'rejectUser',uid},'User rejected.');
-}
-function blockUser(uid){
-  if(!confirm('Block this user?'))return;
-  doUserAction({action:'blockUser',uid},'User blocked.');
-}
-function deleteUser(uid){
-  if(!confirm('Permanently delete user '+uid+'? This cannot be undone.'))return;
-  doUserAction({action:'deleteUser',uid},'User deleted.');
-}
+function quickApproveUser(uid){doUserAction({action:'approveUser',uid},'User approved!');}
+function quickRejectUser(uid){if(!confirm('Reject this user?'))return;doUserAction({action:'rejectUser',uid},'User rejected.');}
+function blockUser(uid){if(!confirm('Block this user?'))return;doUserAction({action:'blockUser',uid},'User blocked.');}
+function deleteUser(uid){if(!confirm('Permanently delete user '+uid+'? This cannot be undone.'))return;doUserAction({action:'deleteUser',uid},'User deleted.');}
+
 function doUserAction(body,successMsg){
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
     .then(r=>r.json()).then(res=>{
@@ -949,19 +908,38 @@ function doUserAction(body,successMsg){
     }).catch(()=>setMsg('usMsg','Connection error.'));
 }
 
+/* ── USER MODAL (Add/Edit) ── */
+function onUmRoleChange(){
+  const role=document.getElementById('umRole').value;
+  const cg=document.getElementById('umClassGroup');
+  cg.style.display=(role==='Student'||role==='Research Scholar')?'block':'none';
+}
+
+function selectUmClass(el,val){
+  document.querySelectorAll('#umClassChips .class-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('umClass').value=val;
+  document.getElementById('umClassText').value=val;
+}
+
 function openAddUserModal(){
-  document.getElementById('userModalTitle').textContent='Add User';
+  document.getElementById('userModalTitle').textContent='Add New User';
   document.getElementById('umUid').value='';
   document.getElementById('umUidField').value='';
   document.getElementById('umUidField').readOnly=false;
   document.getElementById('umName').value='';
   document.getElementById('umRole').value='Student';
   document.getElementById('umClass').value='';
+  document.getElementById('umClassText').value='';
+  document.querySelectorAll('#umClassChips .class-chip').forEach(c=>c.classList.remove('selected'));
   document.getElementById('umEmail').value='';
   document.getElementById('umPhone').value='';
   document.getElementById('umBatch').value='';
   document.getElementById('umStatus').value='Approved';
   document.getElementById('umPwd').value='';
+  document.getElementById('umPwdReq').style.display='';
+  document.getElementById('umPwdHint').textContent='(min 8 characters — required for new user)';
+  onUmRoleChange();
   setMsg('userModalMsg','');
   openModal('userModal');
 }
@@ -976,11 +954,19 @@ function openEditUserModal(uid){
   document.getElementById('umName').value=u.name||'';
   document.getElementById('umRole').value=u.role||'Student';
   document.getElementById('umClass').value=u.cls||'';
+  document.getElementById('umClassText').value=u.cls||'';
+  // Highlight chip if matches
+  document.querySelectorAll('#umClassChips .class-chip').forEach(c=>{
+    c.classList.toggle('selected',c.textContent===u.cls);
+  });
   document.getElementById('umEmail').value=u.email||'';
   document.getElementById('umPhone').value=u.phone||'';
   document.getElementById('umBatch').value=u.batch||'';
   document.getElementById('umStatus').value=u.status||'Pending';
   document.getElementById('umPwd').value='';
+  document.getElementById('umPwdReq').style.display='none';
+  document.getElementById('umPwdHint').textContent='(leave blank to keep current password)';
+  onUmRoleChange();
   setMsg('userModalMsg','');
   openModal('userModal');
 }
@@ -998,19 +984,19 @@ function saveUser(){
   const status=document.getElementById('umStatus').value;
   const pwd=document.getElementById('umPwd').value;
 
-  if(!name||!uidField||!email){setMsg('userModalMsg','Please fill required fields.');return;}
+  if(!name||!uidField||!email){setMsg('userModalMsg','Please fill all required fields.');return;}
+  if(!isEdit&&(!pwd||pwd.length<8)){setMsg('userModalMsg','Password is required (min 8 characters) for new users.');return;}
 
   const body=isEdit
     ?{action:'editUser',uid:uidField,name,role,cls,email,phone,batch,status,pwd:pwd||undefined}
     :{action:'addUser',uid:uidField,name,role,cls,email,phone,batch,status,pwd};
-  if(!isEdit&&(!pwd||pwd.length<8)){setMsg('userModalMsg','Password must be at least 8 characters for new users.');return;}
 
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
     .then(r=>r.json()).then(res=>{
       if(res.status==='ok'){
         toast(isEdit?'User updated!':'User added!','ok');
         closeModal('userModal');fetchAll();
-      }else{setMsg('userModalMsg',res.msg||'Failed.');}
+      }else{setMsg('userModalMsg',res.msg||'Failed to save user.');}
     }).catch(()=>setMsg('userModalMsg','Connection error.'));
 }
 
@@ -1023,8 +1009,7 @@ function renderInstrGrid(){
   }
   grid.innerHTML=instruments.map(i=>`
     <div class="instr-card">
-      ${i.imageUrl
-        ?`<img src="${i.imageUrl}" alt="${i.name}" class="ic-img" onerror="this.style.display='none'">`
+      ${i.imageUrl?`<img src="${i.imageUrl}" alt="${i.name}" class="ic-img" onerror="this.style.display='none'">`
         :`<div class="ic-img-placeholder"><i class="fa-solid fa-flask-vial"></i></div>`}
       <div class="ic-head">
         <h3><i class="fa-solid fa-flask-vial"></i> ${i.name}</h3>
@@ -1038,7 +1023,7 @@ function renderInstrGrid(){
         ${i.model?`<div class="ic-meta"><i class="fa-solid fa-tag"></i><strong>Model:</strong> ${i.model}</div>`:''}
         ${i.make?`<div class="ic-meta"><i class="fa-solid fa-industry"></i><strong>Make:</strong> ${i.make}</div>`:''}
         ${i.labIncharge?`<div class="ic-meta"><i class="fa-solid fa-user-tie"></i><strong>In-charge:</strong> ${i.labIncharge}</div>`:''}
-        <div class="ic-meta"><i class="fa-regular fa-clock"></i> ${pad(i.startHour)}:00 – ${pad(i.endHour)}:00</div>
+        <div class="ic-meta"><i class="fa-regular fa-clock"></i> ${formatTime(pad(i.startHour)+':00')} – ${formatTime(pad(i.endHour)+':00')}</div>
         <p class="ic-desc">${i.desc||''}</p>
         <div class="ic-actions">
           <button class="btn btn-blue btn-xs" onclick="openInstrModal('${i.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
@@ -1069,19 +1054,11 @@ function openInstrModal(id){
     document.getElementById('imImageUrl').value=i.imageUrl||'';
   }else{
     document.getElementById('instrModalTitle').textContent='Add Instrument';
-    document.getElementById('imId').value='';
-    document.getElementById('imName').value='';
-    document.getElementById('imLab').value='';
-    document.getElementById('imRoomNo').value='';
-    document.getElementById('imModel').value='';
-    document.getElementById('imMake').value='';
+    ['imId','imName','imLab','imRoomNo','imModel','imMake','imDesc','imLabIncharge','imImageUrl'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('imStatus').value='Available';
     document.getElementById('imStartHour').value='8';
     document.getElementById('imEndHour').value='17';
     document.getElementById('imMaxH').value='8';
-    document.getElementById('imDesc').value='';
-    document.getElementById('imLabIncharge').value='';
-    document.getElementById('imImageUrl').value='';
   }
   openModal('instrModal');
 }
@@ -1108,10 +1085,8 @@ function saveInstrument(){
   };
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)})
     .then(r=>r.json()).then(res=>{
-      if(res.status==='ok'){
-        toast(id?'Instrument updated!':'Instrument added!','ok');
-        closeModal('instrModal');fetchAll();
-      }else{setMsg('instrModalMsg',res.msg||'Failed.');}
+      if(res.status==='ok'){toast(id?'Instrument updated!':'Instrument added!','ok');closeModal('instrModal');fetchAll();}
+      else{setMsg('instrModalMsg',res.msg||'Failed.');}
     }).catch(()=>setMsg('instrModalMsg','Connection error.'));
 }
 
@@ -1142,8 +1117,7 @@ function openManualBookingModal(){
 function populateMbInstrSelect(){
   const sel=document.getElementById('mbInstr');
   sel.innerHTML='<option value="">— Select Instrument —</option>'+
-    instruments.filter(i=>i.status==='Available')
-      .map(i=>`<option value="${i.id}">${i.name} · ${i.lab}</option>`).join('');
+    instruments.map(i=>`<option value="${i.id}">${i.name} · ${i.lab} (${i.status})</option>`).join('');
 }
 
 function onMbInstrChange(){
@@ -1157,6 +1131,7 @@ function onMbInstrChange(){
   loadMbSlots();
 }
 
+/* ── ADMIN SLOT LOADER — Fixed: proper multi-hour overlap ── */
 function loadMbSlots(){
   const instrId=document.getElementById('mbInstr').value;
   const date=document.getElementById('mbDate').value;
@@ -1166,13 +1141,22 @@ function loadMbSlots(){
   const instr=instruments.find(i=>i.id===instrId);
   if(!instr){sec.style.display='none';return;}
   sec.style.display='block';
+
   const slots=[];
-  for(let h=instr.startHour;h<instr.endHour;h++)slots.push(pad(h)+':00');
-  const busySlots=allBookings.filter(b=>b.instrId===instrId&&b.date===date&&b.status!=='Rejected');
+  for(let h=instr.startHour;h<instr.endHour;h++) slots.push(pad(h)+':00');
+
+  const activeBooks=allBookings.filter(b=>
+    b.instrId===instrId && b.date===date && b.status!=='Rejected'
+  );
+
   document.getElementById('mbSlotGrid').innerHTML=slots.map(slot=>{
-    const busy=busySlots.find(b=>b.time===slot);
-    if(busy)return`<div class="slot-btn busy">${slot}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i></span></div>`;
-    return`<div class="slot-btn" onclick="selectMbSlot(this,'${slot}')">${slot}</div>`;
+    const slotStart=timeToM(slot),slotEnd=slotStart+60;
+    const busy=activeBooks.find(b=>{
+      const bs=timeToM(b.time),be=bs+(parseInt(b.dur)||1)*60;
+      return bs<slotEnd&&slotStart<be;
+    });
+    if(busy)return`<div class="slot-btn busy" title="${busy.userId} | ${busy.id}">${formatTime(slot)}<br><span style="font-size:9px;"><i class="fa-solid fa-lock"></i></span></div>`;
+    return`<div class="slot-btn" onclick="selectMbSlot(this,'${slot}')">${formatTime(slot)}</div>`;
   }).join('');
 }
 
@@ -1196,6 +1180,14 @@ function submitManualBooking(){
   if(!mbSelectedSlot){setMsg('manualBkMsg','Please select a time slot.');return;}
   if(!purpose){setMsg('manualBkMsg','Please enter the purpose.');return;}
   if(!guide){setMsg('manualBkMsg','Please enter the guide name.');return;}
+  // Client-side overlap check with duration
+  const ns=timeToM(mbSelectedSlot),ne=ns+dur*60;
+  const conflict=allBookings.find(b=>{
+    if(b.instrId!==instrId||b.date!==date||b.status==='Rejected')return false;
+    const es=timeToM(b.time),ee=es+(parseInt(b.dur)||1)*60;
+    return es<ne&&ns<ee;
+  });
+  if(conflict){setMsg('manualBkMsg','⚠ Time conflict with booking '+conflict.id+'. Choose a different slot or reduce duration.');return;}
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({
     action:'manualBooking',uid,userId:uid,instrId,instrName:instr?instr.name:'',
     date,time:mbSelectedSlot,dur,purpose,guide,notes
@@ -1212,19 +1204,23 @@ function populateCalFilter(){
   const sel=document.getElementById('calFilter');
   sel.innerHTML='<option value="">All Instruments</option>'+instruments.map(i=>`<option value="${i.id}">${i.name}</option>`).join('');
 }
+
 function moveMonth(d){calDate=new Date(calDate.getFullYear(),calDate.getMonth()+d,1);buildCalendar();}
+
 function buildCalendar(){
   const month=calDate.getMonth(),year=calDate.getFullYear();
   const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
   document.getElementById('calTitle').textContent=MONTHS[month]+' '+year;
-  const filter=document.getElementById('calFilter').value;
+  const instrFilter=document.getElementById('calFilter').value;
+  const statusFilter=document.getElementById('calStatusFilter').value;
   const first=new Date(year,month,1).getDay();
   const days=new Date(year,month+1,0).getDate();
   const today=new Date();
   const relevant=allBookings.filter(b=>{
-    if(b.status==='Rejected')return false;
-    if(filter&&b.instrId!==filter)return false;
-    const bd=new Date(b.date);return bd.getFullYear()===year&&bd.getMonth()===month;
+    if(statusFilter&&b.status!==statusFilter)return false;
+    if(instrFilter&&b.instrId!==instrFilter)return false;
+    const bd=new Date(b.date);
+    return bd.getFullYear()===year&&bd.getMonth()===month;
   });
   let cells='';
   for(let i=0;i<first;i++)cells+=`<div class="cal-cell other"><div class="date-num"></div></div>`;
@@ -1232,7 +1228,7 @@ function buildCalendar(){
     const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isToday=today.getDate()===d&&today.getMonth()===month&&today.getFullYear()===year;
     const dayBooks=relevant.filter(b=>b.date===ds);
-    const events=dayBooks.slice(0,3).map(b=>`<div class="cal-event ce-${b.status.toLowerCase()}">${b.instrName.split(' ')[0]}</div>`).join('');
+    const events=dayBooks.slice(0,3).map(b=>`<div class="cal-event ce-${b.status.toLowerCase()}" title="${b.userId}: ${b.instrName} ${formatTime(b.time)}">${b.instrName.split(' ')[0]}</div>`).join('');
     const more=dayBooks.length>3?`<div style="font-size:9px;color:var(--gray);">+${dayBooks.length-3} more</div>`:'';
     cells+=`<div class="cal-cell${isToday?' today':''}" onclick="showDayModal('${ds}')"><div class="date-num">${d}</div>${events}${more}</div>`;
   }
@@ -1240,17 +1236,23 @@ function buildCalendar(){
 }
 
 function showDayModal(date){
-  const dayBooks=allBookings.filter(b=>b.date===date&&b.status!=='Rejected');
+  // Show all bookings (including rejected) for that day
+  const dayBooks=allBookings.filter(b=>b.date===date);
   document.getElementById('dayModalTitle').textContent='Bookings on '+date;
   document.getElementById('dayModalBody').innerHTML=dayBooks.length
     ?dayBooks.map(b=>`<tr>
         <td><code style="font-size:11px;">${b.id}</code></td>
         <td style="font-size:12px;">${b.userId}</td>
         <td style="font-size:12px;">${b.instrName}</td>
-        <td>${b.time}</td><td>${b.dur}h</td>
+        <td>${formatTime(b.time)}</td><td>${b.dur}h</td>
         <td><span class="badge b-${b.status.toLowerCase()}">${b.status}</span></td>
+        <td>
+          ${b.status==='Pending'
+            ?`<button class="btn btn-green btn-xs" onclick="openBkActionModal('${b.id}');closeModal('dayModal')"><i class="fa-solid fa-check"></i> Review</button>`
+            :`<button class="btn btn-amber btn-xs" onclick="openBkActionModal('${b.id}');closeModal('dayModal')"><i class="fa-solid fa-eye"></i> View</button>`}
+        </td>
       </tr>`).join('')
-    :`<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:18px;">No bookings on this day</td></tr>`;
+    :`<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:18px;">No bookings on this day</td></tr>`;
   openModal('dayModal');
 }
 
@@ -1262,11 +1264,11 @@ function printAllBookings(){
     if(st&&b.status!==st)return false;
     if(instr&&b.instrId!==instr)return false;
     return true;
-  }).reverse();
+  }).slice().reverse();
   const rows=filtered.map(b=>`<tr>
     <td>${b.id}</td><td>${b.userId}</td><td>${b.instrName}</td>
-    <td>${b.date}</td><td>${b.time}</td><td>${b.dur}h</td>
-    <td>${b.purpose}</td><td>${b.guide}</td><td>${b.status}</td>
+    <td>${b.date}</td><td>${formatTime(b.time)}</td><td>${b.dur}h</td>
+    <td>${b.purpose}</td><td>${b.guide||'—'}</td><td>${b.status}</td>
   </tr>`).join('');
   const w=window.open('','_blank');
   w.document.write(printHeader('All Bookings Report')+
@@ -1291,21 +1293,21 @@ function printBooking(bkId){
         ${instr&&instr.lab?`<tr><td><strong>Lab</strong></td><td>${instr.lab}${instr.roomNo?' · '+instr.roomNo:''}</td></tr>`:''}
         ${instr&&instr.labIncharge?`<tr><td><strong>Lab In-charge</strong></td><td>${instr.labIncharge}</td></tr>`:''}
         <tr><td><strong>Date</strong></td><td>${b.date}</td></tr>
-        <tr><td><strong>Time</strong></td><td>${b.time}</td></tr>
+        <tr><td><strong>Time</strong></td><td>${formatTime(b.time)}</td></tr>
         <tr><td><strong>Duration</strong></td><td>${b.dur} hour(s)</td></tr>
         <tr><td><strong>Purpose</strong></td><td>${b.purpose}</td></tr>
-        <tr><td><strong>Guide / Supervisor</strong></td><td>${b.guide}</td></tr>
+        <tr><td><strong>Guide / Supervisor</strong></td><td>${b.guide||'—'}</td></tr>
         ${b.notes?`<tr><td><strong>Notes</strong></td><td>${b.notes}</td></tr>`:''}
         <tr><td><strong>Status</strong></td><td><strong>${b.status}</strong></td></tr>
         <tr><td><strong>Submitted</strong></td><td>${b.createdAt||'—'}</td></tr>
-        ${b.approvedAt?`<tr><td><strong>Approved/Rejected On</strong></td><td>${b.approvedAt}</td></tr>`:''}
+        ${b.approvedAt?`<tr><td><strong>Actioned On</strong></td><td>${b.approvedAt}</td></tr>`:''}
       </table>
       <div class="sign-row">
         <div class="sign-box"><div class="sign-line"></div><div>User Signature</div></div>
         <div class="sign-box"><div class="sign-line"></div><div>Lab In-charge Signature</div></div>
         <div class="sign-box"><div class="sign-line"></div><div>HOD / Admin Signature</div></div>
       </div>
-    </div>`+printFooter('receipt'));
+    </div>`+printFooter());
   w.document.close();w.print();
 }
 
@@ -1313,7 +1315,6 @@ function printHeader(title){
   return`<!DOCTYPE html><html><head><title>${title} — AZBT LIMS</title><style>
     body{font-family:Arial,sans-serif;margin:30px;color:#1E3057;}
     h1{text-align:center;font-size:16px;margin-bottom:2px;}
-    h2{text-align:center;font-size:13px;font-weight:normal;color:#555;margin-bottom:2px;}
     h3{text-align:center;font-size:14px;margin-bottom:16px;color:#1E3057;}
     .hdr{text-align:center;margin-bottom:20px;border-bottom:2px solid #C9973A;padding-bottom:14px;}
     .hdr .title{font-size:18px;font-weight:700;color:#C9973A;margin-top:8px;}
@@ -1336,6 +1337,7 @@ function printHeader(title){
     <div style="font-size:11px;color:#888;margin-top:4px;">Printed: ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})}</div>
   </div>`;
 }
+
 function printFooter(){
   return`<div class="footer">AZBT LIMS, Loyola College &nbsp;|&nbsp; hodzoology@loyolacollege.edu &nbsp;|&nbsp; loyolacollegezoology@gmail.com</div></body></html>`;
 }
@@ -1349,17 +1351,19 @@ function switchPanel(pid){
   closeDrawer();
   if(pid==='calendar')buildCalendar();
 }
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function toggleDrawer(){document.getElementById('drawer').classList.toggle('open');}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
 function doLogout(){sessionStorage.removeItem('limsUser');window.location.href='index.html';}
-function pad(h){return String(h).padStart(2,'0');}
+
 function setMsg(id,html,type='error'){
   const el=document.getElementById(id);if(!el)return;
   const icon={error:'fa-circle-xmark',success:'fa-circle-check',info:'fa-circle-info'};
   el.innerHTML=html?`<div class="msg msg-${type}"><i class="fa-solid ${icon[type]||'fa-circle-info'}"></i><span>${html}</span></div>`:'';
 }
+
 function toast(msg,type='ok'){
   const t=document.getElementById('toast');
   document.getElementById('toastMsg').textContent=msg;
@@ -1368,7 +1372,7 @@ function toast(msg,type='ok'){
   t.className='toast show '+type;
   setTimeout(()=>t.className='toast',3500);
 }
-// Close modal on backdrop click
+
 document.querySelectorAll('.modal-backdrop').forEach(bd=>{
   bd.addEventListener('click',e=>{if(e.target===bd)bd.classList.remove('open');});
 });
